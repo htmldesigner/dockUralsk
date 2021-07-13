@@ -1,0 +1,14 @@
+{
+  "requisites": "Реквизиты",
+  "buttons": {
+    "index": "Главная",
+    "cabinet": "Кабинет",
+    "requisites": "Реквизиты",
+    "enter": "Вход",
+    "close": "Закрыть",
+    "registration": "Регистрация",
+    "catalog": "Каталог",
+    "search": "Найти",
+    "open_catalog": "Открыть каталог"
+  }
+}

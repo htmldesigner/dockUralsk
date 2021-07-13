@@ -1,0 +1,177 @@
+@import "vars"
+
+
+/*==========  Desktop First  ==========*/
+
+// ≥1200px
++media-breakpoint-down(lg)
+  ::placeholder
+    font-size: 13px
+  .header
+    margin-bottom: 0
+
+  .right-aside
+    border-radius: 6px
+    padding: 20px
+
+  .filter
+    display: none
+
+  .header_language
+    .language_switcher
+       .selector
+         span
+           font-size: 13px
+           font-family: 'Montserrat-Medium', sans-serif
+
+  .header_auth
+    ul
+      li
+        a
+          font-size: 13px
+          font-family: 'Montserrat-Medium', sans-serif
+
+
+  .card
+    font-size: 13px
+
+  .section_service
+    .section_service_label
+      .h5
+        font-size: 16px
+
+
+  .content
+    .content_title
+      font-size: 16px
+      padding-bottom: 0
+      margin-top: 0
+      line-height: 20px
+    .items_container
+      margin-top: 0
+      .content_items
+        padding-bottom: 22px
+        margin-top: 22px
+        border-bottom: 1px solid $indexLineColor
+        &:last-child
+          border: none
+          padding-bottom: 16px
+        .content_items_title
+          font-size: 16px
+        .content_items_content
+          .item
+            margin-top: 25px
+            &:first-child
+              margin-top: 0
+          .content_items_subtitle
+            font-size: 14px
+          ul
+            li
+              a
+                font-size: 13px
+    .service_container
+      margin-top: 0px
+
+  .opening_card
+    padding: 12px
+    .opening_card_header
+      p
+        font-size: 13px
+    .opening_card_body
+      margin-top: 6px
+      p
+        font-size: 11px
+        line-height: 16px
+  .header_language
+    margin-right: 0
+    display: flex
+    align-items: center
+    .language_switcher
+      width: 50px
+      height: 20px
+      .selector
+        //right: 10px
+        top: -8px
+// ≥992px
++media-breakpoint-down(md)
+  .header_index_layout
+    width: 100%
+    justify-content: space-between
+  .search_section
+    .search
+      flex-direction: column
+      align-items: center
+      input
+        margin-right: 0
+      .search_control
+        margin-right: 0
+        margin-bottom: 32px
+  .search-section__button
+    display: none
+  .search-section__button_mobile
+    border-bottom-left-radius: 0
+    border-top-left-radius: 0
+  .search-section__input
+    border-bottom-right-radius: 0
+    border-top-right-radius: 0
+  .header
+    min-height: 50px
+
+
+  .btn_outline
+    font-size: 13px
+
+  .btn_primary
+    font-size: 13px
+
+
+  .header_language
+    margin-right: 0
+    display: flex
+    align-items: center
+    .language_switcher
+      width: 50px
+      height: 20px
+      .selector
+        right: 0
+        top: -9px
+
+
+  .footer
+    .footer_container
+      margin-top: 18px
+      margin-bottom: 88px
+      .footer_title
+        font-size: 12px
+      .footer_date
+        font-size: 12px
+      .footer_development
+        font-size: 12px
+
+
+// ≥768px
++media-breakpoint-down(sm)
+
+// ≥576px
++media-breakpoint-down(xs)
+
+
+/*==========  Mobile First  ==========*/
+
+// ≤576px
++media-breakpoint-up(sm)
+
+
+
+// ≤768px
++media-breakpoint-up(md)
+  .search-section__button_mobile
+    display: none
+
+// ≤992px
++media-breakpoint-up(lg)
+  .filter
+    display: block
+
+// ≤1200px
++media-breakpoint-up(xl)

@@ -1,0 +1,798 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+
+::placeholder
+  color: #888888
+
+::selection
+  background-color: $accent
+  color: #fff
+
+.hidden
+  display: none !important
+
+body, html
+  height: 100%
+
+body
+  font-size: 16px
+  min-width: 320px
+  position: relative
+  line-height: 1.65
+  font-family: $default-font
+  overflow-x: hidden
+  color: $indexTextColor
+
+  input, textarea
+    border: #666 1px solid
+    outline: none
+
+    &:focus:required:invalid
+      border-color: red
+
+    &:required:valid
+      border-color: green
+
+.img-responsive
+  display: block
+  max-width: 100%
+  height: auto
+
+  &.img-width
+    width: 100%
+
+.text-center
+  text-align: center
+
+b, strong
+  font-weight: bold
+
+.input_theme
+  border-radius: 6px
+  font-family: 'Montserrat-Regular', sans-serif
+  font-size: 15px
+  background: #F2F2F2
+  border: 1px solid #F2F2F2
+  padding: 8px 0px 8px 15px
+  max-height: 40px
+  width: 100%
+
+.simple_link
+  color: $indexColor
+  //font-size: 13px
+  text-decoration: none
+
+  &:hover
+    color: lighten($indexColor, 5%)
+
+  &:focus
+    color: darken($indexColor, 5%)
+
+.btn_outline
+  background: transparent
+  color: $indexColor
+  border-radius: 6px
+  border: 1px solid $indexColor
+  padding: 7px 18px
+  font-size: 15px
+  font-family: 'Montserrat-Regular', sans-serif
+  max-height: 40px
+  display: inline-block
+  transition: .25s ease
+  width: max-content
+  text-decoration: none
+
+  &:hover
+    background: $indexColor
+    border: 1px solid transparent
+    color: #fff
+
+  &:focus, &:active
+    background: darken($indexColor, 5%)
+    color: #fff
+
+.btn_primary
+  background: $indexColor
+  color: #fff !important
+  border-radius: 6px
+  border: none
+  padding: 7px 18px
+  font-size: 15px
+  font-family: 'Montserrat-Regular', sans-serif
+  max-height: 40px
+  display: inline-block
+  transition: .25s ease
+  width: max-content
+  text-decoration: none
+
+  &:hover
+    background: lighten($indexColor, 5%)
+
+  &:focus
+    background: darken($indexColor, 5%)
+
+.btn_primary_small
+  background: $indexColor
+  color: #fff
+  border-radius: 6px
+  border: none
+  padding: 7px 12px
+  font-size: 15px
+  font-family: 'Montserrat-Regular', sans-serif
+  max-height: 40px
+  display: inline-block
+  transition: .25s ease
+  width: max-content
+
+  &:hover
+    background: lighten($indexColor, 5%)
+
+  &:focus
+    background: darken($indexColor, 5%)
+
+// Mobile style
+.btn_mobile_filter
+  background: #E2E4E7
+  border-radius: 6px
+  border: none
+  padding: 7px 12px
+  max-height: 40px
+
+  &:hover
+    background: lighten(#E2E4E7, 5%)
+
+  &:focus
+    background: darken(#E2E4E7, 5%)
+
+.input_mobile_theme
+  border-radius: 6px
+  font-family: 'Montserrat-Regular', sans-serif
+  font-size: 15px
+  background: #E2E4E7
+  border: 1px solid #E2E4E7
+  padding: 8px 0px 8px 15px
+  max-height: 40px
+  width: 100%
+// End Mobile style
+
+.card
+  background-color: #FFFFFF
+  border: 1px solid #D9E0E2
+  border-radius: 6px
+  padding: 17px
+  color: $indexColor
+  transition: .25s ease
+  height: 100%
+  &:hover
+    box-sizing: border-box
+    box-shadow: 0px 0px 20px rgba(72, 135, 155, 0.35)
+
+.form-check_them
+  margin-top: 5px
+  margin-bottom: 5px
+
+  .check-label_them
+    font-family: 'Montserrat-Regular', sans-serif
+    color: #4B4B4B
+    //display: block
+    position: relative
+    cursor: pointer
+    font-size: 14px
+    user-select: none
+    padding-left: 26px
+    transition: .5s ease
+    display: inline-block
+
+    &:hover input ~ .checkmark
+      border: 1px solid $indexColor
+
+    input
+      position: absolute
+      opacity: 0
+      cursor: pointer
+      height: 0
+      width: 0
+
+      &:checked ~ .checkmark
+        background-color: #39A9CB
+        border: 1px solid $indexColor
+
+    input:checked ~ .checkmark:after
+      display: block
+
+    .checkmark
+      position: absolute
+      top: 3px
+      left: 0
+      width: 14px
+      height: 14px
+      background-color: #fff
+      border: 1px solid #A2A2A2
+      border-radius: 2px
+
+      &:after
+        content: ""
+        position: absolute
+        display: none
+
+
+.check-label_them .checkmark:after
+  left: 4px
+  top: 1px
+  width: 5px
+  height: 8px
+  border: solid white
+  border-width: 0 2px 2px 0
+  transform: rotate(45deg)
+
+
+// layout?
+.header_index_layout
+  height: 70px
+  width: auto
+  display: flex
+  align-items: center
+
+// Global header
+.header
+  //border: 1px solid #3333
+  min-height: 70px
+  display: flex
+  align-items: center
+  background-color: #fff
+  box-shadow: 0px 4px 4px #E6ECF0
+  margin-bottom: 38px
+
+  .category_link
+    font-size: 13px
+
+.header_language
+  .language_switcher
+    position: relative
+    display: flex
+    align-items: center
+    height: 100%
+    .selector
+      color: $indexColor
+      outline: none
+      border-radius: 6px
+      border: 1px solid transparent
+      padding: 5px 12px
+      cursor: pointer
+      max-height: 36px
+      width: 44px
+      overflow: hidden
+      transition: max-height 0.2s ease
+      background-color: #fff
+      position: absolute
+      right: 15px
+      z-index: 1
+      top: -18px
+
+      span
+        font-size: 15px
+        display: none
+        line-height: 1
+        position: relative
+        top: -1px
+
+        &.active
+          display: inline-block
+
+      &.open
+        span
+          &:hover
+            color: #333
+
+      &:hover
+        border: 1px solid $indexColor
+
+
+.header_auth
+  display: inline
+  width: auto
+
+  ul
+    padding: 0
+    margin: 0
+    list-style: none
+    display: inline
+
+    li
+      display: inline
+
+      &:first-child
+        &:after
+          content: ''
+          border-left: 1px solid $indexLineColor
+          margin: 0 5px
+          position: relative
+          top: 1px
+          left: 2px
+
+      a
+        color: $indexColor
+        font-family: 'Montserrat-Medium', sans-serif
+        font-size: 15px
+        cursor: pointer
+        text-decoration: none
+
+        &:hover
+          color: lighten(#4b4b4b, 5%)
+
+        &:focus
+          color: darken(#4b4b4b, 5%)
+
+// Index page
+.search_section
+  margin: 0 auto
+  max-width: 753px
+
+  .search_section_logo
+    margin-bottom: 35px
+
+  .search
+    display: flex
+    flex-direction: row
+
+    input
+      margin-right: 15px
+
+    .search_control
+      display: flex
+      max-width: 550px
+      width: 100%
+      margin-right: 20px
+      flex-shrink: 10000
+
+.section_service
+  .section_service_label
+    display: flex
+    align-items: center
+    .h5
+      margin: 0
+      margin-right: 10px
+      white-space: nowrap
+    .section_service_label_line
+      border-bottom: 1px solid $indexLineColor
+      width: 100%
+  a
+    text-decoration: none
+
+// Generally pages
+.isPage
+  background-color: $indexBackgroundColor
+
+.s-h
+  min-height: calc(100vh - 204px) !important
+
+.right-aside
+  border-bottom-right-radius: 6px
+  border-top-right-radius: 6px
+  padding: 35px 30px
+
+.filter
+  border-right: 1px solid $indexLineColor
+  border-top-left-radius: 6px
+  border-bottom-left-radius: 6px
+  padding: 20px
+
+.content
+  .content_title
+    font-size: 26px
+    line-height: 32px
+    font-family: 'Montserrat-Bold', sans-serif
+  //padding-bottom: 30px
+  .items_container
+    margin-top: 55px
+
+    .content_items
+      margin-top: 25px
+      padding-bottom: 10px
+
+      .content_items_title
+        font-size: 20px
+        font-family: 'Montserrat-Bold', sans-serif
+        text-decoration: none
+        color: $indexTextColor
+        display: inline-block
+        margin-bottom: 16px
+
+      .content_items_content
+        .content_items_subtitle
+          margin-bottom: 7px
+          font-size: 16px
+          font-family: 'Montserrat-Medium', sans-serif
+          text-decoration: none
+          color: $indexTextColor
+          display: inline-block
+
+        ul
+          padding: 0 0 0 17px
+          margin: 0
+
+          li
+            color: #C4C4C4
+
+            a
+              font-size: 14px
+              text-decoration: none
+              color: $indexColor
+
+              &:hover
+                color: lighten(#4b4b4b, 5%)
+
+              &:focus
+                color: darken(#4b4b4b, 5%)
+
+  .link_container
+    margin-top: 22px
+
+  .service_container
+    margin-top: 15px
+
+
+.nested_crumbs
+  margin-top: 18px
+  margin-left: 11px
+  padding-bottom: 16px
+  border-bottom: 1px solid $indexLineColor
+  margin-bottom: 16px
+
+  .level_first
+    margin: 0
+    padding: 0
+
+    .grandfather
+      list-style: none
+
+      a
+        text-decoration: none
+        font-family: 'Montserrat-Bold', sans-serif
+        font-size: 14px
+        color: #4B4B4B
+
+        &:hover
+          color: $indexColor
+
+    .level_second
+      margin: 0
+      padding: 0
+      margin-left: 22px
+
+      .father
+        color: #C4C4C4
+
+        a
+          text-decoration: none
+          font-size: 14px
+          color: #4B4B4B
+
+          &:hover
+            color: $indexColor
+
+      .level_third
+        margin: 0
+        padding: 0
+        margin-left: 20px
+
+        .children
+          color: #C4C4C4
+
+          a
+            text-decoration: none
+            font-size: 14px
+            color: #4B4B4B
+
+            &:hover
+              color: $indexColor
+
+.checkbox_filter
+  margin-bottom: 30px
+  margin-left: 12px
+  margin-top: 11px
+
+  .checkbox_filter_label
+    p
+      font-size: 15px
+      font-family: 'Montserrat-SemiBold', sans-serif
+      margin-bottom: 10px
+      color: $indexTextColor
+
+// layout?
+.footer
+  .footer_container
+    margin-top: 28px
+    margin-bottom: 42px
+
+    .footer_title
+      font-size: 15px
+      color: #707070
+      font-family: 'Montserrat-SemiBold', sans-serif
+
+    .footer_date
+      font-family: 'Montserrat-Regular', sans-serif
+      font-size: 15px
+      margin-left: 5px
+
+    .footer_development
+      font-size: 15px
+      color: #707070
+      font-family: 'Montserrat-Regular', sans-serif
+      transition: .25s ease
+
+      &:hover
+        text-decoration: none
+
+
+.requisites
+  margin-top: 20px
+  margin-left: 15px
+
+  .requisites_label
+    p
+      font-size: 15px
+      font-family: 'Montserrat-SemiBold', sans-serif
+      line-height: 18px
+
+  .requisites_list
+    ul
+      margin: 0
+      padding: 0
+
+      li
+        margin-top: 20px
+        margin-bottom: 20px
+        list-style: none
+
+        .requisites_name
+          font-size: 14px
+          line-height: 26px
+          font-family: 'Montserrat-Medium', sans-serif
+          padding: 0
+          margin: 0
+
+        .requisites_content
+          font-size: 14px
+          line-height: 18px
+          font-family: 'Montserrat-Regular', sans-serif
+          padding: 0
+          margin: 0
+
+
+.opening_card
+  border: 1px solid $indexLineColor
+  box-sizing: border-box
+  border-radius: 6px
+  padding: 20px
+  margin-top: 20px
+  margin-bottom: 20px
+
+  &:hover
+    box-sizing: border-box
+    box-shadow: 0px 0px 20px rgba(72, 135, 155, 0.35)
+
+  &:first-child
+    margin-top: 0
+
+  .hide
+    display: none
+
+  .opening_card_header
+    cursor: pointer
+
+    p
+      color: $indexColor
+      margin: 0
+      padding: 0
+      font-size: 16px
+      line-height: 24px
+
+    .toggler
+      transition: .25s ease
+
+  .opening_card_body
+    margin-top: 12px
+
+    p
+      margin: 0
+      padding: 0
+      font-size: 16px
+      line-height: 24px
+      color: #000000
+      font-family: 'Montserrat-Regular', sans-serif
+
+
+// search and filter button block
+.mobile_block
+  margin: 12px 0 12px 0
+
+  .mobile_block_filter
+    margin-right: 14px
+
+  .mobile_block_search
+    position: relative
+
+    button
+      position: absolute
+      top: 5px
+      right: 13px
+      border: 0
+      padding: 0
+      margin: 0
+      outline: none
+      background-color: transparent
+
+      svg
+        fill: #868686
+
+.mobile_filter
+  display: none
+
+  .mobile_filter_modal
+    border-radius: 0px
+    border: none
+    position: fixed
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    z-index: 999
+    display: flex
+    flex-direction: column
+
+    .mobile_filter_header
+      min-height: 50px
+      width: 100%
+      display: flex
+      justify-content: space-between
+      align-items: center
+      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15)
+      padding: 0 15px 0 15px
+
+      button
+        border: none
+        padding: 0
+        margin: 0
+        background-color: transparent
+        font-size: 14px
+        color: $indexColor
+        font-family: 'Montserrat-Regular', sans-serif
+
+      span
+        font-size: 14px
+        font-family: 'Montserrat-Regular', sans-serif
+
+    .mobile_filter_body
+      padding: 15px 0px 0 0px
+      height: 100%
+      overflow: auto
+
+      .checkbox_filter_wrap
+        border-bottom: 1px solid $indexLineColor
+
+        &:last-child
+          border: none
+
+        .checkbox_filter
+          margin-bottom: 20px
+          margin-left: 22px
+          margin-top: 18px
+
+    .mobile_filter_footer
+      button
+        background-color: $indexColor
+        border: none
+        width: 100%
+        height: 50px
+        border-top-right-radius: 18px
+        border-top-left-radius: 18px
+        color: #fff
+        font-size: 18px
+        font-family: 'Montserrat-SemiBold', sans-serif
+
+        &:hover
+          background: lighten($indexColor, 5%)
+
+        &:focus
+          background: darken($indexColor, 5%)
+
+
+.mobile_popup
+  //display: none
+  .mobile_popup_modal
+    border-radius: 0px
+    border: none
+    position: fixed
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    z-index: 999
+    display: flex
+    flex-direction: column
+    .mobile_popup_header
+      min-height: 50px
+      min-width: 100%
+      display: flex
+      justify-content: flex-end
+      align-items: center
+      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15)
+      padding: 0 15px 0 15px
+      button
+        border: none
+        padding: 0
+        margin: 0
+        background-color: transparent
+        font-size: 14px
+        color: $indexColor
+        font-family: 'Montserrat-Regular', sans-serif
+        flex-basis: 25%
+      span
+        font-size: 14px
+        font-family: 'Montserrat-Regular', sans-serif
+        flex-basis: 50%
+        text-align: center
+    .mobile_popup_body
+      padding: 5px 15px 0 15px
+      height: 100%
+      overflow: auto
+    .mobile_popup_footer
+      button
+        background-color: $indexColor
+        border: none
+        width: 100%
+        height: 50px
+        border-top-right-radius: 18px
+        border-top-left-radius: 18px
+        color: #fff
+        font-size: 18px
+        font-family: 'Montserrat-SemiBold', sans-serif
+
+        &:hover
+          background: lighten($indexColor, 5%)
+
+        &:focus
+          background: darken($indexColor, 5%)
+
+
+.mobile_footer
+  position: fixed
+  bottom: 0
+  background-color: #fff
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 0 35px 0 35px
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15)
+  border-radius: 21px 21px 0px 0px
+
+  .mobile_footer_nav
+    display: flex
+    justify-content: space-between
+    align-items: center
+    min-height: 60px
+
+    a
+      display: flex
+      flex-direction: column
+      align-items: center
+      text-decoration: none
+      padding: 0
+      margin: 8px 0 0 0
+
+      img
+        padding: 0
+        margin: 0
+        width: auto
+        height: 26px
+
+      span
+        font-size: 13px
+        color: #888888
+
+
+@import "media"
+// Always at the end

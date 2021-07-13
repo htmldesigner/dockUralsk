@@ -1,0 +1,30 @@
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal, $asset-pipeline: false )
+  @font-face
+    font-family: $font-family
+    font-weight: $weight
+    font-style: $style
+    src: local($font-family), url($file-path)
+
+    //@if $asset-pipeline == true
+    //  src: url('#{$file-path}.eot')
+    //  src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), url('#{$file-path}.woff') format('woff'), url('#{$file-path}.ttf') format('truetype')
+    //@else
+    //  src: url('#{$file-path}.eot')
+    //  src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), url('#{$file-path}.woff') format('woff'), url('#{$file-path}.ttf') format('truetype')
+
+
+//+font-face("roboto-example", "../fonts/RobotoRegular/RobotoRegular")
+//+font-face("roboto-example", "../fonts/RobotoBold/RobotoBold", bold)
+
++font-face("Montserrat-Black", "./fonts/Montserrat/Montserrat-Black.ttf")
++font-face("Montserrat-Bold", "./fonts/Montserrat/Montserrat-Bold.ttf")
+
++font-face ("Montserrat-ExtraBold", "./fonts/Montserrat/Montserrat-ExtraBold.ttf")
++font-face ("Montserrat-ExtraLight", "./fonts/Montserrat/Montserrat-ExtraLight.ttf")
+
++font-face ("Montserrat-Light", "./fonts/Montserrat/Montserrat-Light.ttf")
++font-face ("Montserrat-Medium", "./fonts/Montserrat/Montserrat-Medium.ttf")
++font-face ("Montserrat-Regular", "./fonts/Montserrat/Montserrat-Regular.ttf")
++font-face ("Montserrat-Thin", "./fonts/Montserrat/Montserrat-Thin.ttf")
+
++font-face ("Montserrat-SemiBold", "./fonts/Montserrat/Montserrat-SemiBold.ttf")

@@ -1,0 +1,82 @@
+<template>
+  <div>
+    <header>
+      <section class="container mb-5">
+        <div class="row ">
+
+          <div class="col-md-12 d-flex justify-content-end">
+
+            <div class="header_index_layout">
+
+              <LanguageSwitcher/>
+
+              <div class="header_auth">
+                <ul>
+                  <li><a href="#">{{$t('buttons.enter')}}</a></li>
+                  <li><a href="#">{{$t('buttons.registration')}}</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+    </header>
+
+    <section class="container">
+      <div class="row py-lg-4">
+        <div class="search_section">
+
+          <div class="search_section_logo">
+            <NuxtLink :to="localePath('/')">
+              <img class="img-responsive" src="~/assets/img/logo.svg" alt="Alt">
+            </NuxtLink>
+          </div>
+
+          <div class="search">
+            <div class="search_control">
+              <input class="search-section__input input_theme" placeholder="Введите наименование услуги">
+              <button class="search-section__button btn_primary">{{$t('buttons.search')}}</button>
+              <button class="search-section__button_mobile btn_primary_small">
+                <img src="~/assets/img/search.svg" alt="Alt">
+              </button>
+            </div>
+            <NuxtLink :to="localePath('/catalog')" class="btn_outline">{{$t('buttons.open_catalog')}}</NuxtLink>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section_service container mt-lg-5 mt-4" v-for="data in response">
+      <div class="row">
+
+        <div class="section_service_label mb-lg-4 mb-3">
+          <p class="h5">{{ data.name }}</p>
+          <div class="section_service_label_line"></div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 mb-lg-4 mb-sm-2 mb-2" v-for="service in data.list_services">
+
+          <NuxtLink :to="localePath(`/catalog/${service.path}`)">
+            <div class="card">{{ service.name }}</div>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</template>
+
+<script>
+import LanguageSwitcher from "../components/LanguageSwitcher";
+export default {
+  components: {LanguageSwitcher},
+  async asyncData({$axios, i18n}) {
+    const response = await $axios.$get('/api/recipients?lang=' + i18n.localeProperties.code)
+    return {response}
+  }
+
+}
+</script>

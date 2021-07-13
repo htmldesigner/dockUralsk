@@ -1,0 +1,14 @@
+{
+  "requisites": "Деректемелер",
+  "buttons": {
+    "index": "Басты",
+    "cabinet": "Кабинет",
+    "requisites": "Деректемелер",
+    "enter": "Кіру",
+    "close": "Жабық",
+    "registration": "Тіркеу",
+    "catalog": "Каталог",
+    "search": "Табу",
+    "open_catalog": "Каталогты ашыңыз"
+  }
+}
