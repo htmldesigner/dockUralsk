@@ -23,7 +23,7 @@
 
     </section>
     <!--Фильтер в моб версии-->
-    <section class="mobile_filter">
+    <section class="mobile_filter d-none">
 
       <div class="mobile_filter_modal bg-white">
 
@@ -233,25 +233,7 @@
 
           <div class="col-lg-3 bg-white left-aside s-h filter">
 
-            <div class="nested_links d-md-block d-none">
-
-              <NuxtLink class="btn_outline" to="/catalog">Все категории</NuxtLink>
-
-              <div class="nested_crumbs">
-
-                <ul class="level_first">
-                  <li class="grandfather"><a href="">ЖКХ</a></li>
-                  <ul class="level_second">
-                    <li class="father"><a href="">Технические условия</a>
-                      <ul class="level_third">
-                        <li class="children"><a href="">Подпункт 3 уровня</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </ul>
-              </div>
-
-            </div>
+            <Breadcrumbs :crumbs="this.crumbs"/>
 
             <div class="checkbox_filter">
               <div class="checkbox_filter_label">
@@ -315,7 +297,7 @@
                 <div class="link_container" v-for="items in response.list_sub_categories" :key="items.id">
                   <div class="col-12 mb-lg-3 mb-sm-2 mb-2">
                     <NuxtLink class="simple_link" :to="`${response.slug_}/${items.slug_}`">
-                      <div class="card">{{ items.name}}</div>
+                      <div class="card">{{ items.name }}</div>
                     </NuxtLink>
                   </div>
                 </div>
@@ -332,15 +314,25 @@
 </template>
 
 <script>
+import Breadcrumbs from "../../../../components/Breadcrumbs";
 export default {
   name: "index",
+  components: {Breadcrumbs},
   layout: 'catalogLayoutService',
+  data() {
+    return {
+      crumbs: [],
+    }
+  },
   async asyncData({$axios, params, i18n}) {
-    console.log(params, 'service index')
     const response = await $axios.$get('/api/categories/' + params.service + '?lang=' + i18n.localeProperties.code)
     console.log(response, 'service index')
     return {response}
   },
+
+  mounted() {
+    this.crumbs = this.$crumbsBuilder(this.response)
+  }
 }
 </script>
 

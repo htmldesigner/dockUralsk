@@ -1,7 +1,12 @@
 {
   "requisites": "Деректемелер",
+  "filter": "Сүзгі",
   "buttons": {
+    "cancel": "Бас тарту",
+    "reset": "Қалпына келтіру",
+    "apply": "Өтініш",
     "index": "Басты",
+    "all_category": "Барлық санаттар",
     "cabinet": "Кабинет",
     "requisites": "Деректемелер",
     "enter": "Кіру",

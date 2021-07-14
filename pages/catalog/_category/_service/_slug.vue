@@ -4,7 +4,7 @@
 
       <div class="mobile_block d-flex justify-content-between">
 
-        <button @click="isRequisites = !isRequisites" class="btn_outline requisites-popup">{{
+        <button @click="showRequisites = !showRequisites" class="btn_outline requisites-popup">{{
             $t('buttons.requisites')
           }}
         </button>
@@ -14,7 +14,7 @@
     </section>
 
     <!--Фильтер в моб версии-->
-    <section class="mobile_popup" v-if="isRequisites">
+    <section class="mobile_popup" v-if="showRequisites">
       <RequisitesPopup :values="response.requisites" @close="close"/>
     </section>
 
@@ -92,12 +92,12 @@ export default {
   data() {
     return {
       open: true,
-      isRequisites: false
+      showRequisites: false
     }
   },
   methods: {
     close() {
-      this.isRequisites = false
+      this.showRequisites = false
     }
   }
 }

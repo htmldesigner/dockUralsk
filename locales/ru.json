@@ -1,7 +1,12 @@
 {
   "requisites": "Реквизиты",
+  "filter": "Фильтр",
   "buttons": {
+    "cancel": "Отмена",
+    "reset": "Сбросить",
+    "apply": "Применить",
     "index": "Главная",
+    "all_category": "Все категории",
     "cabinet": "Кабинет",
     "requisites": "Реквизиты",
     "enter": "Вход",

@@ -1,9 +1,8 @@
 <template>
   <div>
+
     <section class="container mobile_block_section d-lg-none">
-
       <div class="mobile_block d-flex justify-content-center">
-
         <div class="mobile_block_filter">
           <button class="btn_mobile_filter"><img src="~assets/img/filter.svg" alt="Alt"></button>
         </div>
@@ -18,16 +17,12 @@
             </svg>
           </button>
         </div>
-
       </div>
-
     </section>
 
 
-
-
     <!--Фильтер в моб версии-->
-    <section class="mobile_filter">
+    <section class="mobile_filter d-none">
 
       <div class="mobile_filter_modal bg-white">
 
@@ -231,33 +226,17 @@
     </section>
 
 
-
-
     <section class="container">
       <div class="container">
         <div class="row">
-
           <div class="col-lg-3 bg-white left-aside s-h filter">
 
-            <div class="nested_links d-md-block d-none">
 
-              <NuxtLink class="btn_outline" to="/catalog">Все категории</NuxtLink>
+            <Breadcrumbs :crumbs="this.crumbs"/>
 
-              <div class="nested_crumbs">
 
-                <ul class="level_first">
-                  <li class="grandfather"><a href="">ЖКХ</a></li>
-                  <ul class="level_second">
-                    <li class="father"><a href="">Технические условия</a>
-                      <ul class="level_third">
-                        <li class="children"><a href="">Подпункт 3 уровня</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </ul>
-              </div>
 
-            </div>
+
 
             <div class="checkbox_filter">
               <div class="checkbox_filter_label">
@@ -305,7 +284,6 @@
           <div class="col-lg-9 col-md-12 bg-white right-aside s-h">
             <div class="content" v-if="response">
               <p class="content_title">{{ response.name }}</p>
-
               <div v-if="response.list_services">
                 <div class="link_container" v-for="item in response.list_services" :key="item.id">
                   <div class="col-12 mb-lg-3 mb-sm-2 mb-2">
@@ -315,7 +293,6 @@
                   </div>
                 </div>
               </div>
-
 
               <div v-if="response.list_sub_categories">
                 <div class="link_container" v-for="items in response.list_sub_categories" :key="items.id">
@@ -327,7 +304,6 @@
                 </div>
               </div>
 
-
             </div>
           </div>
 
@@ -338,15 +314,24 @@
 </template>
 
 <script>
+import Breadcrumbs from "../../../components/Breadcrumbs";
 export default {
   name: "index",
+  components: {Breadcrumbs},
+  data() {
+    return {
+      crumbs: [],
+    }
+  },
   layout: 'catalogLayoutService',
   async asyncData({$axios, params, i18n}) {
-    console.log(params, 'category')
     const response = await $axios.$get('/api/categories/' + params.category + '?lang=' + i18n.localeProperties.code)
     console.log(response, 'category')
     return {response}
   },
+  mounted() {
+    this.crumbs = this.$crumbsBuilder(this.response)
+  }
 }
 </script>
 

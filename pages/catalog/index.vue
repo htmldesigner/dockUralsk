@@ -5,7 +5,9 @@
       <div class="mobile_block d-flex justify-content-center">
 
         <div class="mobile_block_filter">
-          <button class="btn_mobile_filter"><img src="~assets/img/filter.svg" alt="Alt"></button>
+          <button class="btn_mobile_filter" @click="showFilter = !showFilter">
+            <img src="~assets/img/filter.svg" alt="Alt">
+          </button>
         </div>
 
         <div class="mobile_block_search flex-grow-1">
@@ -23,214 +25,20 @@
     </section>
 
     <!--Фильтер в моб версии-->
-    <section class="mobile_filter">
-
-      <div class="mobile_filter_modal bg-white">
-
-        <div class="mobile_filter_header">
-          <button class="close">Отмена</button>
-          <span>Фильтр</span>
-          <button>Сбросить</button>
-        </div>
-
-        <div class="mobile_filter_body">
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="mobile_filter_footer">
-          <button>Применить</button>
-        </div>
-
-      </div>
-
+    <section class="mobile_filter" v-if="showFilter">
+        <FilterPopup
+          @close="close"
+          @reset="resetFilter"
+          @apply="applyFilter"
+          :filters="response.filters"
+        />
     </section>
 
     <section class="container">
       <div class="container">
         <div class="row">
           <div class="col-lg-3 bg-white left-aside s-h filter" v-if="response.filters">
+
             <div class="checkbox_filter" v-for="(value, idx) of response.filters" :key="idx">
               <div v-if="value.organization">
                 <div class="checkbox_filter_label">
@@ -248,7 +56,6 @@
                   </label>
                 </div>
               </div>
-
 
               <div v-if="value.recipient">
                 <div class="checkbox_filter_label">
@@ -321,14 +128,18 @@
 </template>
 
 <script>
+import FilterPopup from "../../components/mobileComponents/FilterPopup";
+
 export default {
+  components: {
+    FilterPopup
+  },
   name: "index",
   layout: 'catalogLayout',
 
   computed: {
     values(el) {
-
-      return  this.first(this.response.list_categories)
+      return this.first(this.response.list_categories)
     }
   },
 
@@ -336,12 +147,13 @@ export default {
     return {
       recipient: [],
       organization: [],
+      showFilter: false
     }
   },
 
   methods: {
     first(response) {
-      return  response.map(category => ({
+      return response.map(category => ({
           id: category.id,
           list_services: category.list_services,
           list_sub_categories: this.ffl(category.list_sub_categories),
@@ -379,12 +191,23 @@ export default {
       }
       return result
     },
+
+    close() {
+      this.showFilter = false
+    },
+    resetFilter() {
+      this.recipient = []
+      this.organization = []
+    },
+    applyFilter(payload) {
+      this.recipient = payload.recipient
+      this.organization = payload.organization
+    }
   },
 
   async asyncData({$axios, i18n, app}) {
     const response = await $axios.$get('/api/categories?lang=' + i18n.localeProperties.code)
     console.log(response, 'catalog')
-
     return {response}
   }
 }
