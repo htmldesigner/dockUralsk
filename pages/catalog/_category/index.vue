@@ -4,7 +4,7 @@
     <section class="container mobile_block_section d-lg-none">
       <div class="mobile_block d-flex justify-content-center">
         <div class="mobile_block_filter">
-          <button class="btn_mobile_filter"><img src="~assets/img/filter.svg" alt="Alt"></button>
+          <button @click="showFilter = !showFilter" class="btn_mobile_filter"><img src="~assets/img/filter.svg" alt="Alt"></button>
         </div>
 
         <div class="mobile_block_search flex-grow-1">
@@ -22,270 +22,73 @@
 
 
     <!--Фильтер в моб версии-->
-    <section class="mobile_filter d-none">
-
-      <div class="mobile_filter_modal bg-white">
-
-        <div class="mobile_filter_header">
-          <button class="close">Отмена</button>
-          <span>Фильтр</span>
-          <button>Сбросить</button>
-        </div>
-
-        <div class="mobile_filter_body">
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="checkbox_filter_wrap">
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="mobile_filter_footer">
-          <button>Применить</button>
-        </div>
-
-      </div>
+    <section class="mobile_filter" v-if="showFilter">
+      <FilterPopup
+        @close="close"
+        @reset="resetFilter"
+        @apply="applyFilter"
+        :filters="response.filters"
+      />
     </section>
 
 
     <section class="container">
       <div class="container">
         <div class="row">
+
           <div class="col-lg-3 bg-white left-aside s-h filter">
 
 
             <Breadcrumbs :crumbs="this.crumbs"/>
 
 
+            <div v-if="response.filters">
+              <div class="checkbox_filter" v-for="(value, idx) of response.filters" :key="idx">
+                <div v-if="value.organization">
+                  <div class="checkbox_filter_label">
+                    <p>{{ value.organization.title }}</p>
+                  </div>
+                  <div class="form-check form-check_them" v-for="option of value.organization.options" :key="option.id">
+                    <label class="form-check-label check-label_them">{{ option.title }}
+                      <input
+                        class="form-check-input check-input_them"
+                        type="checkbox"
+                        :value="option.id"
+                        v-model="organization"
+                      >
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
 
+                <div v-if="value.recipient">
+                  <div class="checkbox_filter_label">
+                    <p>{{ value.recipient.title }}</p>
+                  </div>
+                  <div class="form-check form-check_them" v-for="option of value.recipient.options" :key="option.id">
+                    <label class="form-check-label check-label_them">{{ option.title }}
+                      <input
+                        class="form-check-input check-input_them"
+                        type="checkbox"
+                        :value="option.id"
+                        v-model="recipient"
+                      >
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
 
-
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Поставщики</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
               </div>
             </div>
-            <div class="checkbox_filter">
-              <div class="checkbox_filter_label">
-                <p>Направления</p>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="form-check form-check_them">
-                <label class="form-check-label check-label_them">Частник
-                  <input class="form-check-input check-input_them" type="checkbox" value="">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-            </div>
+
 
           </div>
 
           <div class="col-lg-9 col-md-12 bg-white right-aside s-h">
-            <div class="content" v-if="response">
-              <p class="content_title">{{ response.name }}</p>
-              <div v-if="response.list_services">
-                <div class="link_container" v-for="item in response.list_services" :key="item.id">
+            <div class="content" v-if="values">
+              <p class="content_title">{{ values.name }}</p>
+              <div v-if="values.list_services">
+                <div class="link_container" v-for="item in values.list_services" :key="item.id">
                   <div class="col-12 mb-lg-3 mb-sm-2 mb-2">
                     <NuxtLink class="simple_link" :to="localePath('/catalog/' + item.path)">
                       <div class="card">{{ item.name }}</div>
@@ -294,11 +97,11 @@
                 </div>
               </div>
 
-              <div v-if="response.list_sub_categories">
-                <div class="link_container" v-for="items in response.list_sub_categories" :key="items.id">
+              <div v-if="values.list_sub_categories">
+                <div class="link_container" v-for="items in values.list_sub_categories" :key="items.id">
                   <div class="col-12 mb-lg-3 mb-sm-2 mb-2">
                     <NuxtLink class="simple_link" :to="localePath('/catalog/' + items.path)">
-                      <div class="card">{{ items.name}}</div>
+                      <div class="card">{{ items.name }}</div>
                     </NuxtLink>
                   </div>
                 </div>
@@ -315,20 +118,117 @@
 
 <script>
 import Breadcrumbs from "../../../components/Breadcrumbs";
+import FilterPopup from "../../../components/mobileComponents/FilterPopup";
 export default {
   name: "index",
-  components: {Breadcrumbs},
-  data() {
-    return {
-      crumbs: [],
+  components: {Breadcrumbs, FilterPopup},
+
+  computed: {
+    values(el) {
+      return this.first(this.response)
     }
   },
+
+  data() {
+    return {
+      showFilter: false,
+      crumbs: [],
+      recipient: [],
+      organization: [],
+    }
+  },
+
   layout: 'catalogLayoutService',
   async asyncData({$axios, params, i18n}) {
     const response = await $axios.$get('/api/categories/' + params.category + '?lang=' + i18n.localeProperties.code)
     console.log(response, 'category')
     return {response}
   },
+
+
+  methods: {
+    first(response) {
+      if(Array.isArray(response)){
+      return response.map(category => ({
+          id: category.id,
+          list_services: this.fsl(category.list_services),
+          list_sub_categories: this.ffl(category.list_sub_categories),
+          name: category.name,
+          path: category.path,
+          slug_: category.slug_
+        })
+      )}else {
+        return {
+          id: response.id,
+          list_services: this.fsl(response.list_services),
+          list_sub_categories: this.ffl(response.list_sub_categories),
+          name: response.name,
+          path: response.path,
+          slug_: response.slug_
+        }
+      }
+    },
+
+    ffl(list_sub_categories) {
+      let result = null
+      if (list_sub_categories.length) {
+        result = list_sub_categories.map(el => ({
+          id: el.id,
+          list_services: el.list_services.filter(z => {
+            if (this.organization.length && !this.recipient.length) {
+              return this.organization.includes(z.organization.id)
+            }
+            if (this.organization.length && this.recipient.length) {
+              return this.organization.includes(z.organization.id) && this.recipient.includes(z.recipient.id)
+            }
+            if (this.recipient.length) {
+              return this.recipient.includes(z.recipient.id)
+            } else {
+              return z
+            }
+          }),
+          name: el.name,
+          path: el.path,
+          slug_: el.slug_
+        })).filter(el => {
+          return el.list_services.length
+        })
+      }
+      return result
+    },
+
+    fsl(list_services){
+      return list_services.filter(z => {
+        if (this.organization.length && !this.recipient.length) {
+          return this.organization.includes(z.organization.id)
+        }
+        if (this.organization.length && this.recipient.length) {
+          return this.organization.includes(z.organization.id) && this.recipient.includes(z.recipient.id)
+        }
+        if (this.recipient.length) {
+          return this.recipient.includes(z.recipient.id)
+        } else {
+          return z
+        }
+      })
+    },
+
+
+    close() {
+      this.showFilter = false
+    },
+    resetFilter() {
+      this.recipient = []
+      this.organization = []
+    },
+    applyFilter(payload) {
+      this.recipient = payload.recipient
+      this.organization = payload.organization
+    }
+
+  },
+
+
   mounted() {
     this.crumbs = this.$crumbsBuilder(this.response)
   }

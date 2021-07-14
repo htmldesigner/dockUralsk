@@ -15,6 +15,18 @@
 body, html
   height: 100%
 
+html
+  margin-left: calc(100vw - 100%)
+  margin-right: 0
+
+//Пофиксить можно совсем просто — использовать данный подход только на широких экранах (больше 960 пикселей),
+//@media screen and (min-width: 960px)
+//  html
+//    margin-left: calc(100vw - 100%)
+//    margin-right: 0
+
+
+
 body
   font-size: 16px
   min-width: 320px

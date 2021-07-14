@@ -26,17 +26,18 @@
 
     <!--Фильтер в моб версии-->
     <section class="mobile_filter" v-if="showFilter">
-        <FilterPopup
-          @close="close"
-          @reset="resetFilter"
-          @apply="applyFilter"
-          :filters="response.filters"
-        />
+      <FilterPopup
+        @close="close"
+        @reset="resetFilter"
+        @apply="applyFilter"
+        :filters="response.filters"
+      />
     </section>
 
     <section class="container">
       <div class="container">
         <div class="row">
+
           <div class="col-lg-3 bg-white left-aside s-h filter" v-if="response.filters">
 
             <div class="checkbox_filter" v-for="(value, idx) of response.filters" :key="idx">
@@ -75,6 +76,7 @@
               </div>
 
             </div>
+
 
           </div>
 
@@ -152,6 +154,7 @@ export default {
   },
 
   methods: {
+
     first(response) {
       return response.map(category => ({
           id: category.id,

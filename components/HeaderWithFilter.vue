@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-lg-4 col-md-6 col-5 d-flex  justify-content-end align-items-center">
-          <NuxtLink class="simple_link category_link me-1 d-md-none d-block" to="/catalog">{{$t('buttons.catalog')}}</NuxtLink>
+          <NuxtLink class="simple_link category_link me-1 d-md-none d-block" :to="localePath('/catalog')">{{$t('buttons.catalog')}}</NuxtLink>
           <LanguageSwitcher/>
           <div class="header_auth d-md-block d-none">
             <ul>
