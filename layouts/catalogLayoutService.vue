@@ -1,19 +1,19 @@
 <template>
   <div class="isPage d-flex flex-column h-100">
-    <HeaderWithFilter/>
+    <Header/>
     <Nuxt/>
     <Footer/>
   </div>
 </template>
 
 <script>
-import HeaderWithFilter from "../components/HeaderWithFilter";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default {
   name: "catalogLayoutService",
   components: {
-    HeaderWithFilter,
+    Header,
     Footer
   }
 }

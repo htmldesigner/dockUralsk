@@ -38,7 +38,7 @@
 <script>
 
 export default {
-  name: "HeaderFilter",
+  name: "DynamicSearch",
   computed: {
     elements() {
       if (this.keyword.length > 3 && this.variants?.length) {

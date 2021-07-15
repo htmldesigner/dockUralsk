@@ -14,13 +14,13 @@
             <li @click="currentLink = 'IpcForm'" :class="{active: currentLink === 'IpcForm'}">
               <div class="component">по ЭЦП</div>
             </li>
-            <li @click="currentLink = 'FormLogin'" :class="{active: currentLink === 'FormLogin'}">
+            <li @click="currentLink = 'LoginForm'" :class="{active: currentLink === 'LoginForm'}">
               <div class="component">по логину и паролю</div>
             </li>
           </ul>
         </div>
 
-        <component :is="currentComponent"></component>
+        <component :is="currentComponent" @close="$emit('close')"></component>
 
       </div>
     </div>
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import FormLogin from "./FormLogin";
-import IpcForm from "./IpcForm";
+import LoginForm from "@/components/auth/login/LoginForm";
+import IpcForm from "@/components/auth/login/IpcForm";
 
 export default {
-  components: {FormLogin, IpcForm},
+  components: {LoginForm, IpcForm},
   name: "Login",
   computed: {
     currentComponent: function () {

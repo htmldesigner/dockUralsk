@@ -213,7 +213,6 @@ export default {
       })
     },
 
-
     close() {
       this.showFilter = false
     },

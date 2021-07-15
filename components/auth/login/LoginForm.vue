@@ -1,0 +1,57 @@
+<template>
+  <form @submit.prevent="onSubmit">
+    <div class="form-group mb-3">
+      <label for="login" class="form-label">Логин</label>
+      <input id="login" type="text" v-model.trim="user.login" class="form-control" name="login">
+      <div class="invalid-feedback">
+        Login is invalid
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password" class="form-label">Пароль</label>
+      <input id="password" type="password" v-model.trim="user.password" class="form-control" name="password">
+      <div class="invalid-feedback">
+        Пароль is invalid
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 36px ">
+      <button type="submit" class="btn_primary btn_block">Войти</button>
+    </div>
+  </form>
+</template>
+
+<script>
+export default {
+  name: "FormLogin",
+  data() {
+    return {
+      user: {
+        login: null,
+        password: null
+      }
+    }
+  },
+  methods: {
+    onSubmit() {
+      try {
+        if (this.user.login.length && this.user.password.length) {
+          this.$store.dispatch('auth/login', this.user).then(() => {
+            this.$emit('close')
+          }).catch(() => {
+            alert('er')
+          })
+        }
+      } catch (e) {
+        alert('Заполните форму')
+      }
+
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

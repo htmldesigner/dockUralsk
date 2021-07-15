@@ -72,6 +72,7 @@
 <script>
 import LanguageSwitcher from "../components/LanguageSwitcher";
 export default {
+  name: "index",
   components: {LanguageSwitcher},
   async asyncData({$axios, i18n}) {
     const response = await $axios.$get('/api/recipients?lang=' + i18n.localeProperties.code)
