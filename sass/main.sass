@@ -60,6 +60,131 @@ body
 b, strong
   font-weight: bold
 
+.form-card
+  max-width: 372px
+  width: 100%
+  display: inline-block
+  border: 1px solid #3333
+  padding: 33px 42px 48px 42px
+  background-color: #fff
+
+  .form-body
+    display: flex
+    flex-direction: column
+    position: relative
+
+    .form-title
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      margin-bottom: 28px
+      p
+        font-size: 20px
+        line-height: 24px
+        font-family: 'Montserrat-Medium', sans-serif
+        font-weight: normal
+        margin: 0
+        padding: 0
+
+
+.component-selector
+  margin-bottom: 20px
+
+  ul
+    padding: 0
+    margin: 0
+
+    li
+      margin-right: 40px
+      display: inline-block
+
+      &:last-child
+        margin-right: 0
+
+      .component
+        font-size: 14px
+        cursor: pointer
+        margin-bottom: 8px
+
+      &.active
+        border-bottom: 4px solid $indexColor
+        color: $indexColor
+
+
+//Form
+.form-control
+  display: block
+  width: 100%
+  padding: .600rem .75rem
+  font-size: 16px
+  font-weight: 400
+  line-height: 1.5
+  color: #212529
+  background-color: #fff
+  background-clip: padding-box
+  border: 1px solid $indexColor
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  border-radius: 6px
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+  font-family: 'Montserrat-Medium', sans-serif
+
+  &:focus
+    background: #fff
+    outline: 0
+    box-shadow: 1px 2px 6px rgba(32, 33, 36, .18)
+
+.form-label
+  font-size: 14px
+  line-height: 24px
+  font-family: 'Montserrat-Regular', sans-serif
+  color: #868686
+  margin-bottom: 8px
+
+.invalid-feedback
+  display: none
+  width: 100%
+  margin-top: .25rem
+  font-size: 12px
+  color: #dc3545
+
+// File-input
+.file-input
+  .file-input__input
+    width: 0.1px
+    height: 0.1px
+    opacity: 0
+    overflow: hidden
+    position: absolute
+    z-index: -1
+
+  .file-input__label
+    cursor: pointer
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    border-radius: 6px
+    font-size: 16px
+    line-height: 24px
+    color: #fff
+    padding: 10px 12px
+    background-color: $indexColor
+    font-family: 'Montserrat-Regular', sans-serif
+    width: 100%
+    transition: .25s ease
+
+    &:hover
+      background: lighten($indexColor, 5%)
+
+    &:focus
+      background: darken($indexColor, 5%)
+
+  .file-input__label
+    svg
+      margin-right: 10px
+
+
 .input_theme
   border-radius: 6px
   font-family: 'Montserrat-Regular', sans-serif
@@ -86,7 +211,7 @@ b, strong
   color: $indexColor
   border-radius: 6px
   border: 1px solid $indexColor
-  padding: 9px 18px
+  padding: 10px 18px
   font-size: 16px
   font-family: 'Montserrat-Regular', sans-serif
   max-height: 44px
@@ -143,6 +268,35 @@ b, strong
   &:focus
     background: darken($indexColor, 5%)
 
+.btn_block
+  display: block
+  width: 100%
+
+
+
+.close
+  position: absolute
+  right: 0px
+  top: 0px
+  width: 24px
+  height: 24px
+  opacity: 0.3
+  &:hover
+    opacity: 1
+  &:before, &:after
+    position: absolute
+    left: 11px
+    content: ' '
+    height: 24px
+    width: 2px
+    background-color: #333
+  &:before
+    transform: rotate(45deg)
+  &:after
+    transform: rotate(-45deg)
+
+
+
 // Mobile style
 .btn_mobile_filter
   background: #E2E4E7
@@ -176,6 +330,7 @@ b, strong
   color: $indexColor
   transition: .25s ease
   height: 100%
+
   &:hover
     box-sizing: border-box
     box-shadow: 0px 0px 20px rgba(72, 135, 155, 0.35)
@@ -265,6 +420,7 @@ b, strong
     display: flex
     align-items: center
     height: 100%
+
     .selector
       color: $indexColor
       outline: none
@@ -362,13 +518,16 @@ b, strong
   .section_service_label
     display: flex
     align-items: center
+
     .h5
       margin: 0
       margin-right: 10px
       white-space: nowrap
+
     .section_service_label_line
       border-bottom: 1px solid $indexLineColor
       width: 100%
+
   a
     text-decoration: none
 
@@ -724,6 +883,7 @@ b, strong
     z-index: 999
     display: flex
     flex-direction: column
+
     .mobile_popup_header
       min-height: 50px
       min-width: 100%
@@ -732,6 +892,7 @@ b, strong
       align-items: center
       box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15)
       padding: 0 15px 0 15px
+
       button
         border: none
         padding: 0
@@ -741,15 +902,18 @@ b, strong
         color: $indexColor
         font-family: 'Montserrat-Regular', sans-serif
         flex-basis: 25%
+
       span
         font-size: 14px
         font-family: 'Montserrat-Regular', sans-serif
         flex-basis: 50%
         text-align: center
+
     .mobile_popup_body
       padding: 5px 15px 0 15px
       height: 100%
       overflow: auto
+
     .mobile_popup_footer
       button
         background-color: $indexColor
