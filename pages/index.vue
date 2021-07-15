@@ -12,8 +12,8 @@
 
               <div class="header_auth">
                 <ul>
-                  <li><a href="#">{{$t('buttons.enter')}}</a></li>
-                  <li><a href="#">{{$t('buttons.registration')}}</a></li>
+                  <li><NuxtLink :to="localePath('/auth/login')">{{$t('buttons.enter')}}</NuxtLink></li>
+                  <li><NuxtLink :to="localePath('/auth/registration')">{{$t('buttons.registration')}}</NuxtLink></li>
                 </ul>
               </div>
             </div>

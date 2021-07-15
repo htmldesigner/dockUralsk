@@ -7,7 +7,7 @@
             <span class="footer_title">© Doc.uralsk.kz</span> <span class="footer_date">2021</span>
           </div>
           <div class="col-lg-6 col-12 d-flex justify-content-lg-end justify-content-center">
-            <a class="footer_development" href="https://web-design.kz/">Разработка сайта — Cтудия «Web-Design.kz»</a>
+            <a class="footer_development" href="https://web-design.kz/">Разработка — Cтудия «Web-Design.kz»</a>
           </div>
         </div>
       </div>

@@ -172,8 +172,8 @@ export default {
         box-shadow: 0 2px 6px rgb(32 33 36 / 18%)
         border-bottom-left-radius: 0
         border-bottom-right-radius: 0
-
       &:focus
+        background: #fff
         outline: 0
         box-shadow: 0 2px 6px rgb(32 33 36 / 18%)
 
@@ -186,7 +186,7 @@ export default {
 .header_search_options
   width: 100%
   height: auto
-  background: #F2F2F2
+  background: #fff
   position: absolute
   padding: 0 0px 15px 0px
   border-radius: 0 0 6px 6px
@@ -204,7 +204,7 @@ export default {
       transition: .25s
 
       &:hover
-        background-color: #e8e8e8
+        background-color: #f5f5f5
 
       a
         text-decoration: none
