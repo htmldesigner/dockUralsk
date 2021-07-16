@@ -34,17 +34,16 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       try {
         if (this.user.login.length && this.user.password.length) {
-          this.$store.dispatch('auth/login', this.user).then(() => {
+          let response = await this.$auth.loginWith('local', {data: this.user})
+          if (response.status === 200) {
             this.$emit('close')
-          }).catch(() => {
-            alert('er')
-          })
+          }
         }
       } catch (e) {
-        alert('Заполните форму')
+        console.log(e)
       }
 
     }

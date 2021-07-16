@@ -32,8 +32,8 @@
             </ul>
 
             <ul v-else>
-              <li><a href="#">Кабиет</a></li>
-              <li><a href="#">Выход</a></li>
+              <li><NuxtLink :to="localePath('/cabinet')">{{ $t('buttons.cabinet') }}</NuxtLink></li>
+              <li><a href="#" @click.prevent="logOut">{{ $t('buttons.exit') }}</a></li>
             </ul>
 
           </div>
@@ -42,8 +42,8 @@
       </div>
     </div>
 
-      <Registration v-if="registrationModal" @close="close"/>
-      <Login v-if="loginModal" @close="close"/>
+    <Registration v-if="registrationModal" @close="close"/>
+    <Login v-if="loginModal" @close="close"/>
   </header>
 </template>
 
@@ -71,6 +71,9 @@ export default {
     login() {
       this.loginModal = true
     },
+    logOut() {
+      this.$auth.logout()
+    },
     registration() {
       this.registrationModal = true
     },
@@ -79,9 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.$nuxt.$on('test', () => {
-      'test eventBuss'
-    })
+
   }
 }
 </script>

@@ -30,7 +30,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/crumbsBuilder.plugin.js"
+    "~/plugins/crumbsBuilder.plugin.js",
+    "~/plugins/ncaLayer.plugin.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,8 +48,27 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'nuxt-i18n',
-
+    '@nuxtjs/auth-next',
   ],
+
+  auth: {
+    redirect: false,
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        endpoints: {
+          login: { url: '/api/signin', method: 'post'},
+          logout: { url: '/api/logout', method: 'post'},
+          user: false
+        }
+      }
+    }
+  },
 
   i18n: {
     locales: ['kz', 'ru'],
