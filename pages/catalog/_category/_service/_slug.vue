@@ -3,12 +3,13 @@
     <section class="container mobile_block_section d-lg-none">
 
       <div class="mobile_block d-flex justify-content-between">
-
-        <button @click="showRequisites = !showRequisites" class="btn_outline requisites-popup">{{
-            $t('buttons.requisites')
-          }}
+        <button
+          @click="showRequisites = !showRequisites"
+          class="btn_outline requisites-popup">{{$t('buttons.requisites') }}
         </button>
-        <a class="btn_primary" href="category.html">Получить услугу</a>
+
+        <NuxtLink class="btn_primary" to="category.html">Получить услугу</NuxtLink>
+
       </div>
 
     </section>
@@ -47,7 +48,8 @@
                 </div>
 
                 <div class="col-4 d-lg-block d-none text-end">
-                  <a class="btn_primary" href="category.html">Получить услугу</a>
+                  <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/catalog')">Получить услугу</NuxtLink>
+                  <button v-else @click="emitLoginForm" class="btn_primary">Получить услугу</button>
                 </div>
               </div>
 
@@ -82,6 +84,11 @@ export default {
   components: {
     RequisitesPopup
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.loggedIn
+    }
+  },
   name: "slug",
   layout: 'catalogLayoutService',
   async asyncData({$axios, params, i18n}) {
@@ -98,6 +105,9 @@ export default {
   methods: {
     close() {
       this.showRequisites = false
+    },
+    emitLoginForm(){
+      this.$nuxt.$emit('showLoginForm')
     }
   }
 }

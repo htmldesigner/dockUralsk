@@ -1,5 +1,4 @@
 export const state = () => ({
-  user: null,
   key: null
 })
 

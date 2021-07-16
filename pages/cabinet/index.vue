@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "index",
-  middleware: 'authenticated'
+ layout: 'cabinetLayout'
 }
 </script>
 

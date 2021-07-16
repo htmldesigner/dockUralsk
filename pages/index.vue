@@ -11,10 +11,18 @@
               <LanguageSwitcher/>
 
               <div class="header_auth">
-                <ul>
-                  <li><NuxtLink :to="localePath('/auth/login')">{{$t('buttons.enter')}}</NuxtLink></li>
-                  <li><NuxtLink :to="localePath('/auth/registration')">{{$t('buttons.registration')}}</NuxtLink></li>
+                <ul v-if="!isLoggedIn">
+                  <li><a href="#" @click.prevent="login">{{ $t('buttons.enter') }}</a></li>
+                  <li><a href="#" @click.prevent="registration">{{ $t('buttons.registration') }}</a></li>
                 </ul>
+
+                <ul v-else>
+                  <li>
+                    <NuxtLink :to="localePath('/cabinet')">{{ $t('buttons.cabinet') }}</NuxtLink>
+                  </li>
+                  <li><a href="#" @click.prevent="logOut">{{ $t('buttons.exit') }}</a></li>
+                </ul>
+
               </div>
             </div>
 
@@ -22,6 +30,10 @@
 
         </div>
       </section>
+
+      <Registration v-if="registrationModal" @close="close"/>
+      <Login v-if="loginModal" @close="close"/>
+
     </header>
 
     <section class="container">
@@ -37,12 +49,12 @@
           <div class="search">
             <div class="search_control">
               <input class="search-section__input input_theme" placeholder="Введите наименование услуги">
-              <button class="search-section__button btn_primary">{{$t('buttons.search')}}</button>
+              <button class="search-section__button btn_primary">{{ $t('buttons.search') }}</button>
               <button class="search-section__button_mobile btn_primary_small">
                 <img src="~/assets/img/search.svg" alt="Alt">
               </button>
             </div>
-            <NuxtLink :to="localePath('/catalog')" class="btn_outline">{{$t('buttons.open_catalog')}}</NuxtLink>
+            <NuxtLink :to="localePath('/catalog')" class="btn_outline">{{ $t('buttons.open_catalog') }}</NuxtLink>
           </div>
 
         </div>
@@ -71,13 +83,42 @@
 
 <script>
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import Login from "@/components/auth/login/Login";
+import Registration from "@/components/auth/Registration";
+
 export default {
   name: "index",
-  components: {LanguageSwitcher},
+  components: {LanguageSwitcher, Login, Registration},
   async asyncData({$axios, i18n}) {
     const response = await $axios.$get('/api/recipients?lang=' + i18n.localeProperties.code)
     return {response}
-  }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.loggedIn
+    }
+  },
+  data() {
+    return {
+      loginModal: false,
+      registrationModal: false
+    }
+  },
+  methods: {
+    login() {
+      this.loginModal = true
+    },
+    logOut() {
+      this.$auth.logout()
+    },
+    registration() {
+      this.registrationModal = true
+    },
+    close() {
+      this.loginModal = this.registrationModal = false
+    }
+  },
+
 
 }
 </script>

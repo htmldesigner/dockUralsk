@@ -58,7 +58,7 @@ export default {
   components: {LanguageSwitcher, DynamicSearch, Login, Registration},
   computed: {
     isLoggedIn() {
-      return this.$store.state.auth.user
+      return this.$store.state.auth.loggedIn
     }
   },
   data() {
@@ -82,7 +82,9 @@ export default {
     }
   },
   mounted() {
-
+  this.$nuxt.$on('showLoginForm', ()=>{
+    this.loginModal = true
+  })
   }
 }
 </script>

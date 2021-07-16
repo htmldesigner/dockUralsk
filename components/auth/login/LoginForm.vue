@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form-group mb-3">
-      <label for="login" class="form-label">Логин</label>
-      <input id="login" type="text" v-model.trim="user.login" class="form-control" name="login">
+      <label for="login" class="form-label">БИН/ИНН</label>
+      <input id="login" type="text" placeholder="Ваш БИН/ИНН" v-model.trim="user.login" class="form-control" name="login">
       <div class="invalid-feedback">
         Login is invalid
       </div>
@@ -43,7 +43,7 @@ export default {
           }
         }
       } catch (e) {
-        console.log(e)
+        alert(e.response.data.error)
       }
 
     }
