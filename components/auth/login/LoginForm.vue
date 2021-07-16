@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group" style="margin-top: 36px ">
-      <button type="submit" class="btn_primary btn_block">Войти</button>
+      <button  type="submit" class="btn_primary btn_block">Войти</button>
     </div>
   </form>
 </template>
