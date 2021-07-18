@@ -2,6 +2,7 @@
   "requisites": "Деректемелер",
   "filter": "Сүзгі",
   "buttons": {
+    "get_service": "Қызмет алыңыз",
     "cancel": "Бас тарту",
     "reset": "Қалпына келтіру",
     "apply": "Өтініш",

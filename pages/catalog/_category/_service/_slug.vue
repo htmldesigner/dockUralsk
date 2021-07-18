@@ -44,12 +44,12 @@
               <div class="row">
 
                 <div class="col-lg-8 col-12" v-if="response">
-                  <p class="content_title">{{ response.name }}</p>
+                  <p class="content_title h1">{{ response.name }}</p>
                 </div>
 
                 <div class="col-4 d-lg-block d-none text-end">
-                  <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/catalog')">Получить услугу</NuxtLink>
-                  <button v-else @click="emitLoginForm" class="btn_primary">Получить услугу</button>
+                  <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service')">{{$t('buttons.get_service')}}</NuxtLink>
+                  <button v-else @click="emitLoginForm" class="btn_primary">{{$t('buttons.get_service')}}</button>
                 </div>
               </div>
 

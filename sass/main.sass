@@ -14,6 +14,23 @@
 .hidden
   display: none !important
 
+
+.h1
+  font-size: 26px
+  line-height: 32px
+  font-weight: 600
+
+.h2
+  font-size: 20px
+  line-height: 24px
+  font-weight: 500
+
+.h3
+  font-size: 18px
+  line-height: 24px
+  font-weight: 400
+
+
 body, html
   height: 100%
 
@@ -125,24 +142,68 @@ b, strong
   background-color: #fff
   background-clip: padding-box
   border: 1px solid $indexColor
-  -webkit-appearance: none
-  -moz-appearance: none
-  appearance: none
+  //-webkit-appearance: none
+  //-moz-appearance: none
+  //appearance: none
   border-radius: 6px
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
-  font-family: 'Montserrat-Medium', sans-serif
+  font-family: 'Montserrat-Regular', sans-serif
 
   &:focus
     background: #fff
     outline: 0
     box-shadow: 1px 2px 6px rgba(32, 33, 36, .18)
 
+  &:disabled
+    pointer-events: none
+    opacity: .65
+    background: #F2F2F2
+    border-color: #F2F2F2
+    color: #969696
+
+select
+  color: $indexColor
+  &:optional
+    color: $indexColor
+  &.form-control
+    vertical-align: middle
+    background: #fff url('~assets/img/vectorDown.svg') no-repeat right .75rem center
+    background-size: 8px 10px
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    &:focus
+      background: #fff url('~assets/img/vectorUp.svg') no-repeat right .75rem center
+      background-size: 8px 10px
+
 .form-label
   font-size: 14px
   line-height: 24px
   font-family: 'Montserrat-Regular', sans-serif
-  color: #868686
+  color: #000
   margin-bottom: 8px
+
+  .required
+    color: red
+    margin-left: 5px
+
+  .hint
+    border-radius: 50%
+    background-color: #39a9cb
+    width: 17px
+    height: 17px
+    display: inline-block
+    text-align: center
+    vertical-align: text-top
+    margin-left: 8px
+    cursor: pointer
+    &:after
+      content: '?'
+      color: #fff
+      font-size: 13px
+      font-family: Montserrat-Medium,sans-serif
+      position: relative
+      top: -4px
 
 .invalid-feedback
   display: none
@@ -532,6 +593,11 @@ b, strong
   border-top-right-radius: 6px
   padding: 35px 30px
 
+.straight
+  border-radius: 6px
+  padding: 35px 30px
+  box-shadow: 0px 0px 10px 0px #E6ECF026
+
 .filter
   border-right: 1px solid $indexLineColor
   border-top-left-radius: 6px
@@ -540,11 +606,11 @@ b, strong
 
 .content
   .content_title
-    font-size: 26px
-    line-height: 32px
-    font-family: 'Montserrat-Bold', sans-serif
-  //padding-bottom: 30px
-  .items_container
+    //font-size: 26px
+    //line-height: 32px
+    //font-family: 'Montserrat-Bold', sans-serif
+  padding-bottom: 30px
+  .items_container // Страница каталог
     margin-top: 55px
 
     .content_items
@@ -586,12 +652,45 @@ b, strong
               &:focus
                 color: darken(#4b4b4b, 5%)
 
-  .link_container
+  .link_container // Страница с ссылками на услуги
     margin-top: 22px
 
-  .service_container
+  .service_container // Страница с услугами и оформления заявки на услугу
     margin-top: 15px
+    .section-sub-title
+      margin-top: 20px
+      margin-bottom: 15px
 
+
+.divider
+  border-bottom: 1px solid #DFDFDF
+  text-align: center
+  position: relative
+  height: auto
+  margin-top: 20px
+  margin-bottom: 36px
+  .arrow-toggler
+    position: absolute
+    top: -15px
+    right: 0
+    left: 0
+    margin: 0 auto
+    border-radius: 50%
+    background-color: #fff
+    width: 30px
+    height: 30px
+    display: inline-block
+    text-align: center
+    vertical-align: text-top
+    cursor: pointer
+    box-shadow: 0px 0px 4px 0px #00000033
+    &:after
+      content: url('~assets/img/vectorDown.svg')
+      display: inline-block
+      transform: rotate(0deg)
+      //color: $indexColor
+      position: relative
+      top: 2px
 
 .nested_crumbs
   margin-top: 18px

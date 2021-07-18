@@ -2,6 +2,7 @@
   "requisites": "Реквизиты",
   "filter": "Фильтр",
   "buttons": {
+    "get_service": "Получить услугу",
     "cancel": "Отмена",
     "reset": "Сбросить",
     "apply": "Применить",
