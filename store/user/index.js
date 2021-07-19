@@ -1,33 +1,28 @@
 export const state = () => ({
-  key: null
+  key: null, // ЭПЦ Ключ Устанавливается в плагине ncaLayer
+  serviceRequest: null
 })
 
 export const mutations = {
   SET_KEY(state, payload) {
     state.key = payload
+  },
+  SET_SERVICE_REQUEST(state, payload) {
+    state.serviceRequest = payload
   }
 }
 
 export const actions = {
-  async login({commit}, user) {
+  async loadServiceRequest({commit}, params) {
     try {
-      // Login user
-      const account = await this.$axios.$get('http://icanhazip.com')
-
-      //Get JWT and USER from October
-      const {userName, token} = account
-
-      // Set JWT to cookie ????
-      // Code
-
-
-      // Set the user locally
-      // commit('SET_USER', {userName, token})
-
-      //Demo
-      commit('SET_USER', user)
+      const response = await this.$axios.$get('api/services/' + params + '/getForm')
+      commit('SET_SERVICE_REQUEST', response)
     } catch (error) {
       throw error
     }
   }
+}
+
+export const getters = {
+  getServiceRequest: (state) => state.serviceRequest
 }

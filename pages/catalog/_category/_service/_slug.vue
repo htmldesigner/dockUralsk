@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="col-4 d-lg-block d-none text-end">
-                  <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service')">{{$t('buttons.get_service')}}</NuxtLink>
+                  <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">{{$t('buttons.get_service')}}</NuxtLink>
                   <button v-else @click="emitLoginForm" class="btn_primary">{{$t('buttons.get_service')}}</button>
                 </div>
               </div>

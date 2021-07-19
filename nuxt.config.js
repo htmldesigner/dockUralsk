@@ -61,6 +61,10 @@ export default {
           // required: true,
           // type: 'Bearer'
         },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
         endpoints: {
           login: { url: '/api/signin', method: 'post'},
           logout: { url: '/api/logout', method: 'post'},

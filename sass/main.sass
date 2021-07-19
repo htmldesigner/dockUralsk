@@ -62,8 +62,8 @@ body
     &:focus:required:invalid
       border-color: red
 
-    &:required:valid
-      border-color: green
+    //&:required:valid
+    //  border-color: green
 
 .img-responsive
   display: block
@@ -129,6 +129,46 @@ b, strong
       &.active
         border-bottom: 4px solid $indexColor
         color: $indexColor
+
+
+
+
+// File-input
+.file-input
+  .file-input__input
+    width: 0.1px
+    height: 0.1px
+    opacity: 0
+    overflow: hidden
+    position: absolute
+    z-index: -1
+
+  .file-input__label
+    cursor: pointer
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    border-radius: 6px
+    font-size: 16px
+    line-height: 24px
+    color: #fff
+    padding: 10px 12px
+    background-color: $indexColor
+    font-family: 'Montserrat-Regular', sans-serif
+    width: 100%
+    transition: .25s ease
+
+    &:hover
+      background: lighten($indexColor, 5%)
+
+    &:focus
+      background: darken($indexColor, 5%)
+
+  .file-input__label
+    svg
+      margin-right: 10px
+
+
 
 //Form
 .form-control

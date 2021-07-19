@@ -28,7 +28,7 @@ import Footer from "@/components/Footer";
 
 export default {
   name: "serviceRequestLayout",
-  // middleware: 'authenticated',
+  middleware: 'authenticated',
   components: {
     Header,
     Footer
