@@ -62,8 +62,8 @@ body
     &:focus:required:invalid
       border-color: red
 
-    //&:required:valid
-    //  border-color: green
+//&:required:valid
+//  border-color: green
 
 .img-responsive
   display: block
@@ -78,6 +78,35 @@ body
 
 b, strong
   font-weight: bold
+
+.map-view
+  max-width: 800px
+  height: 600px
+  width: 100%
+  display: inline-block
+  border: 1px solid #3333
+  padding: 5px
+  background-color: #fff
+
+  .map-view-body
+    display: flex
+    flex-direction: column
+    position: relative
+
+    .map_view-title
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      margin-bottom: 28px
+
+      p
+        font-size: 20px
+        line-height: 24px
+        font-family: 'Montserrat-Medium', sans-serif
+        font-weight: normal
+        margin: 0
+        padding: 0
+
 
 .form-card
   max-width: 372px
@@ -131,8 +160,6 @@ b, strong
         color: $indexColor
 
 
-
-
 // File-input
 .file-input
   .file-input__input
@@ -151,23 +178,23 @@ b, strong
     border-radius: 6px
     font-size: 16px
     line-height: 24px
-    color: #fff
-    padding: 10px 12px
-    background-color: $indexColor
+    color: $indexColor
+    border: 1px solid $indexColor
+    padding: 9px 12px
+    background-color: $insideButtons
     font-family: 'Montserrat-Regular', sans-serif
     width: 100%
     transition: .25s ease
 
     &:hover
-      background: lighten($indexColor, 5%)
+      background: darken($insideButtons, 5%)
 
     &:focus
-      background: darken($indexColor, 5%)
+      background: darken($insideButtons, 5%)
 
   .file-input__label
     svg
       margin-right: 10px
-
 
 
 //Form
@@ -203,8 +230,10 @@ b, strong
 
 select
   color: $indexColor
+
   &:optional
     color: $indexColor
+
   &.form-control
     vertical-align: middle
     background: #fff url('~assets/img/vectorDown.svg') no-repeat right .75rem center
@@ -212,6 +241,7 @@ select
     -webkit-appearance: none
     -moz-appearance: none
     appearance: none
+
     &:focus
       background: #fff url('~assets/img/vectorUp.svg') no-repeat right .75rem center
       background-size: 8px 10px
@@ -237,11 +267,12 @@ select
     vertical-align: text-top
     margin-left: 8px
     cursor: pointer
+
     &:after
       content: '?'
       color: #fff
       font-size: 13px
-      font-family: Montserrat-Medium,sans-serif
+      font-family: Montserrat-Medium, sans-serif
       position: relative
       top: -4px
 
@@ -321,8 +352,36 @@ select
     opacity: .65
     background: lighten($indexColor, 20%)
 
-  svg
+  svg, img
     margin-right: 10px
+
+
+.btn_light // Всетлые кнопки на форме заказа
+   background: $insideButtons
+   color: $indexColor !important
+   border-radius: 6px
+   padding: 10px 18px
+   font-size: 16px
+   font-family: 'Montserrat-Regular', sans-serif
+   max-height: 44px
+   border: 1px solid $stroke
+   display: inline-block
+   transition: .25s ease
+   width: max-content
+   text-decoration: none
+   &:hover
+     background: darken($insideButtons, 5%)
+
+   &:focus
+     background: darken($insideButtons, 5%)
+
+   &:disabled
+     pointer-events: none
+     opacity: .65
+     background: lighten($insideButtons, 20%)
+   svg, img
+     margin-right: 10px
+
 
 .btn_primary_small
   background: $indexColor
@@ -414,7 +473,7 @@ select
 
 .card
   background-color: #FFFFFF
-  border: 1px solid #D9E0E2
+  border: 1px solid $indexLineColor
   border-radius: 6px
   padding: 17px
   color: $indexColor
@@ -431,7 +490,8 @@ select
 
   .check-label_them
     font-family: 'Montserrat-Regular', sans-serif
-    color: #4B4B4B
+    color: $indexTextColor
+    //color: #4B4B4B
     //display: block
     position: relative
     cursor: pointer
@@ -646,60 +706,64 @@ select
 
 .content
   .content_title
-    //font-size: 26px
-    //line-height: 32px
-    //font-family: 'Montserrat-Bold', sans-serif
+  //font-size: 26px
+  //line-height: 32px
+  //font-family: 'Montserrat-Bold', sans-serif
   padding-bottom: 30px
-  .items_container // Страница каталог
-    margin-top: 55px
 
-    .content_items
-      margin-top: 25px
-      padding-bottom: 10px
+  .items_container
+    // Страница каталог
+       margin-top: 55px
 
-      .content_items_title
-        font-size: 20px
-        font-family: 'Montserrat-Bold', sans-serif
-        text-decoration: none
-        color: $indexTextColor
-        display: inline-block
-        margin-bottom: 16px
+       .content_items
+         margin-top: 25px
+         padding-bottom: 10px
 
-      .content_items_content
-        .content_items_subtitle
-          margin-bottom: 7px
-          font-size: 16px
-          font-family: 'Montserrat-Medium', sans-serif
-          text-decoration: none
-          color: $indexTextColor
-          display: inline-block
+         .content_items_title
+           font-size: 20px
+           font-family: 'Montserrat-Bold', sans-serif
+           text-decoration: none
+           color: $indexTextColor
+           display: inline-block
+           margin-bottom: 16px
 
-        ul
-          padding: 0 0 0 17px
-          margin: 0
+         .content_items_content
+           .content_items_subtitle
+             margin-bottom: 7px
+             font-size: 16px
+             font-family: 'Montserrat-Medium', sans-serif
+             text-decoration: none
+             color: $indexTextColor
+             display: inline-block
 
-          li
-            color: #C4C4C4
+           ul
+             padding: 0 0 0 17px
+             margin: 0
 
-            a
-              font-size: 14px
-              text-decoration: none
-              color: $indexColor
+             li
+               color: #C4C4C4
 
-              &:hover
-                color: lighten(#4b4b4b, 5%)
+               a
+                 font-size: 14px
+                 text-decoration: none
+                 color: $indexColor
 
-              &:focus
-                color: darken(#4b4b4b, 5%)
+                 &:hover
+                   color: lighten(#4b4b4b, 5%)
 
-  .link_container // Страница с ссылками на услуги
-    margin-top: 22px
+                 &:focus
+                   color: darken(#4b4b4b, 5%)
 
-  .service_container // Страница с услугами и оформления заявки на услугу
-    margin-top: 15px
-    .section-sub-title
-      margin-top: 20px
-      margin-bottom: 15px
+  .link_container
+    // Страница с ссылками на услуги
+       margin-top: 22px
+
+  .service_container
+    // Страница с услугами и оформления заявки на услугу
+       margin-top: 15px
+       .section-sub-title
+         margin-top: 20px
+         margin-bottom: 15px
 
 
 .divider
@@ -709,6 +773,7 @@ select
   height: auto
   margin-top: 20px
   margin-bottom: 36px
+
   .arrow-toggler
     position: absolute
     top: -15px
@@ -724,6 +789,7 @@ select
     vertical-align: text-top
     cursor: pointer
     box-shadow: 0px 0px 4px 0px #00000033
+
     &:after
       content: url('~assets/img/vectorDown.svg')
       display: inline-block

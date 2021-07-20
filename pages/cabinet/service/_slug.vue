@@ -8,185 +8,88 @@
 
     <div class="service_container">
 
+      <form @submit.prevent="onSubmit">
+        <section v-for="(request, o) of serviceRequest">
 
-      <section v-for="(request, o) of serviceRequest">
+          <div v-for="(sections, idx) in request.sections">
 
-        <div v-for="(sections, idx) in request.sections">
-          <div class="section-title mb-3">
-            <p :class="sections.title.tag">{{ sections.title.text }}</p>
-          </div>
-
-          <div class="row" v-for="(rows, index) in sections.rows">
-
-            <div :class="row.cssClasses[0]" v-for="(row, q) in rows.fields">
-
-              <div class="form-group mb-4" v-if="row.type === 'text'">
-                <label
-                  :for="row.name"
-                  class="form-label">{{ row.title }}
-                  <span v-if="row.validations[0]" class="required">*</span>
-                  <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
-                </label>
-                <input
-                  :id="row.name"
-                  :required="row.validations[0]"
-                  :type="row.type"
-                  :disabled="row.disabled"
-                  class="form-control"
-                  :value="row.value"
-                  :name="row.name">
-                <div class="invalid-feedback">
-                  Login is invalid
-                </div>
-              </div>
-
-              <div class="form-group mb-4" v-if="row.type === 'select'">
-                <label
-                  :for="row.name" class="form-label">{{ row.title }}
-                  <span v-if="row.validations[0]" class="required">*</span>
-                  <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
-                </label>
-                <select
-                  :disabled="row.disabled"
-                  class="form-control"
-                  :name="row.name"
-                  :id="row.name">
-                  <option v-for="option in row.options" :value="option.id">{{ option.text }}</option>
-
-                </select>
-                <div class="invalid-feedback">
-                  Login is invalid
-                </div>
-              </div>
-
-              <div class="form-group mb-4" v-if="row.type === 'multifiles'">
-                <label
-                  :for="row.name"
-                  class="form-label">{{ row.title }}
-                  <span v-if="row.validations[0]" class="required">*</span>
-                  <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
-                </label>
-                <div class="file-input">
-                  <input type="file" name="file-input" id="file-input" class="file-input__input"/>
-                  <label class="file-input__label" for="file-input">
-                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M3.94861 19.135C2.8934 19.135 1.90134 18.7241 1.15521 17.9779C-0.38507 16.4377 -0.38507 13.9314 1.15521 12.3911L10.0189 3.52746C11.0647 2.48162 12.7665 2.48162 13.8123 3.52746C14.8581 4.5733 14.8581 6.27504 13.8123 7.32088L7.29253 13.8406C7.03351 14.0997 6.61346 14.0997 6.35438 13.8406C6.09531 13.5816 6.09531 13.1615 6.35438 12.9025L12.8741 6.38269C13.4027 5.85415 13.4027 4.99414 12.8741 4.46561C12.6181 4.20954 12.2777 4.06855 11.9156 4.06855C11.5535 4.06855 11.2131 4.20954 10.957 4.46561L2.09336 13.3293C1.07039 14.3523 1.07039 16.0168 2.09336 17.0398C2.58895 17.5353 3.24782 17.8083 3.94861 17.8083C4.64941 17.8083 5.30832 17.5353 5.80387 17.0398L14.8756 7.96808C15.6107 7.23301 16.0154 6.25572 16.0154 5.21616C16.0154 4.1766 15.6107 3.1993 14.8756 2.46423C13.3581 0.946776 10.8891 0.94682 9.3717 2.46423L2.64392 9.19197C2.38489 9.45104 1.96484 9.45104 1.70577 9.19197C1.4467 8.9329 1.4467 8.51289 1.70577 8.25382L8.43355 1.52604C10.4683 -0.50868 13.779 -0.50868 15.8137 1.52604C16.7994 2.51169 17.3423 3.82222 17.3423 5.21616C17.3423 6.61009 16.7994 7.92058 15.8137 8.90627L6.74202 17.9779C5.99589 18.7241 5.00383 19.135 3.94861 19.135Z"
-                        fill="white"/>
-                    </svg>
-                    <span>Перетащите файл сюда</span></label>
-                </div>
-              </div>
-
-              <div class="form-group mb-4" v-if="row.type === 'geo'">
-                <label
-                  :for="row.name"
-                  class="form-label">{{ row.title }}
-                  <span v-if="row.validations[0]" class="required">*</span>
-                  <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
-                </label>
-                <button class="btn_primary btn_block">map</button>
-              </div>
-
+            <div class="divider">
+              <div class="arrow-toggler"></div>
             </div>
 
+            <div class="section-title mb-3">
+              <p :class="sections.title.tag">{{ sections.title.text }}</p>
+            </div>
 
-            <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
-              <div v-for="row in rows">
-                <div v-for="el in row">
+            <div class="row" v-for="(rows, index) in sections.rows">
 
-                  <div :class="row.cssClasses[0]" v-for="(row, q) in el.fields">
+              <div :class="row.cssClasses[0]" v-for="(row, q) in rows.fields">
 
-                    <div class="form-group mb-4" v-if="row.type === 'text'">
-                      <label
-                        :for="row.name"
-                        class="form-label">{{ row.title }}
-                        <span v-if="row.validations[0]" class="required">*</span>
-                        <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
-                      </label>
-                      <input
-                        :id="row.name"
-                        :required="row.validations[0]"
-                        :type="row.type"
-                        :disabled="row.disabled"
-                        class="form-control"
-                        :value="row.value"
-                        :name="row.name">
-                      <div class="invalid-feedback">
-                        Login is invalid
-                      </div>
-                    </div>
+                <FormGenerator @loadMap="loadMap" :row="row"/>
 
-                    <div class="form-group mb-4" v-if="row.type === 'select'">
-                      <label
-                        :for="row.name" class="form-label">{{ row.title }}
-                        <span v-if="row.validations[0]" class="required">*</span>
-                        <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
-                      </label>
-                      <select
-                        :disabled="row.disabled"
-                        class="form-control"
-                        :name="row.name"
-                        :id="row.name">
-                        <option v-for="option in row.options" :value="option.id">{{ option.text }}</option>
+              </div>
 
-                      </select>
-                      <div class="invalid-feedback">
-                        Login is invalid
-                      </div>
-                    </div>
 
-                    <div class="form-group mb-4" v-if="row.type === 'multifiles'">
-                      <label
-                        :for="row.name"
-                        class="form-label">{{ row.title }}
-                        <span v-if="row.validations[0]" class="required">*</span>
-                        <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
-                      </label>
-                      <div class="file-input">
-                        <input type="file" name="file-input" id="file-input" class="file-input__input"/>
-                        <label class="file-input__label" for="file-input">
-                          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
-                               xmlns="http://www.w3.org/2000/svg">
-                            <path
-                              d="M3.94861 19.135C2.8934 19.135 1.90134 18.7241 1.15521 17.9779C-0.38507 16.4377 -0.38507 13.9314 1.15521 12.3911L10.0189 3.52746C11.0647 2.48162 12.7665 2.48162 13.8123 3.52746C14.8581 4.5733 14.8581 6.27504 13.8123 7.32088L7.29253 13.8406C7.03351 14.0997 6.61346 14.0997 6.35438 13.8406C6.09531 13.5816 6.09531 13.1615 6.35438 12.9025L12.8741 6.38269C13.4027 5.85415 13.4027 4.99414 12.8741 4.46561C12.6181 4.20954 12.2777 4.06855 11.9156 4.06855C11.5535 4.06855 11.2131 4.20954 10.957 4.46561L2.09336 13.3293C1.07039 14.3523 1.07039 16.0168 2.09336 17.0398C2.58895 17.5353 3.24782 17.8083 3.94861 17.8083C4.64941 17.8083 5.30832 17.5353 5.80387 17.0398L14.8756 7.96808C15.6107 7.23301 16.0154 6.25572 16.0154 5.21616C16.0154 4.1766 15.6107 3.1993 14.8756 2.46423C13.3581 0.946776 10.8891 0.94682 9.3717 2.46423L2.64392 9.19197C2.38489 9.45104 1.96484 9.45104 1.70577 9.19197C1.4467 8.9329 1.4467 8.51289 1.70577 8.25382L8.43355 1.52604C10.4683 -0.50868 13.779 -0.50868 15.8137 1.52604C16.7994 2.51169 17.3423 3.82222 17.3423 5.21616C17.3423 6.61009 16.7994 7.92058 15.8137 8.90627L6.74202 17.9779C5.99589 18.7241 5.00383 19.135 3.94861 19.135Z"
-                              fill="white"/>
-                          </svg>
-                          <span>Перетащите файл сюда</span></label>
-                      </div>
-                    </div>
+              <div  v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
+                <div v-for="row in rows">
+                  <div v-for="el in row">
 
-                    <div class="form-group mb-4" v-if="row.type === 'geo'">
-                      <label
-                        :for="row.name"
-                        class="form-label">{{ row.title }}
-                        <span v-if="row.validations[0]" class="required">*</span>
-                        <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
-                      </label>
-                      <button class="btn_primary btn_block">map</button>
+                    <div :class="row.cssClasses[0]" v-for="(row, q) in el.fields">
+
+                      <FormGenerator @loadMap="loadMap" :row="row"/>
+
                     </div>
 
                   </div>
-
                 </div>
               </div>
+
+
             </div>
 
 
           </div>
 
+        </section>
+        <section class="mt-3">
+          <div class="row">
 
-        </div>
+            <div class="col-xl-5 col-lg-12">
+              <div class="form-group mb-4">
+                <div class="form-check form-check_them">
+                  <label class="form-check-label check-label_them">Согласен <a class="simple_link" href="#">с условием
+                    пользовательского соглашения</a>
+                    <input class="form-check-input check-input_them" v-model="agree" type="checkbox" value="">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
 
-      </section>
+            <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
+              <div class="mb-4">
+                <button :disabled="!agree" class="btn_primary">Подписать</button>
+              </div>
+            </div>
 
+
+          </div>
+        </section>
+      </form>
 
     </div>
+
+    <MapPopup v-if="showMap" @closeMap="closeMap"/>
+
   </div>
 </template>
 
 <script>
+import MapPopup from "~/components/MapPopup";
+import FormGenerator from "~/components/FormGenerator";
+
 export default {
+  components: {FormGenerator, MapPopup},
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
   computed: {
@@ -197,6 +100,25 @@ export default {
   async fetch() {
     await this.$store.dispatch('user/loadServiceRequest', this.$route.params.slug)
   },
+  data() {
+    return {
+      showMap: false,
+      agree: false
+    }
+  },
+  methods: {
+    closeMap(){
+      this.showMap = false
+    },
+    loadMap(){
+      this.showMap = true
+    },
+    onSubmit(el) {
+      if (this.agree) {
+        console.log(el)
+      }
+    }
+  }
 }
 </script>
 

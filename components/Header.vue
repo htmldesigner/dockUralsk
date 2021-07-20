@@ -44,6 +44,7 @@
 
     <Registration v-if="registrationModal" @close="close"/>
     <Login v-if="loginModal" @close="close"/>
+
   </header>
 </template>
 
