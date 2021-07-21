@@ -1,13 +1,48 @@
 <template>
-<div>
-  cabinet component
-</div>
+  <div :class="{'col-lg-12': currentLink === 'Cabinet', 'col-lg-10 offset-lg-1': currentLink === 'Profile'}"
+       class="col-12 bg-white straight s-h">
+    <div class="content">
+
+      <component :is="currentComponent" @logOut="logOut">
+        <div class="component-selector">
+          <ul>
+            <li @click="currentLink = 'Cabinet'" :class="{active: currentLink === 'Cabinet'}">
+              <div class="component">Обращения</div>
+            </li>
+            <li @click="currentLink = 'Profile'" :class="{active: currentLink === 'Profile'}">
+              <div class="component">Профиль</div>
+            </li>
+          </ul>
+        </div>
+      </component>
+
+    </div>
+  </div>
 </template>
 
 <script>
+import Cabinet from "~/components/cabinet/Cabinet";
+import Profile from "~/components/cabinet/Profile";
+
 export default {
+  components: {Cabinet, Profile},
   name: "index",
- layout: 'cabinetLayout'
+  layout: 'cabinet/cabinetLayout',
+  computed: {
+    currentComponent: function () {
+      return this.currentLink
+    },
+  },
+  data() {
+    return {
+      currentLink: 'Cabinet'
+    }
+  },
+  methods: {
+    logOut() {
+      this.$auth.logout()
+    },
+  }
 }
 </script>
 

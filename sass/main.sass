@@ -2,6 +2,117 @@
 @import "fonts"
 @import "libs"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table
+  border: 1px solid #ccc
+  border-collapse: collapse
+  margin: 0
+  padding: 0
+  width: 100%
+  table-layout: fixed
+
+
+table caption
+  font-size: 1.5em
+  margin: .5em 0 .75em
+
+
+table tr
+  background-color: #f8f8f8
+  border: 1px solid #ddd
+  padding: .35em
+
+
+table th,
+table td
+  padding: .625em
+  text-align: center
+
+
+table th
+  font-size: .85em
+  letter-spacing: .1em
+  text-transform: uppercase
+
+//@media screen and (max-width: 600px)
+//table
+//  border: 0
+//
+//
+//table caption
+//  font-size: 1.3em
+//
+//
+//table thead
+//  border: none
+//  clip: rect(0 0 0 0)
+//  height: 1px
+//  margin: -1px
+//  overflow: hidden
+//  padding: 0
+//  position: absolute
+//  width: 1px
+//
+//table tr
+//  border-bottom: 3px solid #ddd
+//  display: block
+//  margin-bottom: .625em
+//
+//table td
+//  border-bottom: 1px solid #ddd
+//  display: block
+//  font-size: .8em
+//  text-align: right
+//
+//
+//table td::before
+//  content: attr(data-label)
+//  float: left
+//  font-weight: bold
+//  text-transform: uppercase
+//
+//table td:last-child
+//  border-bottom: 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ::placeholder
   color: #888888
   font-family: "Montserrat-Regular", sans-serif
@@ -14,6 +125,9 @@
 .hidden
   display: none !important
 
+hr
+  background-color: #DFDFDF
+  opacity: 1
 
 .h1
   font-size: 26px
@@ -169,6 +283,7 @@ b, strong
     position: absolute
     z-index: -1
 
+
   .file-input__label
     cursor: pointer
     display: inline-flex
@@ -184,6 +299,9 @@ b, strong
     font-family: 'Montserrat-Regular', sans-serif
     width: 100%
     transition: .25s ease
+    &:focus:required:invalid
+      .file-input__label
+        border: 1px solid red!important
 
     &:hover
       background: darken($insideButtons, 5%)
@@ -196,7 +314,17 @@ b, strong
       margin-right: 10px
 
 
+
 //Form
+.horizontal
+  display: flex
+  align-items: center
+  label
+    margin: 0 15px 0 0
+    padding: 0
+    color: #888888
+    font-size: 15px
+    font-family: 'Montserrat-Medium', sans-serif
 .form-control
   display: block
   width: 100%
@@ -334,7 +462,7 @@ select
   padding: 10px 18px
   font-size: 16px
   font-family: 'Montserrat-Regular', sans-serif
-  max-height: 44px
+  max-height: 46px
   display: inline-block
   transition: .25s ease
   width: max-content
@@ -754,7 +882,17 @@ select
        .section-sub-title
          margin-top: 20px
          margin-bottom: 15px
-
+  .user
+    .user-name
+      color: #888888
+      font-size: 15px
+      font-family: 'Montserrat-Medium', sans-serif
+    .logOut
+      margin-left: 16px
+      color: $indexColor
+      cursor: pointer
+      font-size: 15px
+      font-family: 'Montserrat-Medium', sans-serif
 
 .divider
   border-bottom: 1px solid #DFDFDF

@@ -8,7 +8,7 @@
 
     <div class="service_container">
 
-      <form @submit.prevent="onSubmit" ref="serviceForm">
+      <form @submit.prevent="onSubmit" ref="serviceForm" enctype="multipart/form-data">
         <section v-for="(request, o) of serviceRequest">
 
           <div v-for="(sections, idx) in request.sections">
