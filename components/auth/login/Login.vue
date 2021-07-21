@@ -6,7 +6,7 @@
       <div class="form-body">
         <div class="form-title">
           <p>Авторизация</p>
-          <a href="#" class="close" @click.prevent="$emit('close')"></a>
+          <a href="#" class="btn_close" @click.prevent="$emit('close')"></a>
         </div>
 
         <div class="component-selector">

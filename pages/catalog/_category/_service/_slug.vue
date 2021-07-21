@@ -8,7 +8,8 @@
           class="btn_outline requisites-popup">{{$t('buttons.requisites') }}
         </button>
 
-        <NuxtLink class="btn_primary" to="category.html">Получить услугу</NuxtLink>
+        <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">{{$t('buttons.get_service')}}</NuxtLink>
+        <button v-else @click="emitLoginForm" class="btn_primary">{{$t('buttons.get_service')}}</button>
 
       </div>
 

@@ -49,7 +49,12 @@
           <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
         </label>
         <div class="file-input">
-          <input type="file" name="file-input" :id="row.name" class="file-input__input"/>
+          <input
+            type="file"
+            :name="row.name"
+            :id="row.name"
+            class="file-input__input"
+          />
           <label class="file-input__label" :for="row.name">
             <svg width="20" height="22" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -65,7 +70,13 @@
           <span v-if="row.validations[0]" class="required">*</span>
           <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
         </label>
-        <button @click.prevent="$emit('loadMap')" :disabled="row.disabled" class="btn_light btn_block"><img src="~assets/img/locationPin.svg" alt="Alt"> {{ row.title }}</button>
+        <button
+          @click.prevent="$emit('loadMap')"
+          :disabled="row.disabled"
+          class="btn_light btn_block">
+          <img src="~assets/img/locationPin.svg" alt="Alt">
+          {{ row.title }}
+        </button>
       </div>
 
       <div class="form-group mb-4" v-if="row.type === 'textarea'">

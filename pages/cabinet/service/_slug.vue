@@ -8,7 +8,7 @@
 
     <div class="service_container">
 
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="onSubmit" ref="serviceForm">
         <section v-for="(request, o) of serviceRequest">
 
           <div v-for="(sections, idx) in request.sections">
@@ -29,8 +29,7 @@
 
               </div>
 
-
-              <div  v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
+              <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
                 <div v-for="row in rows">
                   <div v-for="el in row">
 
@@ -79,7 +78,10 @@
 
     </div>
 
-    <MapPopup v-if="showMap" @closeMap="closeMap"/>
+    <client-only>
+      <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
+    </client-only>
+
 
   </div>
 </template>
@@ -103,19 +105,31 @@ export default {
   data() {
     return {
       showMap: false,
-      agree: false
+      agree: false,
     }
   },
   methods: {
-    closeMap(){
+    closeMap() {
       this.showMap = false
     },
-    loadMap(){
+    onConfirm(el) {
+      console.log(el)
+    },
+    loadMap() {
       this.showMap = true
     },
-    onSubmit(el) {
+    async onSubmit(el) {
       if (this.agree) {
-        console.log(el)
+        let formElem = this.$refs.serviceForm
+
+
+        let response = await fetch('/api/register', {
+          method: 'POST',
+          body: new FormData(formElem)
+        });
+
+        console.log(new FormData(formElem))
+
       }
     }
   }

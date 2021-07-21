@@ -1,8 +1,8 @@
 <template>
   <div class="isPage d-flex flex-column h-100">
+
+
     <Header/>
-
-
     <section class="container">
       <div class="container">
         <div class="row">
@@ -16,9 +16,9 @@
         </div>
       </div>
     </section>
-
-
     <Footer/>
+
+
   </div>
 </template>
 

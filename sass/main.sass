@@ -80,32 +80,31 @@ b, strong
   font-weight: bold
 
 .map-view
-  max-width: 800px
-  height: 600px
+  max-width: 738px
+  height: 542px
   width: 100%
   display: inline-block
   border: 1px solid #3333
-  padding: 5px
+  padding: 34px 40px 40px 40px
   background-color: #fff
-
-  .map-view-body
+  .map-view-header
     display: flex
-    flex-direction: column
+    flex-direction: row
+    justify-content: space-between
+    margin-bottom: 28px
     position: relative
-
-    .map_view-title
-      display: flex
-      flex-direction: row
-      justify-content: space-between
-      margin-bottom: 28px
-
-      p
-        font-size: 20px
-        line-height: 24px
-        font-family: 'Montserrat-Medium', sans-serif
-        font-weight: normal
-        margin: 0
-        padding: 0
+    p
+      margin: 0
+      padding: 0
+  .map-view-body
+    position: relative
+    height: 74%
+  .map_view-footer
+    height: 80px
+    display: flex
+    align-items: center
+    flex-direction: row
+    justify-content: center
 
 
 .form-card
@@ -408,28 +407,25 @@ select
   align-items: center
   width: 100%
 
-.close
+.btn_close
   position: absolute
   right: 0px
   top: 0px
   width: 24px
   height: 24px
   opacity: 0.3
-
+  cursor: pointer
   &:hover
     opacity: 1
-
   &:before, &:after
     position: absolute
     left: 11px
     content: ' '
     height: 24px
-    width: 2px
+    width: 1px
     background-color: #333
-
   &:before
     transform: rotate(45deg)
-
   &:after
     transform: rotate(-45deg)
 
@@ -706,13 +702,9 @@ select
 
 .content
   .content_title
-  //font-size: 26px
-  //line-height: 32px
-  //font-family: 'Montserrat-Bold', sans-serif
-  padding-bottom: 30px
+    padding-bottom: 30px
 
-  .items_container
-    // Страница каталог
+  .items_container // Страница каталог
        margin-top: 55px
 
        .content_items
@@ -754,12 +746,10 @@ select
                  &:focus
                    color: darken(#4b4b4b, 5%)
 
-  .link_container
-    // Страница с ссылками на услуги
+  .link_container // Страница с ссылками на услуги
        margin-top: 22px
 
-  .service_container
-    // Страница с услугами и оформления заявки на услугу
+  .service_container // Страница с услугами и оформления заявки на услугу
        margin-top: 15px
        .section-sub-title
          margin-top: 20px
