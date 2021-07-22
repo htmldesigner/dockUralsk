@@ -488,6 +488,12 @@ select
     margin-right: 10px
 
 
+.disabled
+  pointer-events: none
+  opacity: .65
+  background: lighten($indexColor, 20%)
+
+
 .btn_light // Всетлые кнопки на форме заказа
    background: $insideButtons
    color: $indexColor !important
@@ -514,16 +520,37 @@ select
    svg, img
      margin-right: 10px
 
+//.btn_primary_small
+//  background: $indexColor
+//  color: #fff
+//  border-radius: 6px
+//  border: none
+//  padding: 7px 12px
+//  font-size: 15px
+//  font-family: 'Montserrat-Regular', sans-serif
+//  max-height: 48px
+//  width: auto
+//  display: inline-block
+//  transition: .25s ease
+//  width: max-content
+//
+//  &:hover
+//    background: lighten($indexColor, 5%)
+//
+//  &:focus
+//    background: darken($indexColor, 5%)
+
+
 
 .btn_primary_small
   background: $indexColor
   color: #fff
   border-radius: 6px
   border: none
-  padding: 7px 12px
-  font-size: 15px
+  padding: 10px 12px
+  //font-size: 15px
   font-family: 'Montserrat-Regular', sans-serif
-  max-height: 44px
+  max-height: 48px
   display: inline-block
   transition: .25s ease
   width: max-content
@@ -533,6 +560,32 @@ select
 
   &:focus
     background: darken($indexColor, 5%)
+
+
+.btn_outline_small
+  background: transparent
+  color: $indexColor
+  border-radius: 6px
+  border: 1px solid $indexColor
+  padding: 10px 14px
+  font-size: 16px
+  font-family: 'Montserrat-Regular', sans-serif
+  max-height: 48px
+  display: inline-block
+  transition: .25s ease
+  width: max-content
+  text-decoration: none
+  svg
+    fill: $indexColor
+  &:hover
+    background: $indexColor
+    border: 1px solid transparent
+    svg
+      fill: #fff
+  &:focus, &:active
+    background: darken($indexColor, 5%)
+    color: #fff
+
 
 .btn_block
   display: flex

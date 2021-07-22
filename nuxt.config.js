@@ -64,13 +64,13 @@ export default {
           // type: 'Bearer'
         },
         user: {
-          property: 'user',
+          property: false,
           // autoFetch: true
         },
         endpoints: {
           login: { url: '/api/signin', method: 'post'},
           logout: { url: '/api/logout', method: 'post'},
-          user: false
+          user: { url: '/api/user', method: 'get', propertyName: ''}
         }
       }
     }

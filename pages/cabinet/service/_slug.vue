@@ -27,7 +27,26 @@
 
                 <FormGenerator @loadMap="loadMap" :row="row"/>
 
+                <div v-if="row.type === 'group'">
+
+                  <div class="row" v-for="(el, idx) in row.items">
+                    <div :class="i.cssClasses[0]" v-for="i in el.items">
+                      <FormGenerator @loadMap="loadMap" :row="i" :index="idx" @idx="removeItem"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <button @click.prevent="addItem()" class="btn_primary_small">
+                        <img src="~assets/img/add.svg" alt="Alt">
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
               </div>
+
 
               <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
                 <div v-for="row in rows">
@@ -90,6 +109,7 @@ import MapPopup from "~/components/MapPopup";
 import FormGenerator from "~/components/FormGenerator";
 
 export default {
+  loading: true,
   components: {FormGenerator, MapPopup},
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
@@ -108,6 +128,49 @@ export default {
     }
   },
   methods: {
+    addItem() {
+      let el = {
+        "cssClasses": [
+
+        ],
+        "items": {
+          "plan_address_object": {
+            "title": "Ситуационный план",
+            "tooltip": "",
+            "type": "multifiles",
+            "placeholder": "",
+            "disabled": false,
+            "value": "",
+            "validations": [
+              "required"
+            ],
+            "cssClasses": [
+              "col-xl-6 col-lg-12"
+            ],
+            "options": [
+
+            ],
+            "name": "plan_address_object[]"
+          },
+          "subtract": {
+            "title": "Указать на карте",
+            "tooltip": "",
+            "type": "subtract",
+            "cssClasses": [
+              "col-xl-2 col-lg-2"
+            ]
+          }
+        }
+      }
+
+      this.$store.commit('user/ADD_ITEM_SERVICE_REQUEST', el)
+
+    },
+
+    removeItem(idx){
+      this.$store.commit('user/REMOVE_ITEM_SERVICE_REQUEST', idx)
+    },
+
     closeMap() {
       this.showMap = false
     },

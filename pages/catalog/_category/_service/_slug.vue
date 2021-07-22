@@ -23,6 +23,7 @@
     <section class="container">
       <div class="container">
         <div class="row">
+
           <div class="col-lg-3 bg-white left-aside s-h filter">
             <div class="requisites">
               <div class="requisites_label">
@@ -49,7 +50,7 @@
                 </div>
 
                 <div class="col-4 d-lg-block d-none text-end">
-                  <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">{{$t('buttons.get_service')}}</NuxtLink>
+                  <NuxtLink v-if="isLoggedIn" :class="{ disabled: !userType }" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">{{$t('buttons.get_service')}}</NuxtLink>
                   <button v-else @click="emitLoginForm" class="btn_primary">{{$t('buttons.get_service')}}</button>
                 </div>
               </div>
@@ -88,6 +89,9 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.state.auth.loggedIn
+    },
+    userType(){
+      return this.$store.state.auth.user.type
     }
   },
   name: "slug",

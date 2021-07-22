@@ -9,7 +9,48 @@ export const mutations = {
   },
   SET_SERVICE_REQUEST(state, payload) {
     state.serviceRequest = payload
+  },
+
+  ADD_ITEM_SERVICE_REQUEST(state, payload) {
+
+    for (let items in state.serviceRequest) {
+      if (state.serviceRequest[items].sections) {
+        for (let item of state.serviceRequest[items].sections) {
+          for (let i of item.rows) {
+            if (i.fields?.length) {
+              for (let elem of i.fields) {
+                if (elem.type === 'group') {
+                  elem.items.push(payload)
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  },
+
+  REMOVE_ITEM_SERVICE_REQUEST(state, payload) {
+
+    for (let items in state.serviceRequest) {
+      if (state.serviceRequest[items].sections) {
+        for (let item of state.serviceRequest[items].sections) {
+          for (let i of item.rows) {
+            if (i.fields?.length) {
+              for (let elem of i.fields) {
+                if (elem.type === 'group') {
+                  elem.items.splice(payload, 1)
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
   }
+
 }
 
 export const actions = {

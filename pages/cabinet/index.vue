@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'col-lg-12': currentLink === 'Cabinet', 'col-lg-10 offset-lg-1': currentLink === 'Profile'}"
+  <div :class="{'col-lg-12': currentLink === 'Cabinet', 'col-lg-12': currentLink === 'Profile'}"
        class="col-12 bg-white straight s-h">
     <div class="content">
 
