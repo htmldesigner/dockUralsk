@@ -16,7 +16,8 @@
     "core-js": "^3.15.1",
     "leaflet": "^1.7.1",
     "nuxt": "^2.15.7",
-    "nuxt-i18n": "^6.27.3"
+    "nuxt-i18n": "^6.27.3",
+    "vee-validate": "^3.4.11"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.7",

@@ -169,7 +169,7 @@ body
   overflow-x: hidden
   color: $indexTextColor
 
-  input, textarea
+  input, textarea, select
     border: #666 1px solid
     outline: none
 
@@ -178,6 +178,15 @@ body
 
 //&:required:valid
 //  border-color: green
+
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip, .was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip
+  display: block
+
+.custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid
+  border-color: #dc3545
+
+
+
 
 .img-responsive
   display: block
@@ -299,9 +308,6 @@ b, strong
     font-family: 'Montserrat-Regular', sans-serif
     width: 100%
     transition: .25s ease
-    &:focus:required:invalid
-      .file-input__label
-        border: 1px solid red!important
 
     &:hover
       background: darken($insideButtons, 5%)
@@ -312,7 +318,6 @@ b, strong
   .file-input__label
     svg
       margin-right: 10px
-
 
 
 //Form

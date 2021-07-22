@@ -2,6 +2,7 @@
 
 
     <div v-if="row">
+
       <div class="form-group mb-4" v-if="row.type === 'text'">
         <label
           :for="row.name"
@@ -29,6 +30,7 @@
           <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
         </label>
         <select
+          :required="row.validations[0]"
           :disabled="row.disabled"
           class="form-control"
           :name="row.name"
@@ -107,6 +109,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
 

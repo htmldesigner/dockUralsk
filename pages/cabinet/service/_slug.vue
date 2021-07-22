@@ -82,7 +82,6 @@
       <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
     </client-only>
 
-
   </div>
 </template>
 

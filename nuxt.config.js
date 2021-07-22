@@ -33,6 +33,7 @@ export default {
     {src: "~/plugins/crumbsBuilder.plugin.js"},
     {src: "~/plugins/ncaLayer.plugin.js"},
     {src: "~/plugins/leaflet.js", ssr: false},
+    {src: "~/plugins/vee-validate.js"},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -100,5 +101,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ["vee-validate/dist/rules"],
   }
 }
