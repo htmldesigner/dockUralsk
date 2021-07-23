@@ -74,6 +74,7 @@ export default {
     },
     logOut() {
       this.$auth.logout()
+      this.$router.push('/')
     },
     registration() {
       this.registrationModal = true

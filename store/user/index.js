@@ -12,15 +12,15 @@ export const mutations = {
   },
 
   ADD_ITEM_SERVICE_REQUEST(state, payload) {
-
+    console.log(payload)
     for (let items in state.serviceRequest) {
       if (state.serviceRequest[items].sections) {
         for (let item of state.serviceRequest[items].sections) {
           for (let i of item.rows) {
             if (i.fields?.length) {
               for (let elem of i.fields) {
-                if (elem.type === 'group') {
-                  elem.items.push(payload)
+                if (elem.type === 'group' && elem.name === payload.groupName) {
+                  elem.items.push(payload.el)
                 }
               }
             }
@@ -39,8 +39,8 @@ export const mutations = {
           for (let i of item.rows) {
             if (i.fields?.length) {
               for (let elem of i.fields) {
-                if (elem.type === 'group') {
-                  elem.items.splice(payload, 1)
+                if (elem.type === 'group' && elem.name === payload.groupName) {
+                  elem.items.splice(payload.index, 1)
                 }
               }
             }

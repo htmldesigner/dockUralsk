@@ -31,13 +31,14 @@
 
                   <div class="row" v-for="(el, idx) in row.items">
                     <div :class="i.cssClasses[0]" v-for="i in el.items">
-                      <FormGenerator @loadMap="loadMap" :row="i" :index="idx" @idx="removeItem"/>
+                      <FormGenerator @loadMap="loadMap" :row="i" :index="idx" :groupName="row.name"
+                                     @removeItem="removeItem"/>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col">
-                      <button @click.prevent="addItem()" class="btn_primary_small">
+                      <button @click.prevent="addItem(row.items, row.name)" class="btn_primary_small">
                         <img src="~assets/img/add.svg" alt="Alt">
                       </button>
                     </div>
@@ -87,6 +88,7 @@
             <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
               <div class="mb-4">
                 <button :disabled="!agree" class="btn_primary">Подписать</button>
+
               </div>
             </div>
 
@@ -100,14 +102,14 @@
     <client-only>
       <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
     </client-only>
-
+    <button @click="test" class="btn_primary">Подписать</button>
   </div>
 </template>
 
 <script>
 import MapPopup from "~/components/MapPopup";
 import FormGenerator from "~/components/FormGenerator";
-
+import sha256 from 'crypto-js/sha256';
 export default {
   loading: true,
   components: {FormGenerator, MapPopup},
@@ -128,69 +130,89 @@ export default {
     }
   },
   methods: {
-    addItem() {
-      let el = {
-        "cssClasses": [
 
-        ],
-        "items": {
-          "plan_address_object": {
-            "title": "Ситуационный план",
-            "tooltip": "",
-            "type": "multifiles",
-            "placeholder": "",
-            "disabled": false,
-            "value": "",
-            "validations": [
-              "required"
-            ],
-            "cssClasses": [
-              "col-xl-6 col-lg-12"
-            ],
-            "options": [
+    test() {
 
-            ],
-            "name": "plan_address_object[]"
-          },
-          "subtract": {
-            "title": "Указать на карте",
-            "tooltip": "",
-            "type": "subtract",
-            "cssClasses": [
-              "col-xl-2 col-lg-2"
-            ]
-          }
-        }
-      }
 
-      this.$store.commit('user/ADD_ITEM_SERVICE_REQUEST', el)
+      let a = new File(["foo"], "foo.txt", {
+        type: "text/plain",
+      })
+
+      let ci = sha256(a).toString()
+
+      console.log(ci)
 
     },
 
-    removeItem(idx){
-      this.$store.commit('user/REMOVE_ITEM_SERVICE_REQUEST', idx)
+    addItem(items, groupName) {
+      let cloneItems = Object.assign({}, items[0].items)
+      delete cloneItems.coordinates
+
+      cloneItems.subtract = {
+        "type": "subtract",
+        "cssClasses": [
+          "col-xl-1 col-lg-1"
+        ]
+      }
+
+      let el = {
+        "cssClasses": [],
+        "items": cloneItems,
+      }
+
+      this.$store.commit('user/ADD_ITEM_SERVICE_REQUEST', {el, groupName})
+    },
+
+    removeItem(value) {
+      console.log(value)
+      this.$store.commit('user/REMOVE_ITEM_SERVICE_REQUEST', value)
     },
 
     closeMap() {
       this.showMap = false
     },
+
     onConfirm(el) {
       console.log(el)
     },
+
     loadMap() {
       this.showMap = true
     },
-    async onSubmit(el) {
+
+    async onSubmit() {
       if (this.agree) {
-        let formElem = this.$refs.serviceForm
 
+        let formElem = new FormData(this.$refs.serviceForm)
 
-        let response = await fetch('/api/register', {
+        let response = await fetch('/api/case/create', {
           method: 'POST',
-          body: new FormData(formElem)
+          body: formElem
         });
 
-        console.log(new FormData(formElem))
+        let xml = []
+
+        // for(let [name, value] of formElem){
+        //   console.log(value)
+        // }
+
+        function innerX(name, value){
+          let a = []
+          a.push("<item>" + sha256(value).toString() + '</item>')
+
+          return  '<' + name.replace("[]", "") + '>' + a.join(' ') + '</' + name.replace("[]", "") + '>'
+        }
+
+        for (let [name, value] of formElem) {
+          if (typeof value === "object") {
+            xml.push(innerX(name, value))
+          } else {
+            xml.push('<' + name.replace("[]", "") + '>' + value + '</' + name.replace("[]", "") + '>')
+          }
+
+        }
+
+        console.log(xml)
 
       }
     }

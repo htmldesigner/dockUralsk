@@ -88,7 +88,7 @@
 
           <div class="col-lg-9 col-md-12 bg-white right-aside s-h">
             <div class="content" v-if="values">
-              <p class="content_title h1">{{ values.name }}</p>
+              <p class="h1">{{ values.name }}</p>
               <div v-if="values.list_services">
                 <div class="link_container" v-for="item in values.list_services" :key="item.id">
                   <div class="col-12 mb-lg-3 mb-sm-2 mb-2">

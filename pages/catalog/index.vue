@@ -82,7 +82,7 @@
 
           <div class="col-lg-9 col-md-12 bg-white right-aside s-h">
             <div class="content">
-              <p class="content_title h1">Все категории</p>
+              <p class="h1">Все категории</p>
               <div v-for="(category, index) in values" :key="index">
                 <div class="items_container">
                   <div class="content_items" v-if="category.list_sub_categories.length">
