@@ -4,115 +4,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-table
-  border: 1px solid #ccc
-  border-collapse: collapse
-  margin: 0
-  padding: 0
-  width: 100%
-  table-layout: fixed
-
-
-table caption
-  font-size: 1.5em
-  margin: .5em 0 .75em
-
-
-table tr
-  background-color: #f8f8f8
-  border: 1px solid #ddd
-  padding: .35em
-
-
-table th,
-table td
-  padding: .625em
-  text-align: center
-
-
-table th
-  font-size: .85em
-  letter-spacing: .1em
-  text-transform: uppercase
-
-//@media screen and (max-width: 600px)
-//table
-//  border: 0
-//
-//
-//table caption
-//  font-size: 1.3em
-//
-//
-//table thead
-//  border: none
-//  clip: rect(0 0 0 0)
-//  height: 1px
-//  margin: -1px
-//  overflow: hidden
-//  padding: 0
-//  position: absolute
-//  width: 1px
-//
-//table tr
-//  border-bottom: 3px solid #ddd
-//  display: block
-//  margin-bottom: .625em
-//
-//table td
-//  border-bottom: 1px solid #ddd
-//  display: block
-//  font-size: .8em
-//  text-align: right
-//
-//
-//table td::before
-//  content: attr(data-label)
-//  float: left
-//  font-weight: bold
-//  text-transform: uppercase
-//
-//table td:last-child
-//  border-bottom: 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::placeholder
   color: #888888
   font-family: "Montserrat-Regular", sans-serif
@@ -886,6 +777,13 @@ select
   border-bottom-left-radius: 6px
   padding: 20px
 
+
+.right
+  border-left: 1px solid $indexLineColor
+  border-top-right-radius: 6px
+  border-bottom-right-radius: 6px
+  padding: 20px
+
 .content
   .content_title
     padding-bottom: 30px
@@ -1348,6 +1246,84 @@ select
       span
         font-size: 13px
         color: #888888
+
+
+.status-block
+  display: flex
+  flex-direction: column
+  margin-top: 24px
+  hr
+    margin: 10px 0
+  .request, .status
+    display: flex
+    justify-content: space-between
+    align-items: baseline
+    font-family: "Montserrat-Regular", sans-serif
+    span
+      &:first-child
+        color: #888
+        font-size: 15px
+        line-height: 19px
+
+
+.steps
+  margin-top: 46px
+  ul
+    margin: 0
+    padding: 0
+    li
+      list-style: none
+      margin-bottom: 28px
+      display: flex
+      align-items: center
+      position: relative
+      &:after
+        position: absolute
+        content: ""
+        border-left: 1px solid #C4C4C4
+        height: 80px
+        background-color: #C4C4C4
+        bottom: -60px
+        left: 7px
+        z-index: 1
+      &.green
+        &:after
+          border-left: 3px solid #1DD30D
+          left: 6px
+      &.orange
+        &:after
+          border-left: 3px solid #E9A906
+          left: 6px
+      &:last-child
+        &:after
+          display: none
+      .marker
+        width: 16px
+        height: 16px
+        border-radius: 50%
+        background-color: #C4C4C4
+        margin-right: 20px
+        z-index: 2
+        &.green
+          background-color: #1DD30D
+        &.orange
+          background-color: #E9A906
+      .text-status
+        width: 200px
+        span
+          display: block
+          padding: 0
+          margin: 0
+          font-family: 'Montserrat-Regular', sans-serif
+        .message
+          font-size: 14px
+          color: #000
+          line-height: 18px
+        .status
+          color: #8B8B8B
+          font-size: 13px
+          line-height: 18px
+
 
 
 @import "media"

@@ -18,7 +18,7 @@ import Footer from "../../components/Footer";
 
 export default {
   name: "cabinetLayout",
-  // middleware: 'authenticated',
+  middleware: 'authenticated',
   components: {
     Header,
     Footer

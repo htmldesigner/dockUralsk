@@ -102,7 +102,6 @@
     <client-only>
       <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
     </client-only>
-    <button @click="test" class="btn_primary">Подписать</button>
   </div>
 </template>
 
@@ -110,6 +109,7 @@
 import MapPopup from "~/components/MapPopup";
 import FormGenerator from "~/components/FormGenerator";
 import sha256 from 'crypto-js/sha256';
+
 export default {
   loading: true,
   components: {FormGenerator, MapPopup},
@@ -118,32 +118,34 @@ export default {
   computed: {
     serviceRequest() {
       return this.$store.getters["user/getServiceRequest"]
+    },
+
+    xmlKey() {
+      return this.$store.state.user.key
     }
   },
+
+  watch: {
+    xmlKey: {
+      handler: function () {
+        this.sendKey()
+      }
+    },
+  },
+
   async fetch() {
     await this.$store.dispatch('user/loadServiceRequest', this.$route.params.slug)
   },
+
   data() {
     return {
       showMap: false,
       agree: false,
+      formElem: null
     }
   },
+
   methods: {
-
-    test() {
-
-
-      let a = new File(["foo"], "foo.txt", {
-        type: "text/plain",
-      })
-
-      let ci = sha256(a).toString()
-
-      console.log(ci)
-
-    },
-
     addItem(items, groupName) {
       let cloneItems = Object.assign({}, items[0].items)
       delete cloneItems.coordinates
@@ -183,36 +185,58 @@ export default {
     async onSubmit() {
       if (this.agree) {
 
-        let formElem = new FormData(this.$refs.serviceForm)
+        this.formElem = new FormData(this.$refs.serviceForm)
 
-        let response = await fetch('/api/case/create', {
-          method: 'POST',
-          body: formElem
-        });
+
+        let prepareData = {}
+
+        for (let [name, value] of this.formElem) {
+          if (typeof value === "object") {
+            if (prepareData.hasOwnProperty(name.replace("[]", ""))) {
+              prepareData[name.replace("[]", "")].push({item: sha256(value).toString()})
+            } else {
+              prepareData[name.replace("[]", "")] = [{item: sha256(value).toString()}]
+            }
+
+          } else {
+            prepareData[name] = value
+          }
+        }
+
+        let data = []
+
+        for (let props in prepareData) {
+          data.push({[props]: prepareData[props]})
+        }
+
 
         let xml = []
 
-        // for(let [name, value] of formElem){
-        //   console.log(value)
-        // }
-
-        function innerX(name, value){
-          let a = []
-          a.push("<item>" + sha256(value).toString() + '</item>')
-
-          return  '<' + name.replace("[]", "") + '>' + a.join(' ') + '</' + name.replace("[]", "") + '>'
-        }
-
-        for (let [name, value] of formElem) {
-          if (typeof value === "object") {
-            xml.push(innerX(name, value))
+        for (let i = 0; i < data.length; i++) {
+          if (Array.isArray(data[i][Object.keys(data[i]).join('')])) {
+            xml.push('<' + Object.keys(data[i]).join('') + '>' + data[i][Object.keys(data[i]).join('')].map(el => {
+              return '<items>' + el.item + '</items>'
+            }).join('') + '</' + Object.keys(data[i]).join('') + '>')
           } else {
-            xml.push('<' + name.replace("[]", "") + '>' + value + '</' + name.replace("[]", "") + '>')
+            xml.push('<' + Object.keys(data[i]).join('') + '>' + data[i][Object.keys(data[i]).join('')] + '</' + Object.keys(data[i]).join('') + '>')
           }
-
         }
 
-        console.log(xml)
+        await this.$ncaLayer(xml.join(''))
+
+      }
+    },
+
+    async sendKey() {
+      if (this.xmlKey) {
+        this.formElem.append('xml', this.xmlKey);
+
+        await fetch('/api/case/create', {
+          method: 'POST',
+          body: this.formElem
+        });
+
+        this.$router.push('/cabinet')
 
       }
     }

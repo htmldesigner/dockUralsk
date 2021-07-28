@@ -1,6 +1,6 @@
 export default ({app}, inject) => {
   // Inject function in Vue, context and store.
-  inject('ncaLayer', () => {
+  inject('ncaLayer', (xml) => {
     let webSocket = new WebSocket('wss://127.0.0.1:13579/');
     let callback = null
     let response = null
@@ -58,7 +58,7 @@ export default ({app}, inject) => {
 
 
     function signXmlCall() {
-      let xmlToSign =  "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><document><item>" + Date() + "</item></document>";
+      let xmlToSign =  "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><document><item>" + xml + "</item></document>";
       let selectedStorage = 'PKCS12'
       // blockScreen();
       signXml(selectedStorage, "AUTH", xmlToSign, signXmlBack);

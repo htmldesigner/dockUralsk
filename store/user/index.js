@@ -1,6 +1,8 @@
 export const state = () => ({
   key: null, // ЭПЦ Ключ Устанавливается в плагине ncaLayer
-  serviceRequest: null
+  serviceRequest: null,
+  serviceRequestList: null,
+
 })
 
 export const mutations = {
@@ -9,6 +11,10 @@ export const mutations = {
   },
   SET_SERVICE_REQUEST(state, payload) {
     state.serviceRequest = payload
+  },
+
+  SET_REQUEST_LIST(state, payload) {
+    state.serviceRequestList = payload
   },
 
   ADD_ITEM_SERVICE_REQUEST(state, payload) {
@@ -61,9 +67,20 @@ export const actions = {
     } catch (error) {
       throw error
     }
+  },
+
+  async getServiceRequestsList({commit}, params) {
+    try {
+      const response = await this.$axios.$get('api/cases')
+      console.log(response)
+      commit('SET_REQUEST_LIST', response)
+    } catch (error) {
+      throw error
+    }
   }
 }
 
 export const getters = {
-  getServiceRequest: (state) => state.serviceRequest
+  getServiceRequest: (state) => state.serviceRequest,
+  getRequestList: (state) => state.serviceRequestList
 }

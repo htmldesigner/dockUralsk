@@ -33,6 +33,11 @@ export default {
       return this.currentLink
     },
   },
+
+  async fetch() {
+    await this.$store.dispatch('user/getServiceRequestsList')
+  },
+
   data() {
     return {
       currentLink: 'Cabinet'
@@ -41,6 +46,7 @@ export default {
   methods: {
     logOut() {
       this.$auth.logout()
+      this.$router.push('/')
     },
   }
 }

@@ -3,25 +3,25 @@
 
     <div v-if="row">
 
-      <div class="form-group mb-4" v-if="row.type === 'text'">
-        <label
-          :for="row.name"
-          class="form-label">{{ row.title }}
-          <span v-if="row.validations[0]" class="required">*</span>
-          <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
-        </label>
-        <input
-          :id="row.name"
-          :required="row.validations[0]"
-          :type="row.type"
-          :disabled="row.disabled"
-          class="form-control"
-          :value="row.value"
-          :name="row.name">
-        <div class="invalid-feedback">
-          Login is invalid
-        </div>
-      </div>
+<!--      <div class="form-group mb-4" v-if="row.type === 'text'">-->
+<!--        <label-->
+<!--          :for="row.name"-->
+<!--          class="form-label">{{ row.title }}-->
+<!--          <span v-if="row.validations[0]" class="required">*</span>-->
+<!--          <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>-->
+<!--        </label>-->
+<!--        <input-->
+<!--          :id="row.name"-->
+<!--          :required="row.validations[0]"-->
+<!--          :type="row.type"-->
+<!--          :disabled="row.disabled"-->
+<!--          class="form-control"-->
+<!--          :value="row.value"-->
+<!--          :name="row.name">-->
+<!--        <div class="invalid-feedback">-->
+<!--          Login is invalid-->
+<!--        </div>-->
+<!--      </div>-->
 
       <div class="form-group mb-4" v-if="row.type === 'select'">
         <label
@@ -48,7 +48,7 @@
           :for="row.name + index"
           class="form-label">{{ row.title }}
           <span v-if="row.validations[0]" class="required">*</span>
-          <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
+          <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
         </label>
         <div class="file-input">
           <input
