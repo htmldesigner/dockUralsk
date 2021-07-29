@@ -133,8 +133,8 @@ export default {
     },
   },
 
-  async fetch() {
-    await this.$store.dispatch('user/loadServiceRequest', this.$route.params.slug)
+  async fetch({store, params}) {
+    await store.dispatch('user/loadServiceRequest', params.slug)
   },
 
   data() {

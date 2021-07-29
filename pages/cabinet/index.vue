@@ -34,8 +34,8 @@ export default {
     },
   },
 
-  async fetch() {
-    await this.$store.dispatch('user/getServiceRequestsList')
+  async fetch({store}) {
+    await store.dispatch('user/getServiceRequestsList')
   },
 
   data() {

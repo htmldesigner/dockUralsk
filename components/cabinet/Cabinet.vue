@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between mb-4">
       <div class="user">
         <p class="h1">Личный кабинет</p>
-        <span class="user-name">{{user.full}}</span>
+        <span class="user-name">{{ user.full }}</span>
         <span @click="$emit('logOut')" class="logOut">Выйти</span>
       </div>
       <div class="form-group horizontal">
@@ -100,7 +100,7 @@
 
           </th>
         </tr>
-        <tr class="" role="row" v-for="(element, idx) in requestList" :key="idx">
+        <tr class="" @click="openStatus(element.id)" role="row" v-for="(element, idx) in requestList" :key="idx">
           <td class="" role="cell">
             {{ element.number }}
           </td>
@@ -123,7 +123,6 @@
             <span :style="{color: element.status_color}">{{ element.status }}</span>
           </td>
         </tr>
-
         </thead>
       </table>
     </div>
@@ -135,22 +134,28 @@
 export default {
   name: "Cabinet",
   computed: {
-    user(){
-     return this.$store.state.auth.user
+    user() {
+      return this.$store.state.auth.user
     },
     requestList() {
       let list = this.$store.getters['user/getRequestList']
       if (this.selected === 'all') {
         return this.$store.getters['user/getRequestList']
       } else {
-        return list.filter(el => {return el.time_out === JSON.parse(this.selected)})
+        return list.filter(el => {
+          return el.time_out === JSON.parse(this.selected)
+        })
       }
-
     }
   },
   data() {
     return {
       selected: 'all'
+    }
+  },
+  methods: {
+    openStatus(id) {
+      this.$router.push('cabinet/status/' + id)
     }
   }
 
@@ -212,6 +217,10 @@ export default {
     tr:nth-child(2n)
       background: #F3F4F4
 
+    tr:hover
+      cursor: pointer
+      background: #e6e6e6
+
     td, th
       padding: 16px 12px
 
@@ -232,6 +241,12 @@ export default {
       display: flex
       width: 100%
       justify-content: space-between
+
+      .p-column-title
+        font-family: "Montserrat-Regular", sans-serif
+        font-size: 14px
+        font-weight: normal
+
 
 .p-column-sort-button
   border: none

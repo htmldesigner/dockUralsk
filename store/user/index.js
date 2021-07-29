@@ -1,7 +1,8 @@
 export const state = () => ({
   key: null, // ЭПЦ Ключ Устанавливается в плагине ncaLayer
-  serviceRequest: null,
-  serviceRequestList: null,
+  serviceRequest: null, // Форма услуги
+  serviceRequestList: null, // Списак заказанных услуг
+  serviceStatus: null, // Статус услуги
 
 })
 
@@ -15,6 +16,13 @@ export const mutations = {
 
   SET_REQUEST_LIST(state, payload) {
     state.serviceRequestList = payload
+  },
+
+  SET_SERVICE_STATUS(state, payload) {
+    state.serviceStatus = payload
+    if (state.serviceStatus.steps) {
+      state.serviceStatus.steps.reverse()
+    }
   },
 
   ADD_ITEM_SERVICE_REQUEST(state, payload) {
@@ -63,7 +71,7 @@ export const actions = {
   async loadServiceRequest({commit}, params) {
     try {
       const response = await this.$axios.$get('api/services/' + params + '/getForm')
-      commit('SET_SERVICE_REQUEST', response)
+      await commit('SET_SERVICE_REQUEST', response)
     } catch (error) {
       throw error
     }
@@ -72,15 +80,27 @@ export const actions = {
   async getServiceRequestsList({commit}, params) {
     try {
       const response = await this.$axios.$get('api/cases')
-      console.log(response)
-      commit('SET_REQUEST_LIST', response)
+      await commit('SET_REQUEST_LIST', response)
+    } catch (error) {
+      throw error
+    }
+  },
+
+
+  async getServiceStatus({commit}, payload) {
+    try {
+      const response = await this.$axios.$get('/api/case/' + payload.id +'?lang=' + payload.locale)
+      await commit('SET_SERVICE_STATUS', response)
     } catch (error) {
       throw error
     }
   }
+
 }
 
 export const getters = {
   getServiceRequest: (state) => state.serviceRequest,
-  getRequestList: (state) => state.serviceRequestList
+  getRequestList: (state) => state.serviceRequestList,
+   getServiceCases: (state) => state.serviceStatus.case,
+  getServiceSteps: (state) => state.serviceStatus.steps
 }
