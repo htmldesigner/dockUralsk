@@ -46,17 +46,7 @@
             </NuxtLink>
           </div>
 
-          <div class="search">
-            <div class="search_control">
-              <input class="search-section__input input_theme" placeholder="Введите наименование услуги">
-              <button class="search-section__button btn_primary">{{ $t('buttons.search') }}</button>
-              <button class="search-section__button_mobile btn_primary_small">
-                <img src="~/assets/img/search.svg" alt="Alt">
-              </button>
-            </div>
-            <NuxtLink :to="localePath('/catalog')" class="btn_outline">{{ $t('buttons.open_catalog') }}</NuxtLink>
-          </div>
-
+          <NuxtLink :to="localePath('/catalog')" class="btn_outline">{{ $t('buttons.open_catalog') }}</NuxtLink>
         </div>
       </div>
     </section>

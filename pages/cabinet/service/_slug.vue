@@ -11,11 +11,7 @@
       <form @submit.prevent="onSubmit" ref="serviceForm" enctype="multipart/form-data">
         <section v-for="(request, o) of serviceRequest">
 
-          <div v-for="(sections, idx) in request.sections">
-
-            <div class="divider">
-              <div class="arrow-toggler"></div>
-            </div>
+          <div v-for="(sections, idx) in request.sections" :class="o +'_'+idx">
 
             <div class="section-title mb-3">
               <p :class="sections.title.tag">{{ sections.title.text }}</p>
@@ -48,7 +44,6 @@
 
               </div>
 
-
               <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
                 <div v-for="row in rows">
                   <div v-for="el in row">
@@ -63,13 +58,17 @@
                 </div>
               </div>
 
-
             </div>
 
+
+            <div class="divider" :class="o +'_'+idx">
+              <div class="arrow-toggler" @click="toggler(o +'_'+idx)"></div>
+            </div>
 
           </div>
 
         </section>
+
         <section class="mt-3">
           <div class="row">
 
@@ -88,13 +87,11 @@
             <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
               <div class="mb-4">
                 <button :disabled="!agree" class="btn_primary">Подписать</button>
-
               </div>
             </div>
-
-
           </div>
         </section>
+
       </form>
 
     </div>
@@ -102,6 +99,7 @@
     <client-only>
       <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
     </client-only>
+
   </div>
 </template>
 
@@ -146,6 +144,14 @@ export default {
   },
 
   methods: {
+    toggler(element) {
+      let node = document.querySelector('.' + element)
+      if (node) {
+        node.childNodes.forEach(el => {
+          console.log(el)
+        })
+      }
+    },
     addItem(items, groupName) {
       let cloneItems = Object.assign({}, items[0].items)
       delete cloneItems.coordinates
@@ -187,7 +193,6 @@ export default {
 
         this.formElem = new FormData(this.$refs.serviceForm)
 
-
         let prepareData = {}
 
         for (let [name, value] of this.formElem) {
@@ -228,22 +233,26 @@ export default {
     },
 
     async sendKey() {
-      if (this.xmlKey) {
-        this.formElem.append('xml', this.xmlKey);
+      try {
+        if (this.xmlKey) {
+          this.formElem.append('xml', this.xmlKey);
 
-        await fetch('/api/case/create', {
-          method: 'POST',
-          body: this.formElem
-        });
-
-        this.$router.push('/cabinet')
-
+          await this.$axios('/api/case/create', {
+            method: 'POST',
+            data: this.formElem,
+            headers: { "Content-Type": "multipart/form-data" },
+          });
+          this.$router.push('/cabinet')
+        }
+      } catch (e) {
+        alert('Ошибка отпправки запроса')
+        console.log(e)
       }
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="sass">
 
 </style>
