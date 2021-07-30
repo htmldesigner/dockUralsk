@@ -27,8 +27,13 @@
 
                   <div class="row" v-for="(el, idx) in row.items">
                     <div :class="i.cssClasses[0]" v-for="i in el.items">
-                      <FormGenerator @loadMap="loadMap" :row="i" :index="idx" :groupName="row.name"
-                                     @removeItem="removeItem"/>
+                      <FormGenerator
+                        @loadMap="loadMap"
+                        :row="i"
+                        :index="idx"
+                        :groupName="row.name"
+                        @removeItem="removeItem"
+                      />
                     </div>
                   </div>
 
@@ -139,7 +144,8 @@ export default {
     return {
       showMap: false,
       agree: false,
-      formElem: null
+      formElem: null,
+      LatLng: null
     }
   },
 
@@ -148,7 +154,23 @@ export default {
       let node = document.querySelector('.' + element)
       if (node) {
         node.childNodes.forEach(el => {
-          console.log(el)
+
+          if (el.className === 'divider' + ' ' + element) {
+            if (el.firstChild.classList.contains('active')) {
+              el.firstChild.classList.remove('active')
+            } else {
+              el.firstChild.classList.add('active')
+            }
+
+          }
+
+
+          if (el.className === 'row hidden') {
+            return el.classList.remove('hidden')
+          }
+          if (el.className === 'row') {
+            return el.classList.add('hidden')
+          }
         })
       }
     },
@@ -184,7 +206,10 @@ export default {
       console.log(el)
     },
 
-    loadMap() {
+    loadMap(el) {
+      if (el){
+        this.LatLng = el
+      }
       this.showMap = true
     },
 
@@ -235,18 +260,20 @@ export default {
     async sendKey() {
       try {
         if (this.xmlKey) {
+
+          this.formElem.append('latlng', this.LatLng);
+
           this.formElem.append('xml', this.xmlKey);
 
           await this.$axios('/api/case/create', {
             method: 'POST',
             data: this.formElem,
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: {"Content-Type": "multipart/form-data"},
           });
           this.$router.push('/cabinet')
         }
       } catch (e) {
         alert('Ошибка отпправки запроса')
-        console.log(e)
       }
     }
   }

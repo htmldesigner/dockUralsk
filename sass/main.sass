@@ -875,7 +875,7 @@ select
   text-align: center
   position: relative
   height: auto
-  margin-top: 20px
+  margin-top: 36px
   margin-bottom: 36px
 
   .arrow-toggler
@@ -893,7 +893,6 @@ select
     vertical-align: text-top
     cursor: pointer
     box-shadow: 0px 0px 4px 0px #00000033
-
     &:after
       content: url('~assets/img/vectorDown.svg')
       display: inline-block
@@ -901,6 +900,9 @@ select
       //color: $indexColor
       position: relative
       top: 2px
+    &.active
+      &:after
+        transform: rotate(180deg)
 
 .nested_crumbs
   margin-top: 18px
