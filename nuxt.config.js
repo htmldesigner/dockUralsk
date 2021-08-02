@@ -2,7 +2,7 @@ import ru from './locales/ru.json'
 import kz from './locales/kz.json'
 export default {
   server: {
-    port: 8000 // default: 3000
+    port: 8501 // default: 3000
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head

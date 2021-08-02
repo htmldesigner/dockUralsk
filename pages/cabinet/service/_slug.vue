@@ -10,68 +10,68 @@
 
       <form @submit.prevent="onSubmit" ref="serviceForm" enctype="multipart/form-data">
         <section v-for="(request, o) of serviceRequest">
+          <div v-if="request">
+            <div v-for="(sections, idx) in request.sections" :class="o +'_'+idx">
 
-          <div v-for="(sections, idx) in request.sections" :class="o +'_'+idx">
+              <div class="section-title mb-3">
+                <p :class="sections.title.tag">{{ sections.title.text }}</p>
+              </div>
 
-            <div class="section-title mb-3">
-              <p :class="sections.title.tag">{{ sections.title.text }}</p>
-            </div>
+              <div class="row" v-for="(rows, index) in sections.rows">
 
-            <div class="row" v-for="(rows, index) in sections.rows">
+                <div :class="row.cssClasses[0]" v-for="(row, q) in rows.fields">
 
-              <div :class="row.cssClasses[0]" v-for="(row, q) in rows.fields">
+                  <FormGenerator @loadMap="loadMap" :row="row"/>
 
-                <FormGenerator @loadMap="loadMap" :row="row"/>
+                  <div v-if="row.type === 'group'">
 
-                <div v-if="row.type === 'group'">
-
-                  <div class="row" v-for="(el, idx) in row.items">
-                    <div :class="i.cssClasses[0]" v-for="i in el.items">
-                      <FormGenerator
-                        @loadMap="loadMap"
-                        :row="i"
-                        :index="idx"
-                        :groupName="row.name"
-                        @removeItem="removeItem"
-                      />
+                    <div class="row" v-for="(el, idx) in row.items">
+                      <div :class="i.cssClasses[0]" v-for="i in el.items">
+                        <FormGenerator
+                          @loadMap="loadMap"
+                          :row="i"
+                          :index="idx"
+                          :groupName="row.name"
+                          @removeItem="removeItem"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col">
-                      <button @click.prevent="addItem(row.items, row.name)" class="btn_primary_small">
-                        <img src="~assets/img/add.svg" alt="Alt">
-                      </button>
+                    <div class="row">
+                      <div class="col">
+                        <button @click.prevent="addItem(row.items, row.name)" class="btn_primary_small">
+                          <img src="~assets/img/add.svg" alt="Alt">
+                        </button>
+                      </div>
                     </div>
+
                   </div>
 
                 </div>
 
-              </div>
+                <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
+                  <div v-for="row in rows">
+                    <div v-for="el in row">
 
-              <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
-                <div v-for="row in rows">
-                  <div v-for="el in row">
+                      <div :class="row.cssClasses[0]" v-for="(row, q) in el.fields">
 
-                    <div :class="row.cssClasses[0]" v-for="(row, q) in el.fields">
+                        <FormGenerator @loadMap="loadMap" :row="row"/>
 
-                      <FormGenerator @loadMap="loadMap" :row="row"/>
+                      </div>
 
                     </div>
-
                   </div>
                 </div>
+
+              </div>
+
+
+              <div class="divider" :class="o +'_'+idx">
+                <div class="arrow-toggler" @click="toggler(o +'_'+idx)"></div>
               </div>
 
             </div>
-
-
-            <div class="divider" :class="o +'_'+idx">
-              <div class="arrow-toggler" @click="toggler(o +'_'+idx)"></div>
-            </div>
-
           </div>
-
         </section>
 
         <section class="mt-3">
@@ -207,7 +207,7 @@ export default {
     },
 
     loadMap(el) {
-      if (el){
+      if (el) {
         this.LatLng = el
       }
       this.showMap = true
