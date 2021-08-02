@@ -18,10 +18,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  loading: {
-    color: '#39A9CB',
-    height: '4px'
-  },
+
+  loading: '~/components/LoadingBar.vue',
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
