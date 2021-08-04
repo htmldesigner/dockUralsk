@@ -19,7 +19,7 @@
 
               <div class="row" v-for="(rows, index) in sections.rows">
 
-                <div :class="row.cssClasses[0]" v-for="(row, q) in rows.fields">
+                <div :class="row.cssClasses" v-for="(row, q) in rows.fields">
 
                   <FormGenerator
                     @loadMap="loadMap"
@@ -29,7 +29,7 @@
 
                   <div v-if="row.type === 'group'">
                     <div class="row" v-for="(el, idx) in row.items">
-                      <div :class="i.cssClasses[0]" v-for="i in el.items">
+                      <div :class="i.cssClasses" v-for="i in el.items">
                         <FormGenerator
                           @loadMap="loadMap"
                           :row="i"
@@ -53,10 +53,10 @@
 
                 </div>
 
-                <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
+                <div v-for="(rows) in rows.sections" :class="rows.cssClasses">
                   <div v-for="row in rows">
                     <div v-for="el in row">
-                      <div :class="row.cssClasses[0]" v-for="(row, q) in el.fields">
+                      <div :class="row.cssClasses" v-for="(row, q) in el.fields">
                         <FormGenerator
                           @loadMap="loadMap"
                           :row="row"
@@ -123,10 +123,8 @@ export default {
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
   computed: {
-    serviceRequest: {
-      get() {
-        return this.$store.getters["user/getServiceRequest"]
-      }
+    serviceRequest() {
+      return this.$store.getters["user/getServiceRequest"]
     },
 
     xmlKey() {
@@ -277,6 +275,8 @@ export default {
         if (this.xmlKey) {
 
           this.formElem.append('latlng', this.LatLng);
+
+          this.formElem.append('service_id', this.serviceRequest.service_id)
 
           this.formElem.append('xml', this.xmlKey);
 

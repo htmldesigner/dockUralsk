@@ -132,7 +132,6 @@ export default {
 
   },
 
-
   data() {
     return {
       showFilter: false,
@@ -141,6 +140,7 @@ export default {
       organization: [],
     }
   },
+
   async asyncData({$axios, params, i18n}) {
     const response = await $axios.$get('/api/categories/' + params.service + '?lang=' + i18n.localeProperties.code)
     console.log(response, 'service index')

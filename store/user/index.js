@@ -118,6 +118,6 @@ export const actions = {
 export const getters = {
   getServiceRequest: (state) => state.serviceRequest,
   getRequestList: (state) => state.serviceRequestList,
-   getServiceCases: (state) => state.serviceStatus.case,
+  getServiceCases: (state) => state.serviceStatus.case,
   getServiceSteps: (state) => state.serviceStatus.steps
 }
