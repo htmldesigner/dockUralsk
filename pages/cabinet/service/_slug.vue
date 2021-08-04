@@ -13,7 +13,7 @@
           <div v-if="request">
             <div v-for="(sections, idx) in request.sections" :class="o +'_'+idx">
 
-              <div class="section-title mb-3">
+              <div class="section-title mb-3" v-if="sections.title">
                 <p :class="sections.title.tag">{{ sections.title.text }}</p>
               </div>
 
@@ -21,10 +21,13 @@
 
                 <div :class="row.cssClasses[0]" v-for="(row, q) in rows.fields">
 
-                  <FormGenerator @loadMap="loadMap" :row="row"/>
+                  <FormGenerator
+                    @loadMap="loadMap"
+                    :row="row"
+                    @checkBoxEvent="checkBoxEvent"
+                  />
 
                   <div v-if="row.type === 'group'">
-
                     <div class="row" v-for="(el, idx) in row.items">
                       <div :class="i.cssClasses[0]" v-for="i in el.items">
                         <FormGenerator
@@ -33,6 +36,7 @@
                           :index="idx"
                           :groupName="row.name"
                           @removeItem="removeItem"
+                          @checkBoxEvent="checkBoxEvent"
                         />
                       </div>
                     </div>
@@ -52,13 +56,13 @@
                 <div v-for="(rows) in rows.sections" :class="rows.cssClasses[0]">
                   <div v-for="row in rows">
                     <div v-for="el in row">
-
                       <div :class="row.cssClasses[0]" v-for="(row, q) in el.fields">
-
-                        <FormGenerator @loadMap="loadMap" :row="row"/>
-
+                        <FormGenerator
+                          @loadMap="loadMap"
+                          :row="row"
+                          @checkBoxEvent="checkBoxEvent"
+                        />
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -119,8 +123,10 @@ export default {
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
   computed: {
-    serviceRequest() {
-      return this.$store.getters["user/getServiceRequest"]
+    serviceRequest: {
+      get() {
+        return this.$store.getters["user/getServiceRequest"]
+      }
     },
 
     xmlKey() {
@@ -134,6 +140,11 @@ export default {
         this.sendKey()
       }
     },
+    checkValue: {
+      handler: function (payload) {
+        return this.$store.commit('user/DISABLED_FIELD', payload)
+      }
+    }
   },
 
   async fetch({store, params}) {
@@ -145,11 +156,15 @@ export default {
       showMap: false,
       agree: false,
       formElem: null,
-      LatLng: null
+      LatLng: null,
+      checkValue: null
     }
   },
 
   methods: {
+    checkBoxEvent(event) {
+      this.checkValue = event
+    },
     toggler(element) {
       let node = document.querySelector('.' + element)
       if (node) {

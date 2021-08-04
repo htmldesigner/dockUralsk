@@ -26,7 +26,6 @@ export const mutations = {
   },
 
   ADD_ITEM_SERVICE_REQUEST(state, payload) {
-    console.log(payload)
     for (let items in state.serviceRequest) {
       if (state.serviceRequest[items].sections) {
         for (let item of state.serviceRequest[items].sections) {
@@ -46,7 +45,6 @@ export const mutations = {
   },
 
   REMOVE_ITEM_SERVICE_REQUEST(state, payload) {
-
     for (let items in state.serviceRequest) {
       if (state.serviceRequest[items].sections) {
         for (let item of state.serviceRequest[items].sections) {
@@ -62,7 +60,26 @@ export const mutations = {
         }
       }
     }
+  },
 
+  DISABLED_FIELD(state, payload){
+    if (payload){
+      for (let items in state.serviceRequest) {
+        if (state.serviceRequest[items].sections) {
+          for (let item of state.serviceRequest[items].sections) {
+            for (let i of item.rows) {
+              if (i.fields?.length) {
+                for (let elem of i.fields) {
+                  if(elem.disabledIf === payload.value){
+                    elem.disabled = payload.status
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
 }
