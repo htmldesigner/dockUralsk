@@ -131,18 +131,17 @@ export default {
       return this.$store.state.user.key
     }
   },
-
   watch: {
     xmlKey: {
       handler: function () {
         this.sendKey()
       }
     },
-    checkValue: {
-      handler: function (payload) {
-        return this.$store.commit('user/DISABLED_FIELD', payload)
-      }
-    }
+    // checkValue: {
+    //   handler: function (payload) {
+    //     return this.$store.commit('user/DISABLED_FIELD', payload)
+    //   }
+    // }
   },
 
   async fetch({store, params}) {
@@ -161,7 +160,7 @@ export default {
 
   methods: {
     checkBoxEvent(event) {
-      this.checkValue = event
+      this.$store.commit('user/DISABLED_FIELD', event)
     },
     toggler(element) {
       let node = document.querySelector('.' + element)

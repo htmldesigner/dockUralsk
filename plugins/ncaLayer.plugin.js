@@ -71,7 +71,6 @@ export default ({app}, inject) => {
       } else if (result['code'] === "200") {
         let res = result['responseObject'];
         app.store.commit('user/SET_KEY', res)
-        console.log(app)
         // $("#signedXml").val(res);
       }
     }

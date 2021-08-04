@@ -38,14 +38,15 @@ export default {
     },
 
     async sendKey() {
-      let response = await this.$auth.loginWith('local', {data: {sign: this.xmlKey}})
-      if (response.status === 200) {
-        this.$emit('close')
+      try {
+        let response = await this.$auth.loginWith('local', {data: {sign: this.xmlKey}})
+        if (response.status === 200) {
+          this.$emit('close')
+        }
+      } catch (e) {
+        alert("Вы не зарегистрированы в системе")
       }
     }
-
-  },
-  mounted() {
   }
 }
 </script>

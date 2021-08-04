@@ -15,7 +15,6 @@
         :required="row.validations[0]"
         :type="row.type"
         :disabled="row.disabled"
-        :disabledIf="row.disabledIf"
         class="form-control"
         :value="row.value"
         :name="row.name">
@@ -37,7 +36,6 @@
         :name="row.name"
         :id="row.name">
         <option v-for="option in row.options" :value="option.id">{{ option.text }}</option>
-
       </select>
       <div class="invalid-feedback">
         Login is invalid
@@ -109,8 +107,8 @@
               type="checkbox"
               :name="row.name"
               :value="row.value"
-              v-model="checked"
-              @change="$emit('checkBoxEvent', {status: checked, value: row.name})"
+              :checked="row.value"
+              @change="$emit('checkBoxEvent', {status: !!row.value, value: row.name})"
             >
             <span class="checkmark"></span>
           </label>
@@ -136,9 +134,7 @@ export default {
   name: "FormGenerator",
   props: ['row', 'index', 'groupName'],
   data() {
-    return {
-      checked: false
-    }
+    return {}
   }
 }
 </script>

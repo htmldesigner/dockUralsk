@@ -62,20 +62,25 @@ export const mutations = {
     }
   },
 
-  DISABLED_FIELD(state, payload){
-    if (payload){
-      for (let items in state.serviceRequest) {
-        if (state.serviceRequest[items].sections) {
-          for (let item of state.serviceRequest[items].sections) {
-            for (let i of item.rows) {
-              if (i.fields?.length) {
-                for (let elem of i.fields) {
-                  if(elem.disabledIf === payload.value){
-                    elem.disabled = payload.status
+  DISABLED_FIELD(state, payload) {
+    if (payload) {
+      changeCheckValue(state.serviceRequest)
+    }
+
+    function changeCheckValue(serviceRequest) {
+      for (let items in serviceRequest) {
+        if (typeof serviceRequest[items] === 'object' || Array.isArray(serviceRequest[items])) {
+          changeCheckValue(serviceRequest[items])
+          if (serviceRequest[items]?.length) {
+            serviceRequest[items].forEach(el => {
+              if (el.fields) {
+                el.fields.forEach(target => {
+                  if(target.disabledIf === payload.value){
+                    target.disabled = !target.disabled
                   }
-                }
+                })
               }
-            }
+            })
           }
         }
       }
@@ -106,7 +111,7 @@ export const actions = {
 
   async getServiceStatus({commit}, payload) {
     try {
-      const response = await this.$axios.$get('/api/case/' + payload.id +'?lang=' + payload.locale)
+      const response = await this.$axios.$get('/api/case/' + payload.id + '?lang=' + payload.locale)
       await commit('SET_SERVICE_STATUS', response)
     } catch (error) {
       throw error
