@@ -101,6 +101,7 @@ export default {
     logOut() {
       this.$auth.logout()
       this.$store.commit('user/SET_KEY', null)
+      this.$router.push('/')
     },
     registration() {
       this.registrationModal = true

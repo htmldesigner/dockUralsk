@@ -36,16 +36,16 @@ export default {
     async runNca() {
       await this.$ncaLayer()
     },
-
     async sendKey() {
       try {
-        let response = await this.$auth.loginWith('local', {data: {sign: this.xmlKey}})
-        if (response.status === 200) {
-          this.$emit('close')
-        }
+        await this.$nuxt.$emit('loader', true)
+        await this.$auth.loginWith('local', {data: {sign: this.xmlKey}})
+        await this.$nuxt.$emit('loader', false)
+        this.$emit('close')
       } catch (e) {
         this.$nuxt.$emit('showRegistrationForm')
         this.$store.commit('user/SET_KEY', null)
+        this.$nuxt.$emit('loader', false)
       }
     }
   }
