@@ -112,6 +112,7 @@ export default {
         await this.$auth.loginWith('local', {data: {sign: this.xmlKey}})
         this.$emit('close')
       } catch (e) {
+        this.$store.commit('user/SET_KEY', null)
         alert(e.response.data.error)
       }
     }

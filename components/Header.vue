@@ -32,7 +32,9 @@
             </ul>
 
             <ul v-else>
-              <li><NuxtLink :to="localePath('/cabinet')">{{ $t('buttons.cabinet') }}</NuxtLink></li>
+              <li>
+                <NuxtLink :to="localePath('/cabinet')">{{ $t('buttons.cabinet') }}</NuxtLink>
+              </li>
               <li><a href="#" @click.prevent="logOut">{{ $t('buttons.exit') }}</a></li>
             </ul>
 
@@ -74,6 +76,7 @@ export default {
     },
     logOut() {
       this.$auth.logout()
+      this.$store.commit('user/SET_KEY', null)
       this.$router.push('/')
     },
     registration() {
@@ -83,11 +86,17 @@ export default {
       this.loginModal = this.registrationModal = false
     }
   },
+
   mounted() {
-  this.$nuxt.$on('showLoginForm', ()=>{
-    this.loginModal = true
-  })
-  }
+    this.$nuxt.$on('showRegistrationForm', () => {
+      this.close()
+      this.registration()
+    })
+    this.$nuxt.$on('showLoginForm', () => {
+      this.loginModal = true
+    })
+  },
+
 }
 </script>
 

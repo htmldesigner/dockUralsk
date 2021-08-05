@@ -100,6 +100,7 @@ export default {
     },
     logOut() {
       this.$auth.logout()
+      this.$store.commit('user/SET_KEY', null)
     },
     registration() {
       this.registrationModal = true
@@ -107,6 +108,12 @@ export default {
     close() {
       this.loginModal = this.registrationModal = false
     }
+  },
+  mounted() {
+    this.$nuxt.$on('showRegistrationForm', () => {
+      this.close()
+      this.registration()
+    })
   },
 
 

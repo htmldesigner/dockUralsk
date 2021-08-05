@@ -67,7 +67,7 @@ export default {
           }
         }
       } catch (e) {
-        alert(e.response.data.error)
+        this.$nuxt.$emit('showRegistrationForm')
       }
 
     }
