@@ -95,7 +95,7 @@
 
             <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
               <div class="mb-4">
-                <button :disabled="!agree" class="btn_primary">Подписать</button>
+                <button :disabled="!agree" class="btn_primary">Зарегистрировать</button>
               </div>
             </div>
           </div>
@@ -106,7 +106,7 @@
     </div>
 
     <client-only>
-      <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
+      <keep-alive> <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/></keep-alive>
     </client-only>
 
   </div>
