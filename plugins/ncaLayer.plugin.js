@@ -67,7 +67,8 @@ export default ({app}, inject) => {
     function signXmlBack(result) {
       console.log(result);
       if (result['code'] === "500") {
-        alert(result['message']);
+        console.log(result['message'])
+        // alert(result['message']);
       } else if (result['code'] === "200") {
         let res = result['responseObject'];
         app.store.commit('user/SET_KEY', res)

@@ -251,7 +251,6 @@ export default {
           data.push({[props]: prepareData[props]})
         }
 
-
         let xml = []
 
         for (let i = 0; i < data.length; i++) {

@@ -33,6 +33,7 @@ export default {
     {src: "~/plugins/leaflet.js", ssr: false},
     {src: "~/plugins/crypto.js", ssr: false},
     {src: "~/plugins/vee-validate.js"},
+    {src: "~/plugins/v-mask.js", ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
