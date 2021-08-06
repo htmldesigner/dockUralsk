@@ -106,7 +106,9 @@
     </div>
 
     <client-only>
-      <keep-alive> <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/></keep-alive>
+      <keep-alive>
+        <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
+      </keep-alive>
     </client-only>
 
   </div>
@@ -173,10 +175,7 @@ export default {
             } else {
               el.firstChild.classList.add('active')
             }
-
           }
-
-
           if (el.className === 'row hidden') {
             return el.classList.remove('hidden')
           }
@@ -186,6 +185,7 @@ export default {
         })
       }
     },
+
     addItem(items, groupName) {
       let cloneItems = Object.assign({}, items[0].items)
       delete cloneItems.coordinates
@@ -206,7 +206,6 @@ export default {
     },
 
     removeItem(value) {
-      console.log(value)
       this.$store.commit('user/REMOVE_ITEM_SERVICE_REQUEST', value)
     },
 
@@ -227,7 +226,7 @@ export default {
 
     async onSubmit() {
       if (this.agree) {
-
+        console.log('sdcsc')
         this.formElem = new FormData(this.$refs.serviceForm)
 
         let prepareData = {}
@@ -239,7 +238,6 @@ export default {
             } else {
               prepareData[name.replace("[]", "")] = [{item: sha256(value).toString()}]
             }
-
           } else {
             prepareData[name] = value
           }
@@ -262,9 +260,7 @@ export default {
             xml.push('<' + Object.keys(data[i]).join('') + '>' + data[i][Object.keys(data[i]).join('')] + '</' + Object.keys(data[i]).join('') + '>')
           }
         }
-
         await this.$ncaLayer(xml.join(''))
-
       }
     },
 

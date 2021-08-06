@@ -1,5 +1,6 @@
 import ru from './locales/ru.json'
 import kz from './locales/kz.json'
+
 export default {
   server: {
     port: 8501 // default: 3000
@@ -9,13 +10,13 @@ export default {
   head: {
     title: 'docksUralsk',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: ''},
+      {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
 
@@ -41,7 +42,11 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/moment'
   ],
+  moment: {
+    locales: ['ru']
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -68,9 +73,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/api/signin', method: 'post'},
-          logout: { url: '/api/logout', method: 'post'},
-          user: { url: '/api/user', method: 'get', propertyName: ''}
+          login: {url: '/api/signin', method: 'post'},
+          logout: {url: '/api/logout', method: 'post'},
+          user: {url: '/api/user', method: 'get', propertyName: ''}
         }
       }
     }
@@ -100,12 +105,10 @@ export default {
   },
 
 
-
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ["vee-validate/dist/rules"],
-    extend (config, ctx) {
+    extend(config, ctx) {
       config.performance.maxAssetSize = 700000
     }
   }

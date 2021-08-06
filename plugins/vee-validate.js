@@ -6,6 +6,22 @@ extend("required", {
   message: "Обязательное поле"
 });
 
+
+extend("email", {
+  ...email,
+  message: "Не верный формат почты"
+});
+
+extend("minPhone", {
+  async validate(value, { min }) {
+    const res = await validate(value, `min:${min}`,)
+    return res.valid;
+  },
+  params: ['min'],
+  message: 'Введите номер телефона'
+  // message: 'Минимум {min} символов'
+});
+
 extend("max", max);
 extend("min", min);
 
