@@ -24,6 +24,7 @@
                   <FormGenerator
                     @loadMap="loadMap"
                     :row="row"
+                    :index="q"
                     @checkBoxEvent="checkBoxEvent"
                   />
 
@@ -60,6 +61,7 @@
                         <FormGenerator
                           @loadMap="loadMap"
                           :row="row"
+                          :index="q"
                           @checkBoxEvent="checkBoxEvent"
                         />
                       </div>
@@ -106,9 +108,7 @@
     </div>
 
     <client-only>
-      <keep-alive>
-        <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/>
-      </keep-alive>
+      <keep-alive> <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/></keep-alive>
     </client-only>
 
   </div>

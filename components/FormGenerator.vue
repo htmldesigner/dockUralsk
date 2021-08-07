@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group mb-4" v-if="row.type === 'multifiles'">
-      <MultiFilesField :row="row"/>
+      <MultiFilesField :row="row" :index="index"/>
     </div>
 
     <div class="form-group mb-4" v-if="row.type === 'textarea'">
@@ -91,6 +91,7 @@ import MultiFilesField from "@/components/formFields/MultiFilesField";
 import TextAreaField from "@/components/formFields/TextAreaField";
 
 export default {
+
   components: {TextField, PhoneField, DateField, EmailField, SelectField, MultiFilesField, TextAreaField},
   name: "FormGenerator",
   props: ['row', 'index', 'groupName'],

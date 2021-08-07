@@ -183,7 +183,6 @@ b, strong
     position: absolute
     z-index: -1
 
-
   .file-input__label
     cursor: pointer
     display: inline-flex
@@ -199,10 +198,19 @@ b, strong
     font-family: 'Montserrat-Regular', sans-serif
     width: 100%
     transition: .25s ease
-
+    ul
+      padding: 0
+      margin: 0
+      li
+        display: flex
+        align-items: flex-end
+        list-style: none
+        button
+          border: none
+          background-color: transparent
+          margin-left: 15px
     &:hover
       background: darken($insideButtons, 5%)
-
     &:focus
       background: darken($insideButtons, 5%)
 
@@ -210,6 +218,10 @@ b, strong
     svg
       margin-right: 10px
 
+.removeFileIcon
+  fill: $indexColor
+  &:hover
+    fill: red!important
 
 //Form
 .horizontal
