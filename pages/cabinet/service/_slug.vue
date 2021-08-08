@@ -214,19 +214,17 @@ export default {
     },
 
     onConfirm(el) {
-      console.log(el)
-    },
-
-    loadMap(el) {
       if (el) {
         this.LatLng = el
       }
+    },
+
+    loadMap() {
       this.showMap = true
     },
 
     async onSubmit() {
       if (this.agree) {
-        console.log('sdcsc')
         this.formElem = new FormData(this.$refs.serviceForm)
 
         let prepareData = {}

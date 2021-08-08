@@ -1,11 +1,15 @@
 import {extend, validate} from "vee-validate";
-import {required, email, min, max, numeric, alpha} from "vee-validate/dist/rules";
+import {required, image, email, min, max, numeric, alpha} from "vee-validate/dist/rules";
 
 extend("required", {
   ...required,
   message: "Обязательное поле"
 });
 
+extend("image", {
+  ...image,
+  message: "Не верный image"
+});
 
 extend("email", {
   ...email,
