@@ -44,7 +44,7 @@
 
                     <div class="row">
                       <div class="col">
-                        <button @click.prevent="addItem(row.items, row.name)" class="btn_primary_small">
+                        <button type="button" @click.prevent="addItem(row.items, row.name)" class="btn_primary_small">
                           <img src="~assets/img/add.svg" alt="Alt">
                         </button>
                       </div>
@@ -147,7 +147,7 @@ export default {
   },
 
   async fetch({store, params}) {
-    await store.dispatch('user/loadServiceRequest', params.slug)
+    await store.dispatch('user/loadServiceRequest', encodeURIComponent(params.slug))
   },
 
   data() {

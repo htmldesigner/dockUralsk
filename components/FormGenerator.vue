@@ -1,6 +1,5 @@
 <template>
 
-
   <div v-if="row">
 
     <div class="form-group mb-4" v-if="row.type === 'text'">
@@ -60,6 +59,7 @@
         <span v-if="row.tooltip" class="hint" :title="rows.tooltip"></span>
       </label>
       <button
+        type="button"
         @click.prevent="$emit('loadMap')"
         :disabled="row.disabled"
         class="btn_light btn_block">
@@ -69,7 +69,7 @@
     </div>
 
     <div class="form-group mb-4" style="margin-top: 30px;" v-if="row.type === 'subtract'">
-      <button class="btn_outline_small" @click.prevent="$emit('removeItem', {index, groupName})">
+      <button type="button" class="btn_outline_small" @click.prevent="$emit('removeItem', {index, groupName})">
         <svg width="15" height="6" viewBox="0 0 13 4" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.64 0.711999H12.168V3.44H0.64V0.711999Z"/>
         </svg>

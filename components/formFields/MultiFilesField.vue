@@ -8,7 +8,8 @@
       <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
     </label>
 
-    <div class="file-input" @dragover.prevent="dragover" @dragleave.prevent="dragleave" @drop.prevent="addFile">
+    <div class="file-input" @dragover.prevent="dragover" @dragleave.prevent="dragleave"
+         @drop.prevent="addFile(row.name + index, $event)">
       <input
         multiple
         type="file"
@@ -16,6 +17,7 @@
         :id="row.name + index"
         class="file-input__input"
         :required="true"
+        @click="onValidate(row.name + index)"
         @change="onChange"
         ref="file"
         accept=".pdf,.jpg,.jpeg,.png"
@@ -24,8 +26,8 @@
       <div class="file-input__label" v-if="fileList.length" v-cloak>
         <ul>
           <li v-for="file in fileList">
-            <span>{{ file.name }}</span>
-            <button @click.prevent="remove(fileList.indexOf(file))">
+            <span style="word-break: break-all">{{ file.name }}</span>
+            <button type="button" @click.prevent="remove(row.name + index, fileList.indexOf(file))">
               <svg class="removeFileIcon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13.5268 2.75799L9.28487 7.00034L13.5268 11.2425C14.1578 11.8737 14.1578 12.8962 13.5268 13.5274C13.2115 13.8426 12.7982 14.0004 12.3851 14.0004C11.9713 14.0004 11.5579 13.8429 11.2429 13.5274L7.00003 9.28474L2.7575 13.5273C2.44228 13.8426 2.02891 14.0003 1.61542 14.0003C1.20206 14.0003 0.788968 13.8428 0.473465 13.5273C-0.1575 12.8964 -0.1575 11.8739 0.473465 11.2425L4.71527 7.0003L0.473224 2.75799C-0.157741 2.12702 -0.157741 1.10431 0.473224 0.473349C1.10407 -0.157132 2.12618 -0.157132 2.75726 0.473349L6.99999 4.71571L11.2424 0.473349C11.8736 -0.157132 12.8958 -0.157132 13.5266 0.473349C14.1578 1.10431 14.1578 2.12702 13.5268 2.75799Z"
@@ -46,7 +48,7 @@
       </label>
 
       <div class="invalid-feedback">
-        Login is invalid
+        Error
       </div>
 
     </div>
@@ -64,27 +66,64 @@ export default {
     }
   },
   methods: {
-    remove(i) {
-      this.fileList.splice(i, 1);
+    remove(id, i) {
+      console.log(id)
+      this.fileList.splice(i, 1)
+      this.onValidate(id)
     },
-    onChange() {
-      const file = this.$refs.file.files[0];
-      if (!file) {
-        alert('Фаил не выбран');
-        return;
+    onValidate(id) {
+
+      const file = this.$refs.file.files[0]
+
+      let feedbackElement = null
+
+      let element = document.getElementById(id)
+
+      let fileFormat = [
+        'application/pdf',
+        'application/vnd.ms-excel',
+        'image/jpeg',
+        'image/png',
+        'image/bmp',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      ]
+
+      element.parentNode.childNodes.forEach(el => {
+        if (el.className === 'invalid-feedback') {
+          feedbackElement = el
+        }
+      })
+
+      if (!this.fileList.length) {
+        feedbackElement.style.display = 'block'
+        return feedbackElement.innerHTML = 'Загрузите фаил'
+      } else {
+        feedbackElement.style.display = 'none'
       }
 
-      let element = document.querySelector('.invalid-feedback')
-
-      if (file.size > 1024 * 1024) {
-        element.style.display = 'block'
+      if (fileFormat.includes(file?.type)) {
+        feedbackElement.style.display = 'none'
+      } else {
+        feedbackElement.style.display = 'block'
         this.fileList = []
-        return element.innerHTML = 'Слишком большой фаил (> 1MB)'
-      }else {
-        element.style.display = 'none'
+        return feedbackElement.innerHTML = 'Не верный формат'
       }
 
+      if (file?.size > 10024 * 1024) {
+        feedbackElement.style.display = 'block'
+        this.fileList = []
+        return feedbackElement.innerHTML = 'Слишком большой фаил (> 10MB)'
+      } else {
+        feedbackElement.style.display = 'none'
+      }
+    },
+
+    onChange(event) {
+      let id = event.target.id
       this.fileList = [this.$refs.file.files[0]]
+      if (this.fileList)
+        this.onValidate(id)
     },
     dragover(event) {
       event.currentTarget.classList.add('dragover')
@@ -92,10 +131,13 @@ export default {
     dragleave(event) {
       event.currentTarget.classList.remove('dragover')
     },
-    addFile(event) {
+    addFile(id, event) {
       this.$refs.file.files = event.dataTransfer.files
-      this.onChange()
-      event.currentTarget.classList.remove('dragover')
+      this.fileList = [this.$refs.file.files[0]]
+      if (this.fileList) {
+        this.onValidate(id)
+        event.currentTarget.classList.remove('dragover')
+      }
     }
   }
 }
