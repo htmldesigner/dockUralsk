@@ -210,7 +210,6 @@ export default {
 
   async asyncData({$axios, i18n, app}) {
     const response = await $axios.$get('/api/categories?lang=' + i18n.localeProperties.code)
-    console.log(response, 'catalog')
     return {response}
   }
 }

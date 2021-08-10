@@ -7,7 +7,7 @@
     </div>
 
     <div class="service_container">
-
+      <ValidationObserver ref="form" v-slot="{ valid }">
       <form @submit.prevent="onSubmit" ref="serviceForm" enctype="multipart/form-data">
         <section v-for="(request, o) of serviceRequest">
           <div v-if="request">
@@ -104,7 +104,7 @@
         </section>
 
       </form>
-
+      </ValidationObserver>
     </div>
 
     <client-only>
@@ -118,10 +118,10 @@
 import MapPopup from "~/components/MapPopup";
 import FormGenerator from "~/components/FormGenerator";
 import sha256 from 'crypto-js/sha256';
-
+import {ValidationProvider, ValidationObserver} from "vee-validate";
 export default {
   loading: true,
-  components: {FormGenerator, MapPopup},
+  components: {FormGenerator, MapPopup, ValidationProvider, ValidationObserver},
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
   computed: {
@@ -147,7 +147,7 @@ export default {
   },
 
   async fetch({store, params}) {
-    await store.dispatch('user/loadServiceRequest', encodeURIComponent(params.slug))
+    await store.dispatch('user/loadServiceRequest', params.slug)
   },
 
   data() {

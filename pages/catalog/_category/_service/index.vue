@@ -142,12 +142,9 @@ export default {
   },
 
   async asyncData({$axios, params, i18n}) {
-    const response = await $axios.$get('/api/categories/' + params.service + '?lang=' + i18n.localeProperties.code)
-    console.log(response, 'service index')
+    const response = await $axios.$get('/api/categories/' + `${encodeURIComponent(params.slug)}` + '?lang=' + i18n.localeProperties.code)
     return {response}
   },
-
-
 
 
   methods: {

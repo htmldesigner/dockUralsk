@@ -91,7 +91,6 @@ import MultiFilesField from "@/components/formFields/MultiFilesField";
 import TextAreaField from "@/components/formFields/TextAreaField";
 
 export default {
-
   components: {TextField, PhoneField, DateField, EmailField, SelectField, MultiFilesField, TextAreaField},
   name: "FormGenerator",
   props: ['row', 'index', 'groupName'],

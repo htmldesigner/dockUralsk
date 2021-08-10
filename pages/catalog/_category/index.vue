@@ -140,8 +140,7 @@ export default {
 
   layout: 'catalogLayoutService',
   async asyncData({$axios, params, i18n}) {
-    const response = await $axios.$get('/api/categories/' + params.category + '?lang=' + i18n.localeProperties.code)
-    console.log(response, 'category')
+    const response = await $axios.$get('/api/categories/' + encodeURIComponent(params.category) + '?lang=' + i18n.localeProperties.code)
     return {response}
   },
 

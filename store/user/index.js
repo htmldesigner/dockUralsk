@@ -10,6 +10,7 @@ export const mutations = {
   SET_KEY(state, payload) {
     state.key = payload
   },
+
   SET_SERVICE_REQUEST(state, payload) {
     state.serviceRequest = payload
   },
@@ -75,7 +76,7 @@ export const mutations = {
             serviceRequest[items].forEach(el => {
               if (el.fields) {
                 el.fields.forEach(target => {
-                  if(target.disabledIf === payload.value){
+                  if (target.disabledIf === payload.value) {
                     target.disabled = !target.disabled
                   }
                 })
@@ -86,19 +87,19 @@ export const mutations = {
       }
     }
   }
-
 }
-
+// Запрос полей формы для страницы подачи заявления
 export const actions = {
   async loadServiceRequest({commit}, params) {
     try {
-      const response = await this.$axios.$get('api/services/' + params + '/getForm')
+      const response = await this.$axios.$get(encodeURIComponent('api/services/' + params + '/getForm'))
       await commit('SET_SERVICE_REQUEST', response)
     } catch (error) {
       throw error
     }
   },
 
+// Запрос всех ранее сделанных запросов на услуги (Личный кабинет)
   async getServiceRequestsList({commit}, params) {
     try {
       const response = await this.$axios.$get('api/cases')
@@ -108,7 +109,7 @@ export const actions = {
     }
   },
 
-
+// Запрос данных о текушем состоянии услуги (Личный кабинет)
   async getServiceStatus({commit}, payload) {
     try {
       const response = await this.$axios.$get('/api/case/' + payload.id + '?lang=' + payload.locale)

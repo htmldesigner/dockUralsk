@@ -97,8 +97,7 @@ export default {
   name: "slug",
   layout: 'catalogLayoutService',
   async asyncData({$axios, params, i18n}) {
-    const response = await $axios.$get('/api/services/' + params.slug + '?lang=' + i18n.localeProperties.code)
-    console.log(response, '_slug')
+    const response = await $axios.$get('/api/services/' + `${encodeURIComponent(params.slug)}` + '?lang=' + i18n.localeProperties.code)
     return {response}
   },
   data() {
