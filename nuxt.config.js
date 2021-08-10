@@ -30,11 +30,12 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {src: "~/plugins/crumbsBuilder.plugin.js"},
-    {src: "~/plugins/ncaLayer.plugin.js"},
-    {src: "~/plugins/leaflet.js", ssr: false},
-    {src: "~/plugins/crypto.js", ssr: false},
-    {src: "~/plugins/vee-validate.js"},
-    {src: "~/plugins/v-mask.js", ssr: false},
+    {src: "~/plugins/ncaLayer.plugin.js", mode: 'client', ssr: false},
+    {src: "~/plugins/leaflet.js", mode: 'client', ssr: false},
+    {src: "~/plugins/crypto.js", mode: 'client', ssr: false},
+    {src: "~/plugins/vee-validate.js", mode: 'client', ssr: false},
+    {src: "~/plugins/v-mask.js", mode: 'client', ssr: false},
+    {src: "~/plugins/esriGeocoder.js",mode: 'client', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -205,7 +205,6 @@ b, strong
         display: flex
         align-items: center
         list-style: none
-
         button
           border: none
           background-color: transparent
@@ -219,7 +218,7 @@ b, strong
     svg
       margin-right: 10px
 
-.removeFileIcon
+.removeSvgIcon
   fill: $indexColor
   &:hover
     fill: red!important
@@ -397,32 +396,37 @@ select
   opacity: .65
   background: lighten($indexColor, 20%)
 
+// Всетлые кнопки на форме заказа
+.btn_light
+  background: $insideButtons
+  color: $indexColor !important
+  border-radius: 6px
+  padding: 8px 12px
+  font-size: 16px
+  font-family: 'Montserrat-Regular', sans-serif
+  min-height: 42px
+  //max-height: 44px
+  border: 1px solid $stroke
+  display: inline-block
+  transition: .25s ease
+  width: max-content
+  text-decoration: none
+  &:hover
+    background: darken($insideButtons, 5%)
+  &:focus
+    background: darken($insideButtons, 5%)
+  &:disabled
+    pointer-events: none
+    opacity: .65
+    background: lighten($insideButtons, 20%)
+  svg, img
+    margin-right: 10px
+  button
+    border: none
+    background-color: transparent
+    margin-left: 15px
 
-.btn_light // Всетлые кнопки на форме заказа
-   background: $insideButtons
-   color: $indexColor !important
-   border-radius: 6px
-   padding: 10px 18px
-   font-size: 16px
-   font-family: 'Montserrat-Regular', sans-serif
-   max-height: 44px
-   border: 1px solid $stroke
-   display: inline-block
-   transition: .25s ease
-   width: max-content
-   text-decoration: none
-   &:hover
-     background: darken($insideButtons, 5%)
 
-   &:focus
-     background: darken($insideButtons, 5%)
-
-   &:disabled
-     pointer-events: none
-     opacity: .65
-     background: lighten($insideButtons, 20%)
-   svg, img
-     margin-right: 10px
 
 //.btn_primary_small
 //  background: $indexColor

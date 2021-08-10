@@ -25,16 +25,16 @@
 
 <script>
 
-
 export default {
   name: "MapPopup",
   data() {
     return {
-      latlng: null
+      geoData: null
     }
   },
   methods: {
     mapInstance() {
+      let self = this
       const map = L.map(this.$refs.map, {preferCanvas: true}).setView([51.219338, 51.380997], 10);
 
       let osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -58,18 +58,30 @@ export default {
       }, {}, {}).addTo(map)
 
       let marker
+
       map.on('click', (e) => {
         if (marker) {
           map.removeLayer(marker)
         }
-        this.latlng = e.latlng
-        marker = new L.Marker(this.latlng, {draggable: false})
-        map.addLayer(marker)
+
+        let geocodeService = ELG.geocodeService()
+        geocodeService.reverse().latlng(e.latlng)
+          .run(function (error, result) {
+            if (error) {
+              console.log(error)
+              return;
+            }
+            marker = new L.Marker(e.latlng, {draggable: false})
+            map.addLayer(marker)
+            self.geoData = result
+          })
+
       })
     },
 
-    onConfirm(){
-      this.$emit('onConfirm', this.latlng)
+    onConfirm() {
+      // this.$emit('onConfirm', this.geoData)
+      this.$store.commit('helper/SET_GEO_DATA', this.geoData)
       this.$emit('closeMap')
     }
   },

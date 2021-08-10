@@ -7,7 +7,6 @@
     </div>
 
     <div class="service_container">
-      <ValidationObserver ref="form" v-slot="{ valid }">
       <form @submit.prevent="onSubmit" ref="serviceForm" enctype="multipart/form-data">
         <section v-for="(request, o) of serviceRequest">
           <div v-if="request">
@@ -104,11 +103,10 @@
         </section>
 
       </form>
-      </ValidationObserver>
     </div>
 
     <client-only>
-      <keep-alive> <MapPopup v-if="showMap" @closeMap="closeMap" @onConfirm="onConfirm"/></keep-alive>
+      <keep-alive> <MapPopup v-if="showMap" @closeMap="closeMap"/></keep-alive>
     </client-only>
 
   </div>
@@ -127,6 +125,10 @@ export default {
   computed: {
     serviceRequest() {
       return this.$store.getters["user/getServiceRequest"]
+    },
+
+    getGeoDate(){
+      return this.$store.getters['helper/getGeoDate']
     },
 
     xmlKey() {
@@ -155,7 +157,6 @@ export default {
       showMap: false,
       agree: false,
       formElem: null,
-      LatLng: null,
       checkValue: null
     }
   },
@@ -213,11 +214,11 @@ export default {
       this.showMap = false
     },
 
-    onConfirm(el) {
-      if (el) {
-        this.LatLng = el
-      }
-    },
+    // onConfirm(el) {
+    //   if (el) {
+    //     this.LatLng = el
+    //   }
+    // },
 
     loadMap() {
       this.showMap = true
@@ -266,7 +267,7 @@ export default {
       try {
         if (this.xmlKey) {
 
-          this.formElem.append('latlng', this.LatLng);
+          this.formElem.append('latlng', this.getGeoDate);
 
           this.formElem.append('service_id', this.serviceRequest.service_id)
 
