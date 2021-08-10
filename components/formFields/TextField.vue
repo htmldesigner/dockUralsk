@@ -15,7 +15,6 @@
       :disabled="row.disabled"
       class="form-control"
       :value="row.value"
-      v-model="text"
       :name="row.name">
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
@@ -31,9 +30,7 @@ export default {
   props: ['row', 'index', 'groupName'],
   name: "TextField",
   data() {
-    return {
-      text:''
-    }
+    return {}
   }
 }
 </script>
