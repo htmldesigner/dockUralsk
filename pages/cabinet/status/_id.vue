@@ -47,7 +47,7 @@
 
 
         <div class="col-lg-3 bg-white s-h right">
-          <button class="btn_primary btn_block">Скачать PDF</button>
+          <a v-if="cases.document_link" target="_blank" :href="cases.document_link" class="btn_primary btn_block">Скачать PDF</a>
           <div class="status-block">
             <div class="request">
               <span>№ Заявки</span>
