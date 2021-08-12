@@ -3,7 +3,7 @@
   <section class="container">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 bg-white left-aside s-h filter">
+        <div class="col-lg-3 bg-white left-aside s-h filter d-none">
           <div class="requisites">
             <div class="requisites_label">
               <p>{{ $t('requisites') }}</p>
@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="col-lg-6 col-md-12 bg-white straight s-h">
+        <div class="col-lg-9 col-md-12 bg-white straight s-h">
           <div class="content">
             <div class="row">
 
