@@ -1,24 +1,26 @@
 <template>
-  <div v-if="row">
+  <div v-if="text">
     <label
-      :for="row.name"
-      class="form-label">{{ row.title }}
-      <span v-if="row.validations[0]" class="required">*</span>
-      <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
+      :for="text.name"
+      class="form-label">{{ text.title }}
+      <span v-if="text.validations[0]" class="required">*</span>
+      <span v-if="text.tooltip" class="hint" :title="text.tooltip"></span>
     </label>
-
-    <input
-      :id="row.name"
-      :required="row.validations[0]"
-      :type="row.type"
-      :disabled="row.disabled"
-      class="form-control"
-      :value="row.value"
-      :name="row.name">
-
-    <div class="invalid-feedback">
-      error
-    </div>
+    <ValidationProvider :rules="text.validations.join('|')" v-slot="{ errors }">
+      <input
+        :id="text.name"
+        :required="text.validations[0]"
+        :type="text.type"
+        :class="{'is-invalid': errors[0]}"
+        :disabled="text.disabled"
+        class="form-control"
+        v-model="text.value"
+        :name="text.name"
+      >
+      <div v-if="errors[0]" class="invalid-feedback">
+        {{ errors[0] }}
+      </div>
+    </ValidationProvider>
   </div>
 </template>
 
@@ -30,7 +32,9 @@ export default {
   props: ['row', 'index', 'groupName'],
   name: "TextField",
   data() {
-    return {}
+    return {
+      text: Object.assign({}, this.row)
+    }
   }
 }
 </script>

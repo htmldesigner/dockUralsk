@@ -8,17 +8,17 @@
 
         <div v-show="!load">
           <div class="form-title">
-            <p>Авторизация</p>
+            <p>{{ $t('authorization') }}</p>
             <a href="#" class="btn_close" @click.prevent="$emit('close')"></a>
           </div>
 
           <div class="component-selector">
             <ul>
               <li @click="currentLink = 'IpcForm'" :class="{active: currentLink === 'IpcForm'}">
-                <div class="component">по ЭЦП</div>
+                <div class="component">{{ $t('by_EDS') }}</div>
               </li>
               <li @click="currentLink = 'LoginForm'" :class="{active: currentLink === 'LoginForm'}">
-                <div class="component">по логину и паролю</div>
+                <div class="component">{{ $t('by_login_password') }}</div>
               </li>
             </ul>
           </div>
