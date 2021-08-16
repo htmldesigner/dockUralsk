@@ -3,13 +3,13 @@
     <label
       :for="row.name"
       class="form-label">{{ row.title }}
-      <span v-if="row.validations[0]" class="required">*</span>
+      <span v-if="row.validations.includes('required')" class="required">*</span>
       <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
     </label>
     <ValidationProvider rules="email" v-slot="{ errors }">
     <input
       :id="row.name"
-      :required="row.validations[0]"
+      :required="row.validations.includes('required')"
       :type="row.type"
       :class="{'is-invalid': errors[0]}"
       :disabled="row.disabled"

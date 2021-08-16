@@ -17,7 +17,7 @@ export default ({app}, inject) => {
         console.log('Connection error');
         openDialog();
       }
-      console.log('Code: ' + event.code + ' Reason: ' + event.reason);
+      // console.log('Code: ' + event.code + ' Reason: ' + event.reason);
     };
 
 

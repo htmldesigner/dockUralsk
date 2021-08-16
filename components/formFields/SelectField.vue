@@ -2,11 +2,11 @@
   <div v-if="row">
     <label
       :for="row.name" class="form-label">{{ row.title }}
-      <span v-if="row.validations[0]" class="required">*</span>
+      <span v-if="row.validations.includes('required')" class="required">*</span>
       <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
     </label>
     <select
-      :required="row.validations[0]"
+      :required="row.validations.includes('required')"
       :disabled="row.disabled"
       class="form-control"
       :name="row.name"

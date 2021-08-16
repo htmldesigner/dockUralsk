@@ -3,10 +3,10 @@
     <label
       :for="row.name"
       class="form-label">{{ row.title }}
-      <span v-if="row.validations[0]" class="required">*</span>
+      <span v-if="row.validations.includes('required')" class="required">*</span>
       <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
     </label>
-    <ValidationProvider :rules="row.validations[0]" v-slot="{ errors }">
+    <ValidationProvider :rules="row.validations.join('|')" v-slot="{ errors }">
       <input
         v-mask="'+7(###)-###-##-##'"
         :id="row.name"
