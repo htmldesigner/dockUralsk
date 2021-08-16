@@ -10,6 +10,7 @@
       <input
         v-mask="'+7(###)-###-##-##'"
         :id="row.name"
+        :required="row.validations.includes('required')"
         :class="{'is-invalid': errors[0]}"
         type="text"
         :disabled="row.disabled"

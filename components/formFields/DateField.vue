@@ -14,6 +14,7 @@
       class="form-control"
       :value="$moment(row.value).format('YYYY-MM-DD')"
       :name="row.name"
+
     >
     <div class="invalid-feedback">
       Login is invalid

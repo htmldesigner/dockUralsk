@@ -1,30 +1,40 @@
 <template>
-  <div v-if="row">
+  <div v-if="select">
     <label
-      :for="row.name" class="form-label">{{ row.title }}
-      <span v-if="row.validations.includes('required')" class="required">*</span>
-      <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
+      :for="select.name" class="form-label">{{ select.title }}
+      <span v-if="select.validations.includes('required')" class="required">*</span>
+      <span v-if="select.tooltip" class="hint" :title="select.tooltip"></span>
     </label>
-    <select
-      :required="row.validations.includes('required')"
-      :disabled="row.disabled"
-      class="form-control"
-      :name="row.name"
-      :id="row.name">
-      <option v-for="option in row.options" :value="option.id">{{ option.text }}</option>
-    </select>
-    <div class="invalid-feedback">
-      Login is invalid
-    </div>
+    <ValidationProvider :rules="select.validations.join('|')" v-slot="{ errors }">
+      <select
+        v-model="selected"
+        :required="select.validations.includes('required')"
+        :disabled="select.disabled"
+        :class="{'is-invalid': errors[0]}"
+        class="form-control"
+        :name="select.name"
+        :id="select.name">
+        <option v-for="option in select.options" :value="option.id">{{ option.text }}</option>
+      </select>
+      <div v-if="errors[0]" class="invalid-feedback">
+        {{ errors[0] }}
+      </div>
+    </ValidationProvider>
   </div>
 </template>
 
 <script>
+import {ValidationProvider, ValidationObserver} from "vee-validate";
+
 export default {
+  components: {ValidationProvider, ValidationObserver},
   name: "SelectField",
   props: ['row', 'index', 'groupName'],
   data() {
-    return {}
+    return {
+     selected: '',
+      select: Object.assign({}, this.row)
+    }
   }
 }
 </script>
