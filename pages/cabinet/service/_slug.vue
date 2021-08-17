@@ -229,7 +229,6 @@ export default {
       if (this.agree) {
         this.$refs.form.validate().then(success => {
             if (success) {
-              console.log(success)
               this.formElem = new FormData(this.$refs.serviceForm)
 
               let prepareData = {}
@@ -264,9 +263,15 @@ export default {
                 }
               }
               this.$ncaLayer(xml.join(''))
+            } else {
+              console.log(this.$refs.form)
+              let el = document.querySelector(".is-invalid").parentNode;
+              el.scrollIntoView({block: "center", behavior: "smooth"});
+
             }
           }
         ).catch(error => {
+
           console.log(error)
         })
       }

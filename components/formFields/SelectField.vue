@@ -5,10 +5,9 @@
       <span v-if="select.validations.includes('required')" class="required">*</span>
       <span v-if="select.tooltip" class="hint" :title="select.tooltip"></span>
     </label>
-    <ValidationProvider :rules="select.validations.join('|')" v-slot="{ errors }">
+    <ValidationProvider :rules="{'required': !select.disabled}" v-slot="{ errors }">
       <select
         v-model="selected"
-        :required="select.validations.includes('required')"
         :disabled="select.disabled"
         :class="{'is-invalid': errors[0]}"
         class="form-control"
@@ -30,10 +29,14 @@ export default {
   components: {ValidationProvider, ValidationObserver},
   name: "SelectField",
   props: ['row', 'index', 'groupName'],
+  computed: {
+    select() {
+      return Object.assign({}, this.row)
+    }
+  },
   data() {
     return {
-     selected: '',
-      select: Object.assign({}, this.row)
+      selected: '',
     }
   }
 }
