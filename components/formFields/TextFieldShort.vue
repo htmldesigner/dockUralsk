@@ -1,38 +1,31 @@
 <template>
-  <div v-if="text && !text.description">
-    <label
-      :for="text.name"
-      class="form-label">{{ text.title }}
-      <span v-if="text.validations.includes('required')" class="required">*</span>
-      <span v-if="text.tooltip" class="hint" :title="text.tooltip"></span>
-    </label>
+  <div v-if="text" class="d-flex" style="margin-right: 40px">
+
     <ValidationProvider :rules="rules" v-slot="{ errors }">
       <input
         :id="text.name"
         :type="text.type"
-        :class="{'is-invalid': errors[0]}"
+        :class="{'is-invalid': errors[0], 'field-width': text.cssClasses.length}"
         :disabled="text.disabled"
         class="form-control"
         v-model="text.value"
         :name="text.name"
       >
-      <div v-if="errors[0]" class="invalid-feedback">
-        {{ errors[0] }}
-      </div>
+<!--      <div v-if="errors[0]" class="invalid-feedback">-->
+<!--        {{ errors[0] }}-->
+<!--      </div>-->
     </ValidationProvider>
-  </div>
-  <div v-else>
-    <TextFieldShort :row="text" />
+    <label v-html="text.description" style="margin-top: 10px; margin-left: 15px"></label>
   </div>
 </template>
 
 <script>
 import {ValidationProvider, ValidationObserver} from "vee-validate";
-import TextFieldShort from "./TextFieldShort";
+
 export default {
-  components: {ValidationProvider, ValidationObserver, TextFieldShort},
+  components: {ValidationProvider, ValidationObserver},
   props: ['row', 'index', 'groupName'],
-  name: "TextField",
+  name: "TextFieldShort",
   computed: {
     rules() {
       if (!this.text.disabled) {

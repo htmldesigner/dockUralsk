@@ -43,9 +43,13 @@ export default {
         await this.$nuxt.$emit('loader', false)
         this.$emit('close')
       } catch (e) {
-        this.$nuxt.$emit('showRegistrationForm')
-        this.$store.commit('user/SET_KEY', null)
+        if (e.response.status === 500) {
+          alert('Ошибка. Попробуйте позже')
+        } else {
+          this.$nuxt.$emit('showRegistrationForm')
+        }
         this.$nuxt.$emit('loader', false)
+        this.$store.commit('user/SET_KEY', null)
       }
     }
   }

@@ -1,7 +1,5 @@
 <template>
   <div v-if="row">
-
-
     <label
       :for="row.name + index"
       class="form-label">{{ row.title }}
@@ -11,15 +9,13 @@
 
     <div class="file-input" :class="{disabled_multi_file: row.disabled}" @dragover.prevent="dragover"
          @dragleave.prevent="dragleave"
-         @drop.prevent="addFile(row.name + index, $event)"
-    >
-
+         @drop.prevent="addFile(row.name + index, $event)">
       <input
         multiple
         type="file"
         :name="row.name"
         :id="row.name + index"
-
+        :disabled="row.disabled"
         class="file-input__input"
         :required="row.validations.includes('required') && !row.disabled"
         @click="onValidate(row.name + index)"
@@ -56,12 +52,10 @@
       </label>
 
       <div class="invalid-feedback">
-        error
+        Error
       </div>
 
-
     </div>
-
 
 
 
@@ -69,9 +63,7 @@
 </template>
 
 <script>
-import {ValidationProvider, ValidationObserver} from "vee-validate";
 export default {
-  components: {ValidationProvider, ValidationObserver},
   name: "MultiFilesField",
   props: ['row', 'index', 'groupName'],
   data() {
