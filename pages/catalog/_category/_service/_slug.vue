@@ -5,11 +5,13 @@
       <div class="mobile_block d-flex justify-content-between">
         <button
           @click="showRequisites = !showRequisites"
-          class="btn_outline requisites-popup">{{$t('buttons.requisites') }}
+          class="btn_outline requisites-popup">{{ $t('buttons.requisites') }}
         </button>
 
-        <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">{{$t('buttons.get_service')}}</NuxtLink>
-        <button v-else @click="emitLoginForm" class="btn_primary">{{$t('buttons.get_service')}}</button>
+        <NuxtLink v-if="isLoggedIn" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">
+          {{ $t('buttons.get_service') }}
+        </NuxtLink>
+        <button v-else @click="emitLoginForm" class="btn_primary">{{ $t('buttons.get_service') }}</button>
 
       </div>
 
@@ -50,8 +52,17 @@
                 </div>
 
                 <div class="col-4 d-lg-block d-none text-end">
-                  <NuxtLink v-if="isLoggedIn" :class="{ disabled: !userType }" class="btn_primary" :to="localePath('/cabinet/service/' + response.slug, )">{{$t('buttons.get_service')}}</NuxtLink>
-                  <button v-else @click="emitLoginForm" class="btn_primary">{{$t('buttons.get_service')}}</button>
+                  <NuxtLink
+                    v-if="isLoggedIn"
+                    :class="{ disabled: !userType }"
+                    class="btn_primary"
+                    :to="localePath('/cabinet/service/' + response.slug, )"
+                  >
+                    {{ $t('buttons.get_service') }}
+                  </NuxtLink>
+                  <button v-else @click="emitLoginForm(localePath('/cabinet/service/' + response.slug, ))"
+                          class="btn_primary">{{ $t('buttons.get_service') }}
+                  </button>
                 </div>
               </div>
 
@@ -90,7 +101,7 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.loggedIn
     },
-    userType(){
+    userType() {
       return this.$store.state.auth.user.type
     }
   },
@@ -110,8 +121,11 @@ export default {
     close() {
       this.showRequisites = false
     },
-    emitLoginForm(){
+    emitLoginForm(path) {
       this.$nuxt.$emit('showLoginForm')
+      if (path) {
+        this.$store.commit('helper/SET_GO_TO_URL', path)
+      }
     }
   }
 }

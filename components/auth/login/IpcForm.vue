@@ -20,6 +20,9 @@ export default {
   computed: {
     xmlKey() {
       return this.$store.state.user.key
+    },
+    goToUrl() {
+      return this.$store.getters['helper/getGoToURL']
     }
   },
   watch: {
@@ -42,6 +45,10 @@ export default {
         await this.$auth.loginWith('local', {data: {sign: this.xmlKey}})
         await this.$nuxt.$emit('loader', false)
         this.$emit('close')
+        if (this.goToUrl) {
+          this.$router.push(this.goToUrl)
+          this.$store.commit('helper/CLEAR_GO_TO_URL')
+        }
       } catch (e) {
         if (e.response.status === 500) {
           alert('Ошибка. Попробуйте позже')

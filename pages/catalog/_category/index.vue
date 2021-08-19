@@ -38,9 +38,7 @@
 
           <div class="col-lg-3 bg-white left-aside s-h filter">
 
-
             <Breadcrumbs :crumbs="this.crumbs"/>
-
 
             <div v-if="response.filters">
               <div class="checkbox_filter" v-for="(value, idx) of response.filters" :key="idx">

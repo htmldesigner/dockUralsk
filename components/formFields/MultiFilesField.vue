@@ -1,6 +1,5 @@
 <template>
   <div v-if="row">
-
     <label
       :for="row.name + index"
       class="form-label">{{ row.title }}
@@ -55,8 +54,11 @@
       </div>
     </div>
 
-    <ValidationProvider :rules="rules" ref="provider" v-slot="{ errors }">
-      <input type="hidden" v-model="fileList.length || null" required :class="{'is-invalid': errors[0]}">
+    <ValidationProvider :rules="{'required': !row.disabled}" ref="provider" v-slot="{ errors }">
+      <input type="hidden"
+             v-model="fileList.length || null"
+             :class="{'is-invalid': errors[0]}"
+      >
 
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
@@ -72,15 +74,6 @@ import TextFieldShort from "./TextFieldShort";
 
 export default {
   components: {ValidationProvider, ValidationObserver, TextFieldShort},
-  computed: {
-    rules() {
-      if (!this.row.disabled) {
-        return this.row.validations.join('|')
-      } else {
-        return ''
-      }
-    },
-  },
   name: "MultiFilesField",
   props: ['row', 'index', 'groupName'],
   data() {
@@ -146,9 +139,12 @@ export default {
 
     onChange(event) {
       let id = event.target.id
-      this.fileList = [this.$refs.file.files[0]]
-      if (this.fileList)
+      let file = [this.$refs.file.files[0]]
+      this.fileList = file
+      if (this.fileList.length) {
         this.onValidate(id)
+        file = null
+      }
     },
     dragover(event) {
       event.currentTarget.classList.add('dragover')
