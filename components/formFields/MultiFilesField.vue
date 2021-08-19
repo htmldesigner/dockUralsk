@@ -23,7 +23,6 @@
         ref="file"
         accept=".pdf,.jpg,.jpeg,.png,.doc,.xls"
       />
-
       <div class="file-input__label" v-if="fileList.length" v-cloak>
         <ul>
           <li v-for="file in fileList">
