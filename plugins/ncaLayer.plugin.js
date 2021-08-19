@@ -51,28 +51,29 @@ export default ({app}, inject) => {
     };
 
 
-
     function openDialog() {
       confirm("Ошибка при подключении к NCALayer. Запустите NCALayer и нажмите ОК") === true
     }
 
 
     function signXmlCall() {
-      let xmlToSign =  "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><document><item>" + xml + "</item></document>";
+      let xmlToSign = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><document><item>" + xml + "</item></document>";
       let selectedStorage = 'PKCS12'
       // blockScreen();
       signXml(selectedStorage, "AUTH", xmlToSign, signXmlBack);
     }
 
+
+    function closeConnect() {
+      webSocket.close()
+    }
+
     function signXmlBack(result) {
-      console.log(result);
       if (result['code'] === "500") {
-        console.log(result['message'])
-        // alert(result['message']);
       } else if (result['code'] === "200") {
         let res = result['responseObject'];
         app.store.commit('user/SET_KEY', res)
-        // $("#signedXml").val(res);
+        closeConnect()
       }
     }
 
@@ -85,8 +86,6 @@ export default ({app}, inject) => {
       window.callback = callBack;
       webSocket.send(JSON.stringify(signXml));
     }
-
-
 
 
   })

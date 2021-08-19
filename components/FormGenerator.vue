@@ -65,7 +65,9 @@
         class="btn_light btn_block">
 
         <template v-if="geoDate">
-          <span style="word-break: break-all; line-height: 24px; text-align: left;">{{geoDate.address.Region}}, {{geoDate.address.City}}, {{geoDate.address.Address}}</span>
+          <span style="word-break: break-all; line-height: 24px; text-align: left;">
+            {{geoDate.address.Region}}, {{geoDate.address.City}}, {{geoDate.address.Address}}
+          </span>
           <button type="button" @click.stop.prevent="clearGeoDate()">
             <svg class="removeSvgIcon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -75,7 +77,7 @@
           </button>
         </template>
 
-        <template v-else><img src="~assets/img/locationPin.svg" alt="Alt"> {{ row.title }}</template>
+        <template v-else><img src="~assets/img/locationPin.svg" alt="Alt">{{ row.title }}</template>
 
       </button>
     </div>

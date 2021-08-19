@@ -71,11 +71,13 @@ export default {
     }
   },
   methods: {
+
     remove(id, i) {
       console.log(id)
       this.fileList.splice(i, 1)
       this.onValidate(id)
     },
+
     onValidate(id) {
 
       const file = this.$refs.file.files[0]

@@ -20,12 +20,12 @@
                 <div class="row" v-for="(rows, index) in sections.rows">
 
 
-                    <Supplement
-                      v-if="rows.fields_array"
-                      @loadMap="loadMap"
-                      @checkBoxEvent="checkBoxEvent"
-                      :rows="rows"
-                    />
+                  <Supplement
+                    v-if="rows.fields_array"
+                    @loadMap="loadMap"
+                    @checkBoxEvent="checkBoxEvent"
+                    :rows="rows"
+                  />
 
 
                   <div :class="row.cssClasses" v-for="(row, q) in rows.fields">
@@ -238,6 +238,7 @@ export default {
       if (this.agree) {
         this.$refs.form.validate().then(success => {
             if (success) {
+
               this.formElem = new FormData(this.$refs.serviceForm)
 
               let prepareData = {}
@@ -271,7 +272,9 @@ export default {
                   xml.push('<' + Object.keys(data[i]).join('') + '>' + data[i][Object.keys(data[i]).join('')] + '</' + Object.keys(data[i]).join('') + '>')
                 }
               }
+
               this.$ncaLayer(xml.join(''))
+
             } else {
               let el = document.querySelector(".is-invalid").parentNode;
               el.scrollIntoView({block: "center", behavior: "smooth"});
@@ -299,6 +302,8 @@ export default {
             headers: {"Content-Type": "multipart/form-data"},
           });
           this.$router.push('/cabinet')
+
+          this.$store.commit('helper/CLEAR_GEO_DATE')
         }
       } catch (e) {
         alert('Ошибка отпправки запроса')
