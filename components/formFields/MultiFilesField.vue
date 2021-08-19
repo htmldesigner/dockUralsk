@@ -1,5 +1,6 @@
 <template>
   <div v-if="row">
+
     <label
       :for="row.name + index"
       class="form-label">{{ row.title }}
@@ -18,11 +19,11 @@
         :disabled="row.disabled"
         class="file-input__input"
         :required="row.validations.includes('required') && !row.disabled"
-        @click="onValidate(row.name + index)"
         @change="onChange"
         ref="file"
         accept=".pdf,.jpg,.jpeg,.png,.doc,.xls"
       />
+
       <div class="file-input__label" v-if="fileList.length" v-cloak>
         <ul>
           <li v-for="file in fileList">
@@ -49,20 +50,37 @@
         </svg>
         <span>{{ $t('buttons.drop_down') }}</span>
       </label>
-
       <div class="invalid-feedback">
         Error
       </div>
-
     </div>
 
+    <ValidationProvider :rules="rules" ref="provider" v-slot="{ errors }">
+      <input type="hidden" v-model="fileList.length || null" required :class="{'is-invalid': errors[0]}">
 
+      <div v-if="errors[0]" class="invalid-feedback">
+        {{ errors[0] }}
+      </div>
+    </ValidationProvider>
 
   </div>
 </template>
 
 <script>
+import {ValidationObserver, ValidationProvider} from "vee-validate";
+import TextFieldShort from "./TextFieldShort";
+
 export default {
+  components: {ValidationProvider, ValidationObserver, TextFieldShort},
+  computed: {
+    rules() {
+      if (!this.row.disabled) {
+        return this.row.validations.join('|')
+      } else {
+        return ''
+      }
+    },
+  },
   name: "MultiFilesField",
   props: ['row', 'index', 'groupName'],
   data() {
@@ -102,12 +120,12 @@ export default {
         }
       })
 
-      if (!this.fileList.length) {
-        feedbackElement.style.display = 'block'
-        return feedbackElement.innerHTML = 'Загрузите фаил'
-      } else {
-        feedbackElement.style.display = 'none'
-      }
+      // if (!this.fileList.length) {
+      //   feedbackElement.style.display = 'block'
+      //   return feedbackElement.innerHTML = 'Загрузите фаил'
+      // } else {
+      //   feedbackElement.style.display = 'none'
+      // }
 
       if (fileFormat.includes(file?.type)) {
         feedbackElement.style.display = 'none'
