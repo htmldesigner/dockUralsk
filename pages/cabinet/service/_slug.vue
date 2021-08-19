@@ -94,8 +94,8 @@
               <div class="col-xl-5 col-lg-12">
                 <div class="form-group mb-4">
                   <div class="form-check form-check_them">
-                    <label class="form-check-label check-label_them">Согласен <a class="simple_link" href="#">с условием
-                      пользовательского соглашения</a>
+                    <label class="form-check-label check-label_them">Согласен
+                      <a class="simple_link" href="http:\\www.yandex.ru" target="_blank">с условием пользовательского соглашения</a>
                       <input class="form-check-input check-input_them" v-model="agree" type="checkbox" value="">
                       <span class="checkmark"></span>
                     </label>

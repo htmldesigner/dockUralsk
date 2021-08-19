@@ -10,13 +10,16 @@
       <input
         v-mask="'+7(###)-###-##-##'"
         :id="row.name"
+        placeholder="+7(999)-999-99-99"
         :required="row.validations.includes('required')"
         :class="{'is-invalid': errors[0]}"
         type="text"
         :disabled="row.disabled"
         class="form-control"
         v-model="phone"
-        :name="row.name">
+        :name="row.name"
+        @focus="activateField"
+      >
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
       </div>
@@ -26,6 +29,7 @@
 
 <script>
 import {ValidationProvider, ValidationObserver} from "vee-validate";
+
 export default {
   components: {ValidationProvider, ValidationObserver},
   name: "PhoneField",
@@ -33,6 +37,11 @@ export default {
   data() {
     return {
       phone: ''
+    }
+  },
+  methods: {
+    activateField() {
+      this.phone = '+7('
     }
   }
 }
