@@ -15,6 +15,7 @@
         class="form-control"
         :name="element.name"
         v-model="dataValue"
+        @focus="clearData"
       >
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
@@ -62,6 +63,11 @@ export default {
       temp: {
         value: ''
       }
+    }
+  },
+  methods: {
+    clearData() {
+      this.temp.value = ''
     }
   }
 }

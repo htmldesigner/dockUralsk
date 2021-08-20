@@ -35,7 +35,7 @@ export default {
     {src: "~/plugins/crypto.js", mode: 'client', ssr: false},
     {src: "~/plugins/vee-validate.js", mode: 'client', ssr: false},
     {src: "~/plugins/v-mask.js", mode: 'client', ssr: false},
-    {src: "~/plugins/esriGeocoder.js",mode: 'client', ssr: false},
+    {src: "~/plugins/esriGeocoder.js", mode: 'client', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -77,6 +77,10 @@ export default {
           login: {url: '/api/signin', method: 'post'},
           logout: {url: '/api/logout', method: 'post'},
           user: {url: '/api/user', method: 'get', propertyName: ''}
+        },
+        redirect: {
+          login: '/',
+          logout: '/',
         }
       }
     }
