@@ -95,7 +95,10 @@
                 <div class="form-group mb-4">
                   <div class="form-check form-check_them">
                     <label class="form-check-label check-label_them">Согласен
-                      <a class="simple_link" href="http:\\www.yandex.ru" target="_blank">с условием пользовательского соглашения</a>
+                      <NuxtLink target="_blank"
+                                :to="localePath('/user_agreement')"
+                                class="content_items_subtitle">с условием пользовательского соглашения
+                      </NuxtLink>
                       <input class="form-check-input check-input_them" v-model="agree" type="checkbox" value="">
                       <span class="checkmark"></span>
                     </label>
