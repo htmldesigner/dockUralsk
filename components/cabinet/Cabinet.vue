@@ -22,83 +22,114 @@
     <div class="p-datatable-wrapper" v-if="requestList">
       <table role="table" class="p-datatable-table">
         <thead class="p-datatable-thead" role="rowgroup">
+
         <tr role="row">
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">№</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort ascending"></span>
+
+                <button @click="byNumber = !byNumber" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byNumber}"></span>
                 </button>
+
               </div>
             </div>
           </th>
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">Объект</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort"></span>
+
+                <button type="button" class="p-column-filter-button">
+                  <span class="pi pi-filter-icon pi-filter"></span>
                 </button>
+
+                <button @click="byObject = !byObject" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byObject}"></span>
+                </button>
+
               </div>
             </div>
-
           </th>
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">Услуга</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort"></span>
+                <button type="button" class="p-column-filter-button">
+                  <span class="pi pi-filter-icon pi-filter"></span>
+                </button>
+
+                <button @click="byService = !byService" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byService}"></span>
                 </button>
               </div>
             </div>
-
           </th>
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">Организация</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort"></span>
+                <button type="button" class="p-column-filter-button">
+                  <span class="pi pi-filter-icon pi-filter"></span>
+                </button>
+
+                <button @click="byOrg = !byOrg" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byOrg}"></span>
                 </button>
               </div>
             </div>
-
           </th>
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">Ответственное лицо</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort"></span>
+                <button type="button" class="p-column-filter-button">
+                  <span class="pi pi-filter-icon pi-filter"></span>
+                </button>
+
+                <button @click="byResponsible = !byResponsible" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byResponsible}"></span>
                 </button>
               </div>
             </div>
-
           </th>
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">Дата обр.</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort"></span>
+                <button type="button" class="p-column-filter-button">
+                  <span class="pi pi-filter-icon pi-filter"></span>
+                </button>
+
+                <button @click="byDate = !byDate" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byDate}"></span>
                 </button>
               </div>
             </div>
-
           </th>
+
           <th class="" role="cell">
             <div class="p-column-header-content">
               <span class="p-column-title">Статус</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-sort-button">
-                  <span class="pi pi-sort-icon pi-sort"></span>
+                <button type="button" class="p-column-filter-button">
+                  <span class="pi pi-filter-icon pi-filter"></span>
+                </button>
+
+                <button @click="byStatus = !byStatus" type="button" class="p-column-sort-button">
+                  <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byStatus}"></span>
                 </button>
               </div>
             </div>
-
           </th>
+
         </tr>
         <tr class="" @click="openStatus(element.id)" role="row" v-for="(element, idx) in requestList" :key="idx">
           <td class="" role="cell">
@@ -133,32 +164,115 @@
 <script>
 export default {
   name: "Cabinet",
+  watch: {
+    byNumber: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('number')
+      }
+    },
+    byObject: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('object')
+      }
+    },
+    byService: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('service')
+      }
+    },
+    byOrg: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('org')
+      }
+    },
+    byResponsible: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('responsible')
+      }
+    },
+    byDate: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('begin_date')
+      }
+    },
+    byStatus: {
+      handler: function (val) {
+        if (!val) {
+          return this.reloadFilter()
+        }
+        this.filterByNumber('status')
+      }
+    }
+  },
   computed: {
     user() {
       return this.$store.state.auth.user
     },
-    requestList() {
-      let list = this.$store.getters['user/getRequestList']
-      if (this.selected === 'all') {
-        return this.$store.getters['user/getRequestList']
-      } else {
-        return list.filter(el => {
-          return el.time_out === JSON.parse(this.selected)
-        })
+    requestList: {
+      get() {
+        if (this.selected === 'all') {
+          return this.tempList
+        } else {
+          return [...this.tempList].filter(el => {
+            return el.time_out === JSON.parse(this.selected)
+          })
+        }
+      },
+      set(value) {
+        this.tempList = value
       }
     }
   },
   data() {
     return {
-      selected: 'all'
+      tempList: this.$store.getters['user/getRequestList'],
+      selected: 'all',
+      sortedList: null,
+      byNumber: false,
+      byObject: false,
+      byService: false,
+      byOrg: false,
+      byResponsible: false,
+      byDate: false,
+      byStatus: false,
     }
   },
   methods: {
+
     openStatus(id) {
       this.$router.push('cabinet/status/' + id)
+    },
+
+    filterByNumber(arg) {
+      this.sortedList = [...this.$store.getters['user/getRequestList']]
+      this.sortedList.sort((a, b) => {
+        return a[arg].localeCompare(b[arg])
+      })
+      this.requestList = this.sortedList
+    },
+
+    reloadFilter() {
+      this.requestList = [...this.$store.getters['user/getRequestList']]
     }
   }
-
 }
 </script>
 
@@ -241,6 +355,7 @@ export default {
       display: flex
       width: 100%
       justify-content: space-between
+      align-items: center
 
       .p-column-title
         font-family: "Montserrat-Regular", sans-serif
@@ -248,17 +363,32 @@ export default {
         font-weight: normal
 
 
+.p-column-sort
+  display: flex
+  flex-direction: column
+
 .p-column-sort-button
   border: none
   background: none
+  height: 20px
 
   .pi-sort-icon
     &::before
       display: inline-block
       content: url("../../assets/img/arrow-down.svg")
-
     &.ascending::before
       transform: rotate(180deg)
+
+.p-column-filter-button
+  border: none
+  background: none
+  height: 20px
+
+  .pi-filter-icon
+    &::before
+      display: inline-block
+      content: url("../../assets/img/funnel.svg")
+
 
 .main-aside
   border-radius: 6px
