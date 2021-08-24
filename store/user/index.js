@@ -93,6 +93,7 @@ export const actions = {
   async loadServiceRequest({commit}, params) {
     try {
       const response = await this.$axios.$get(encodeURIComponent('api/services/' + params + '/getForm'))
+      console.log(response)
       await commit('SET_SERVICE_REQUEST', response)
     } catch (error) {
       throw error
@@ -109,7 +110,7 @@ export const actions = {
         "id": 242,
         "number": "Z",
         "object": "Кафе",
-        "service": "Выдача технических условий на присоединение к электрическим сетям для юридических лиц",
+        "service": "Аыдача технических условий на присоединение к электрическим сетям для юридических лиц",
         "org": "ЗО ТЕСТ",
         "responsible": "Эльмира А.",
         "begin_date": "10.06.2021 17:05",
@@ -131,7 +132,7 @@ export const actions = {
         "id": 244,
         "number": "U",
         "object": "Антон Шашков",
-        "service": "Выдача технических условий на присоединение к электрическим сетям для юридических лиц",
+        "service": "Жыдача технических условий на присоединение к электрическим сетям для юридических лиц",
         "org": "АО ТЕСТ",
         "responsible": "Эльмира А.",
         "begin_date": "16.08.2021 10:04",

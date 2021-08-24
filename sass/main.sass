@@ -363,11 +363,15 @@ select
   transition: .25s ease
   width: max-content
   text-decoration: none
-
+  .btn_outline_ico
+    fill: #39A9CB
+    vertical-align: baseline
   &:hover
     background: $indexColor
     border: 1px solid transparent
     color: #fff
+    svg
+      fill: #fff
 
   &:focus, &:active
     background: darken($indexColor, 5%)
@@ -386,18 +390,18 @@ select
   transition: .25s ease
   width: max-content
   text-decoration: none
-
+  .btn_primary_ico
+    fill: #fff
+    vertical-align: middle
+    margin: 0
   &:hover
     background: lighten($indexColor, 5%)
-
   &:focus
     background: darken($indexColor, 5%)
-
   &:disabled
     pointer-events: none
     opacity: .65
     background: lighten($indexColor, 20%)
-
   svg, img
     margin-right: 10px
 

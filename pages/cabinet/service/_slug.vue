@@ -19,14 +19,12 @@
 
                 <div class="row" v-for="(rows, index) in sections.rows">
 
-
                   <Supplement
                     v-if="rows.fields_array"
                     @loadMap="loadMap"
                     @checkBoxEvent="checkBoxEvent"
                     :rows="rows"
                   />
-
 
                   <div :class="row.cssClasses" v-for="(row, q) in rows.fields">
                     <FormGenerator
@@ -310,6 +308,7 @@ export default {
         }
       } catch (e) {
         alert('Ошибка отпправки запроса')
+        this.$store.commit('user/SET_KEY', null)
       }
     }
   }
