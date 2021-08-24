@@ -19,6 +19,11 @@
 
     <slot></slot>
 
+    <div class="row justify-content-end">
+      <div class="form-group mb-3 col-3">
+        <input placeholder="Поиск по результатам..." type="text" class="form-control" @input="searchFunction">
+      </div>
+    </div>
 
     <div class="p-datatable-wrapper" v-if="requestList">
       <table role="table" class="p-datatable-table">
@@ -30,11 +35,9 @@
             <div class="p-column-header-content">
               <span class="p-column-title">№</span>
               <div class="p-column-sort p-fluid">
-
                 <button @click="byNumber = !byNumber" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byNumber}"></span>
                 </button>
-
               </div>
             </div>
           </th>
@@ -43,21 +46,9 @@
             <div class="p-column-header-content">
               <span class="p-column-title">Объект</span>
               <div class="p-column-sort p-fluid">
-
-                <button @click="sortListByObject" type="button" class="p-column-filter-button">
-                  <span class="pi pi-filter-icon pi-filter"></span>
-                </button>
-
                 <button @click="byObject = !byObject" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byObject}"></span>
                 </button>
-
-                <SortPopUp v-if="byObjectFilterWindow" @close="closeFilterWindow" @confirm="confirmFilter">
-                  <div slot="body">
-                    <input type="text" class="form-control" v-on:input="inputOutput($event, 'object')">
-                  </div>
-                </SortPopUp>
-
               </div>
             </div>
           </th>
@@ -66,22 +57,9 @@
             <div class="p-column-header-content">
               <span class="p-column-title">Услуга</span>
               <div class="p-column-sort p-fluid">
-
-                <button @click="sortListByService" type="button" class="p-column-filter-button">
-                  <span class="pi pi-filter-icon pi-filter"></span>
-                </button>
-
                 <button @click="byService = !byService" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byService}"></span>
                 </button>
-
-
-                <SortPopUp v-if="byServiceFilterWindow" @close="closeFilterWindow" @confirm="confirmFilter">
-                  <div slot="body">
-                    <input type="text" class="form-control" v-on:input="inputOutput($event, 'service')">
-                  </div>
-                </SortPopUp>
-
               </div>
             </div>
           </th>
@@ -90,20 +68,9 @@
             <div class="p-column-header-content">
               <span class="p-column-title">Организация</span>
               <div class="p-column-sort p-fluid">
-                <button @click="sortListByOrg" type="button" class="p-column-filter-button">
-                  <span class="pi pi-filter-icon pi-filter"></span>
-                </button>
-
                 <button @click="byOrg = !byOrg" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byOrg}"></span>
                 </button>
-
-                <SortPopUp v-if="byOrgFilterWindow" @close="closeFilterWindow" @confirm="confirmFilter">
-                  <div slot="body">
-                    <input type="text" class="form-control" v-on:input="inputOutput($event, 'org')">
-                  </div>
-                </SortPopUp>
-
               </div>
             </div>
           </th>
@@ -112,10 +79,6 @@
             <div class="p-column-header-content">
               <span class="p-column-title">Ответственное лицо</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-filter-button">
-                  <span class="pi pi-filter-icon pi-filter"></span>
-                </button>
-
                 <button @click="byResponsible = !byResponsible" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byResponsible}"></span>
                 </button>
@@ -127,10 +90,6 @@
             <div class="p-column-header-content">
               <span class="p-column-title">Дата обр.</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-filter-button">
-                  <span class="pi pi-filter-icon pi-filter"></span>
-                </button>
-
                 <button @click="byDate = !byDate" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byDate}"></span>
                 </button>
@@ -142,10 +101,6 @@
             <div class="p-column-header-content">
               <span class="p-column-title">Статус</span>
               <div class="p-column-sort p-fluid">
-                <button type="button" class="p-column-filter-button">
-                  <span class="pi pi-filter-icon pi-filter"></span>
-                </button>
-
                 <button @click="byStatus = !byStatus" type="button" class="p-column-sort-button">
                   <span class="pi pi-sort-icon pi-sort" :class="{'ascending': byStatus}"></span>
                 </button>
@@ -234,11 +189,10 @@ export default {
   },
   data() {
     return {
+      search: '',
+      searchValue: ['object', 'service', 'responsible', 'number', 'begin_date', 'org'],
       tempList: this.$store.getters['user/getRequestList'],
       selected: 'all',
-      byObjectFilterWindow: false,
-      byServiceFilterWindow: false,
-      byOrgFilterWindow: false,
       sortedList: null,
       byNumber: false,
       byObject: false,
@@ -250,28 +204,12 @@ export default {
     }
   },
   methods: {
-    inputOutput(event, param) {
-      this.requestList = [...this.$store.getters['user/getRequestList']].filter(el => el[param].toLowerCase().includes(event.target.value.toLowerCase()))
-    },
-
-    sortListByObject() {
-      this.byObjectFilterWindow = !this.byObjectFilterWindow
-    },
-
-    sortListByService() {
-      this.byServiceFilterWindow = !this.byServiceFilterWindow
-    },
-
-    sortListByOrg() {
-      this.byOrgFilterWindow = !this.byOrgFilterWindow
-    },
-
-    closeFilterWindow() {
-      this.byServiceFilterWindow = this.byObjectFilterWindow = this.byOrgFilterWindow = false
-      this.tempList = [...this.$store.getters['user/getRequestList']]
-    },
-    confirmFilter() {
-      this.byServiceFilterWindow = this.byObjectFilterWindow = this.byOrgFilterWindow = false
+    searchFunction(event) {
+      this.requestList = [...this.$store.getters['user/getRequestList']].filter(el =>
+        this.searchValue.some(value => {
+          return el[value].toLowerCase().includes(event.target.value.toLowerCase())
+        })
+      )
     },
     openStatus(id) {
       this.$router.push('cabinet/status/' + id)
