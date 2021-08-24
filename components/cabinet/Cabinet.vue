@@ -165,61 +165,26 @@
 export default {
   name: "Cabinet",
   watch: {
-    byNumber: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('number')
-      }
+    byNumber: function (val) {
+      this.runFilter(val, 'number')
     },
-    byObject: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('object')
-      }
+    byObject: function (val) {
+      this.runFilter(val, 'object')
     },
-    byService: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('service')
-      }
+    byService: function (val) {
+      this.runFilter(val, 'service')
     },
-    byOrg: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('org')
-      }
+    byOrg: function (val) {
+      this.runFilter(val, 'org')
     },
-    byResponsible: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('responsible')
-      }
+    byResponsible: function (val) {
+      this.runFilter(val, 'responsible')
     },
-    byDate: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('begin_date')
-      }
+    byDate: function (val) {
+      this.runFilter(val, 'begin_date')
     },
-    byStatus: {
-      handler: function (val) {
-        if (!val) {
-          return this.reloadFilter()
-        }
-        this.filterByNumber('status')
-      }
+    byStatus: function (val) {
+      this.runFilter(val, 'status')
     }
   },
   computed: {
@@ -256,12 +221,18 @@ export default {
     }
   },
   methods: {
-
     openStatus(id) {
       this.$router.push('cabinet/status/' + id)
     },
 
-    filterByNumber(arg) {
+    runFilter(val, param) {
+      if (!val) {
+        return this.reloadFilter()
+      }
+      this.filters(param)
+    },
+
+    filters(arg) {
       this.sortedList = [...this.$store.getters['user/getRequestList']]
       this.sortedList.sort((a, b) => {
         return a[arg].localeCompare(b[arg])
@@ -376,6 +347,7 @@ export default {
     &::before
       display: inline-block
       content: url("../../assets/img/arrow-down.svg")
+
     &.ascending::before
       transform: rotate(180deg)
 
