@@ -1,0 +1,252 @@
+<template>
+  <div class="searchSelectorWrap">
+
+    <label
+      :for="row.name"
+      class="form-label">{{ row.title }}
+      <span v-if="row.validations.includes('required')" class="required">*</span>
+      <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
+    </label>
+
+    <div class="searchSelector form-control" :disabled="row.disabled" @click.prevent="showDropDownList = !showDropDownList">
+
+      <span>{{ found }}</span>
+
+      <div v-if="found">
+        <button type="button" class="remove_search_icon" @click.stop="clearSearch">
+          <svg width="18" height="18" viewBox="0 0 15 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="arrow-toggler" :class="{'active': showDropDownList}">
+        <svg width="10" height="5" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.99998 7C5.78492 7 5.56988 6.91597 5.40591 6.74825L0.24617 1.46804C-0.0820567 1.13215 -0.0820567 0.587565 0.24617 0.251814C0.574264 -0.0839379 1.10632 -0.0839379 1.43458 0.251814L5.99998 4.92404L10.5654 0.251977C10.8936 -0.0837747 11.4256 -0.0837747 11.7537 0.251977C12.0821 0.587728 12.0821 1.13231 11.7537 1.4682L6.59405 6.74842C6.43 6.91616 6.21496 7 5.99998 7Z" fill="#39A9CB"/>
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="dropDownList" v-if="showDropDownList">
+      <div class="searchInput">
+
+        <input type="text" class="searchInput_Input" v-model="searchValue">
+
+        <button type="button" class="search_icon" v-if="searchValue.length < 1">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M17.4249 16.3951L13.1409 11.9395C14.2424 10.6301 14.8459 8.98262 14.8459 7.26749C14.8459 3.26026 11.5857 0 7.57842 0C3.57119 0 0.310928 3.26026 0.310928 7.26749C0.310928 11.2747 3.57119 14.535 7.57842 14.535C9.08279 14.535 10.5164 14.0812 11.7421 13.2199L16.0586 17.7093C16.2391 17.8967 16.4817 18 16.7418 18C16.9879 18 17.2214 17.9062 17.3987 17.7355C17.7753 17.3731 17.7874 16.7721 17.4249 16.3951ZM7.57842 1.89587C10.5404 1.89587 12.95 4.30552 12.95 7.26749C12.95 10.2295 10.5404 12.6391 7.57842 12.6391C4.61644 12.6391 2.2068 10.2295 2.2068 7.26749C2.2068 4.30552 4.61644 1.89587 7.57842 1.89587Z"
+            />
+          </svg>
+        </button>
+
+        <button type="button" class="remove_search_icon" v-else @click="searchValue = ''">
+          <svg width="18" height="18" viewBox="0 0 15 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+          </svg>
+        </button>
+
+      </div>
+      <ul class="optionList" v-for="option in options" :key="option.id">
+        <li @click="selectedOptions(option)"><span>{{ option.text }}</span></li>
+      </ul>
+    </div>
+
+
+    <ValidationProvider :rules="{'required': !row.disabled}" ref="provider" v-slot="{ errors }">
+      <input type="hidden"
+             :name="row.name"
+             v-model="targetId"
+             :class="{'is-invalid': errors[0]}"
+      >
+
+      <div v-if="errors[0]" class="invalid-feedback">
+        {{ errors[0] }}
+      </div>
+    </ValidationProvider>
+
+  </div>
+</template>
+
+<script>
+import {ValidationObserver, ValidationProvider} from "vee-validate";
+export default {
+  name: "SearchSelector",
+  components: {ValidationProvider, ValidationObserver,},
+  props: ['row'],
+  computed: {
+    options() {
+      if (this.searchValue.length) {
+        return this.row.options.filter(el => {
+          return el.text.toLowerCase().includes(this.searchValue.toLowerCase())
+        })
+      } else {
+        return this.row.options
+      }
+    }
+  },
+  data() {
+    return {
+      showDropDownList: false,
+      searchValue: '',
+      found: '',
+      targetId: ''
+    }
+  },
+  methods: {
+    selectedOptions(option) {
+      this.found = option.text
+      this.targetId = option.id
+      this.showDropDownList = false
+    },
+    clearSearch() {
+      this.found = ''
+      this.targetId = ''
+      this.showDropDownList = false
+    }
+  }
+}
+</script>
+
+<style scoped lang="sass">
+.searchSelectorWrap
+  position: relative
+.searchSelector
+  width: 100%
+  height: 44px
+  cursor: pointer
+  display: flex
+  align-items: center
+  .arrow-toggler
+    position: absolute
+    right: 11px
+    &.active
+      transform: rotate(180deg)
+  .remove_search_icon
+    position: absolute
+    right: 40px
+    bottom: 0
+    top: 30px
+    border: 0
+    padding: 0
+    margin: 0
+    outline: none
+    background-color: transparent
+    cursor: pointer
+    svg
+      fill: #AAAEB0
+      transition: .25s
+
+.dropDownList
+  position: absolute
+  z-index: 100
+  width: 100%
+  background-color: #fff
+  border: 1px solid #DFDFDF
+  padding: 5px 5px 7px 5px
+  border-radius: 6px
+  margin-top: 4px
+  box-shadow: 1px 2px 6px rgb(32 33 36 / 18%)
+
+  .searchInput
+    position: relative
+    margin:
+      top: 5px
+      bottom: 10px
+      left: 5px
+      right: 5px
+
+    .searchInput_Input
+      border-radius: 6px
+      font-family: "Montserrat-Regular", sans-serif
+      font-size: 15px
+      border: 1px solid #DFDFDF
+      padding: 8px 0px 8px 15px
+      max-height: 40px
+      width: 100%
+      transition: 0.25s ease-out
+
+      &:focus
+        background: #fff
+        outline: 0
+        box-shadow: 0 2px 6px rgb(32 33 36 / 12%)
+
+    button
+      position: absolute
+      right: 13px
+      top: 7px
+      border: 0
+      padding: 0
+      margin: 0
+      outline: none
+      background-color: transparent
+      cursor: pointer
+
+      svg
+        fill: #AAAEB0
+        transition: .25s
+
+      &.remove_search_icon
+        cursor: pointer
+
+        &:hover
+          svg
+            fill: darken(#AAAEB0, 10%)
+
+.optionList
+  padding: 0 0 0 10px
+  margin: 0
+
+  li
+    list-style: none
+    cursor: pointer
+    margin: 3px 0px
+
+    span
+      font-size: 16px
+      font-family: "Montserrat-Regular", sans-serif
+      color: #39A9CB
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

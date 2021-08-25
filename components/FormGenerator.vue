@@ -22,6 +22,12 @@
       <SelectField :row="row"/>
     </div>
 
+    <div class="form-group mb-4" v-if="row.type === 'select2'">
+
+        <SearchSelector :row="row"/>
+
+    </div>
+
     <div class="form-group mb-4" v-if="row.type === 'multifiles'">
       <MultiFilesField :row="row" :index="index"/>
     </div>
@@ -79,6 +85,7 @@ import SelectField from "@/components/formFields/SelectField";
 import MultiFilesField from "@/components/formFields/MultiFilesField";
 import TextAreaField from "@/components/formFields/TextAreaField";
 import GeoButton from "./formFields/GeoButton";
+import SearchSelector from "./formFields/SearchSelector";
 
 
 export default {
@@ -90,7 +97,8 @@ export default {
     SelectField,
     MultiFilesField,
     TextAreaField,
-    GeoButton
+    GeoButton,
+    SearchSelector
   },
   name: "FormGenerator",
   props: ['row', 'index', 'groupName'],

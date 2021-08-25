@@ -7,6 +7,7 @@
     </div>
 
     <div class="service_container">
+
       <ValidationObserver ref="form" v-slot="{ invalid }">
         <form ref="serviceForm" enctype="multipart/form-data">
           <section v-for="(request, o) of serviceRequest">
@@ -133,10 +134,18 @@ import FormGenerator from "~/components/FormGenerator";
 import sha256 from 'crypto-js/sha256';
 import {ValidationProvider, ValidationObserver} from "vee-validate";
 import Supplement from "../../../components/Supplement";
+import SearchSelector from "../../../components/formFields/SearchSelector";
 
 export default {
   loading: true,
-  components: {FormGenerator, MapPopup, ValidationProvider, ValidationObserver, Supplement},
+  components: {
+    FormGenerator,
+    MapPopup,
+    ValidationProvider,
+    ValidationObserver,
+    Supplement,
+    SearchSelector,
+  },
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
   computed: {
@@ -291,7 +300,7 @@ export default {
       try {
         if (this.xmlKey) {
 
-          this.formElem.append('latlng', this.getGeoDate);
+          this.formElem.append('latlng', JSON.stringify(this.getGeoDate));
 
           this.formElem.append('service_id', this.serviceRequest.service_id)
 

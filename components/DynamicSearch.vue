@@ -136,7 +136,6 @@ export default {
     display: flex
     align-items: center
     position: relative
-
     button
       position: absolute
       right: 13px
@@ -146,14 +145,11 @@ export default {
       outline: none
       background-color: transparent
       cursor: auto
-
       svg
         fill: #AAAEB0
         transition: .25s
-
       &.remove_search_icon
         cursor: pointer
-
         &:hover
           svg
             fill: darken(#AAAEB0, 10%)
