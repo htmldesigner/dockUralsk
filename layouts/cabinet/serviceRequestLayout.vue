@@ -26,7 +26,7 @@ import Footer from "@/components/Footer";
 
 export default {
   name: "serviceRequestLayout",
-  middleware: 'authenticated',
+  middleware: ['checkToken', 'authenticated'],
   components: {
     Header,
     Footer

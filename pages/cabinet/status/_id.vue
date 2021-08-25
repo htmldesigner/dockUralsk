@@ -90,7 +90,7 @@
 <script>
 export default {
   name: "id",
-  layout: 'catalogLayout',
+  layout: 'cabinet/statusLayout',
   computed: {
     cases() {
       return this.$store.getters['user/getServiceCases']

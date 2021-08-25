@@ -93,7 +93,6 @@ export const actions = {
   async loadServiceRequest({commit}, params) {
     try {
       const response = await this.$axios.$get(encodeURIComponent('api/services/' + params + '/getForm'))
-      console.log(response)
       await commit('SET_SERVICE_REQUEST', response)
     } catch (error) {
       throw error

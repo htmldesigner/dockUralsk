@@ -1,13 +1,7 @@
 <template>
   <div class="isPage d-flex flex-column h-100">
     <Header/>
-    <section class="container">
-      <div class="container">
-        <div class="row">
-              <Nuxt/>
-        </div>
-      </div>
-    </section>
+      <Nuxt/>
     <Footer/>
   </div>
 </template>
@@ -17,7 +11,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 export default {
-  name: "cabinetLayout",
+  name: "statusLayout",
   middleware: ['checkToken', 'authenticated'],
   components: {
     Header,
