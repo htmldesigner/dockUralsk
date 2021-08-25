@@ -1,6 +1,9 @@
 <template>
 <div v-if="row">
-  <label :for="row.name" class="form-label">{{ row.title }}</label>
+  <label :for="row.name" class="form-label">
+    {{ row.title }}
+    <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
+  </label>
   <textarea
     :disabled="row.disabled"
     class="form-control"

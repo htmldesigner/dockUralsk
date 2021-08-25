@@ -29,10 +29,24 @@ export default {
   name: "MapPopup",
   data() {
     return {
-      geoData: null
+      geoData: null,
+      marker: null
+    }
+  },
+  computed: {
+    getGeoDate() {
+      return this.$store.getters['helper/getGeoDate']
+    }
+  },
+  watch: {
+    getGeoDate: function (value) {
+      if (!value) {
+        this.marker = null
+      }
     }
   },
   methods: {
+
     mapInstance() {
       let self = this
       const map = L.map(this.$refs.map, {preferCanvas: true}).setView([51.219338, 51.380997], 10);
@@ -57,11 +71,10 @@ export default {
         "google2": google2,
       }, {}, {}).addTo(map)
 
-      let marker
 
       map.on('click', (e) => {
-        if (marker) {
-          map.removeLayer(marker)
+        if (this.marker) {
+          map.removeLayer(this.marker)
         }
 
         let geocodeService = ELG.geocodeService()
@@ -71,8 +84,8 @@ export default {
               console.log(error)
               return;
             }
-            marker = new L.Marker(e.latlng, {draggable: false})
-            map.addLayer(marker)
+            self.marker = new L.Marker(e.latlng, {draggable: false})
+            map.addLayer(self.marker)
             self.geoData = result
           })
 
@@ -80,13 +93,9 @@ export default {
     },
 
     onConfirm() {
-      // this.$emit('onConfirm', this.geoData)
       this.$store.commit('helper/SET_GEO_DATA', this.geoData)
       this.$emit('closeMap')
     }
-  },
-  created() {
-
   },
   mounted() {
     this.mapInstance()
