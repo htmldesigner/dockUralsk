@@ -30,7 +30,8 @@ export default {
   data() {
     return {
       geoData: null,
-      marker: null
+      marker: null,
+      markerLayer: new L.featureGroup()
     }
   },
   computed: {
@@ -41,7 +42,7 @@ export default {
   watch: {
     getGeoDate: function (value) {
       if (!value) {
-        this.marker = null
+        this.markerLayer.clearLayers()
       }
     }
   },
@@ -72,10 +73,12 @@ export default {
       }, {}, {}).addTo(map)
 
 
+      this.markerLayer.addTo(map)
+
       map.on('click', (e) => {
-        if (this.marker) {
-          map.removeLayer(this.marker)
-        }
+
+        this.markerLayer.clearLayers()
+        this.markerLayer.addLayer(new L.Marker(e.latlng, {draggable: false}))
 
         let geocodeService = ELG.geocodeService()
         geocodeService.reverse().latlng(e.latlng)
@@ -84,8 +87,6 @@ export default {
               console.log(error)
               return;
             }
-            self.marker = new L.Marker(e.latlng, {draggable: false})
-            map.addLayer(self.marker)
             self.geoData = result
           })
 

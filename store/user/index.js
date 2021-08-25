@@ -284,7 +284,7 @@ export const actions = {
       }]
 
 
-      await commit('SET_REQUEST_LIST', test)
+      await commit('SET_REQUEST_LIST', response)
     } catch (error) {
       throw error
     }
