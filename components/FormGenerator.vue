@@ -23,9 +23,7 @@
     </div>
 
     <div class="form-group mb-4" v-if="row.type === 'select2'">
-
         <SearchSelector :row="row"/>
-
     </div>
 
     <div class="form-group mb-4" v-if="row.type === 'multifiles'">
@@ -85,7 +83,7 @@ import SelectField from "@/components/formFields/SelectField";
 import MultiFilesField from "@/components/formFields/MultiFilesField";
 import TextAreaField from "@/components/formFields/TextAreaField";
 import GeoButton from "./formFields/GeoButton";
-import SearchSelector from "./formFields/SearchSelector";
+import SearchSelector from "./formFields/saerchSelector/SearchSelector";
 
 
 export default {

@@ -134,7 +134,7 @@ import FormGenerator from "~/components/FormGenerator";
 import sha256 from 'crypto-js/sha256';
 import {ValidationProvider, ValidationObserver} from "vee-validate";
 import Supplement from "../../../components/Supplement";
-import SearchSelector from "../../../components/formFields/SearchSelector";
+import SearchSelector from "../../../components/formFields/saerchSelector/SearchSelector";
 
 export default {
   loading: true,
