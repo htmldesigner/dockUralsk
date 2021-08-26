@@ -92,7 +92,7 @@ export const mutations = {
 export const actions = {
   async loadServiceRequest({commit}, params) {
     try {
-      const response = await this.$axios.$get(encodeURIComponent('api/services/' + params.slug + '/getForm' + '?lang=' + params.locale))
+      const response = await this.$axios.$get('api/services/' + encodeURIComponent(params.slug) + '/getForm' + '?lang=' + params.locale)
       await commit('SET_SERVICE_REQUEST', response)
     } catch (error) {
       throw error
