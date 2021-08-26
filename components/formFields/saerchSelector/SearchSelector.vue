@@ -67,7 +67,6 @@ export default {
   components: {DropDownList, ValidationProvider, ValidationObserver,},
   props: ['row'],
 
-
   data() {
     return {
       showDropDownList: false,
@@ -87,6 +86,14 @@ export default {
       this.targetId = ''
       this.showDropDownList = false
     }
+  },
+  mounted() {
+    let target = document.querySelector('body')
+    target.addEventListener('click', (event) => {
+      if (!event.target.closest('.searchSelectorWrap')) {
+        this.showDropDownList = false
+      }
+    })
   }
 }
 </script>
@@ -105,6 +112,7 @@ export default {
   .arrow-toggler
     position: absolute
     right: 11px
+
     svg
       fill: #39A9CB
       transition: .25s
@@ -127,17 +135,16 @@ export default {
     svg
       fill: #AAAEB0
       transition: .25s
+
   &.disabled
     pointer-events: none
     opacity: 0.65
     background: #F2F2F2
     border-color: #F2F2F2
     color: #969696
+
     svg
       fill: #000
-
-
-
 
 
 </style>

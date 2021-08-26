@@ -73,6 +73,8 @@ export default {
   border-radius: 6px
   margin-top: 4px
   box-shadow: 1px 2px 6px rgb(32 33 36 / 18%)
+  overflow-y: scroll
+  max-height: 360px
 
   .searchInput
     position: relative
@@ -87,7 +89,7 @@ export default {
       font-family: "Montserrat-Regular", sans-serif
       font-size: 15px
       border: 1px solid #DFDFDF
-      padding: 8px 0px 8px 15px
+      padding: 8px 0 8px 15px
       max-height: 40px
       width: 100%
       transition: 0.25s ease-out
@@ -126,7 +128,7 @@ export default {
   li
     list-style: none
     cursor: pointer
-    margin: 3px 0px
+    margin: 3px 0
 
     span
       font-size: 16px
