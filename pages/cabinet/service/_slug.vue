@@ -174,8 +174,9 @@ export default {
     // }
   },
 
-  async fetch({store, params}) {
-    await store.dispatch('user/loadServiceRequest', params.slug)
+  async fetch({store, params, app}) {
+    let locale = app.i18n.localeProperties.code
+    await store.dispatch('user/loadServiceRequest', {slug: params.slug, locale})
   },
 
   data() {
