@@ -54,7 +54,7 @@
                 <div class="col-4 d-lg-block d-none text-end">
                   <NuxtLink
                     v-if="isLoggedIn"
-                    :class="{ disabled: !userType }"
+                    :class="{ disabled: getRecipientId}"
                     class="btn_primary"
                     :to="localePath('/cabinet/service/' + response.slug, )"
                   >
@@ -83,7 +83,6 @@
 
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -98,6 +97,15 @@ export default {
     RequisitesPopup
   },
   computed: {
+    getRecipientId() {
+      if (+this.response.recipient_id === 2 && this.userType === 1) {
+        return false
+      }
+      if (+this.response.recipient_id === 1 && this.userType === 0) {
+        return false
+      }
+      return true
+    },
     isLoggedIn() {
       return this.$store.state.auth.loggedIn
     },

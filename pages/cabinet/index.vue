@@ -7,7 +7,7 @@
         <div class="component-selector">
           <ul>
             <li @click="currentLink = 'Cabinet'" :class="{active: currentLink === 'Cabinet'}">
-              <div class="component">Обращения</div>
+              <div class="component">{{$t('appeals')}}</div>
             </li>
             <li @click="currentLink = 'Profile'" :class="{active: currentLink === 'Profile'}">
               <div class="component">Профиль</div>

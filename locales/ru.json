@@ -13,6 +13,11 @@
   "authorization": "Авторизация",
   "by_login_password": "по логину и паролю",
   "by_EDS": "по ЭЦП",
+  "agree_part_one": "Согласен",
+  "agree_part_two": "с условием пользовательского соглашения",
+  "personal_area": "Личный кабинет",
+  "show": "Показать:",
+  "appeals": "Обращения",
   "buttons": {
     "sign_by_EDS": "Войти по ЭЦП",
     "sign_and_login": "Подписать и войти",
@@ -31,6 +36,7 @@
     "registration": "Регистрация",
     "catalog": "Каталог",
     "search": "Найти",
-    "open_catalog": "Открыть каталог"
+    "open_catalog": "Открыть каталог",
+    "register": "Зарегистрировать"
   }
 }

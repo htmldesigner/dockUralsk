@@ -13,6 +13,11 @@
   "authorization": "Авторизация",
   "by_login_password": "логин мен пароль арқылы",
   "by_EDS": "ЭЦҚ арқылы",
+  "agree_part_one": "Келісемін",
+  "agree_part_two": "пайдаланушы келісімі бойынша",
+  "personal_area": "Жеке бөлме",
+  "show": "Көрсету:",
+  "appeals": "Апелляциялар",
   "buttons": {
     "sign_by_EDS": "ЭЦҚ арқылы кіріңіз",
     "sign_and_login": "Қол қою және кіру",
@@ -24,13 +29,14 @@
     "index": "Басты",
     "all_category": "Барлық санаттар",
     "cabinet": "Кабинет",
-    "exit": "Выход",
+    "exit": "Шығу",
     "requisites": "Деректемелер",
     "enter": "Кіру",
     "close": "Жабық",
     "registration": "Тіркеу",
     "catalog": "Каталог",
     "search": "Табу",
-    "open_catalog": "Каталогты ашыңыз"
+    "open_catalog": "Каталогты ашыңыз",
+    "register": "Тіркелу"
   }
 }

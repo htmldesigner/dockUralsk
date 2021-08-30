@@ -27,11 +27,11 @@
                     :rows="rows"
                   />
 
-                  <div :class="row.cssClasses" v-for="(row, q) in rows.fields">
+                  <div :class="row.cssClasses" v-for="(row) in rows.fields">
                     <FormGenerator
                       @loadMap="loadMap"
                       :row="row"
-                      :index="q"
+                      :index="index"
                       @checkBoxEvent="checkBoxEvent"
                     />
 
@@ -93,10 +93,10 @@
               <div class="col-xl-5 col-lg-12">
                 <div class="form-group mb-4">
                   <div class="form-check form-check_them">
-                    <label class="form-check-label check-label_them">Согласен
+                    <label class="form-check-label check-label_them">{{$t('agree_part_one')}}
                       <NuxtLink target="_blank"
                                 :to="localePath('/user_agreement')"
-                                class="content_items_subtitle">с условием пользовательского соглашения
+                                class="content_items_subtitle">{{$t('agree_part_two')}}
                       </NuxtLink>
                       <input class="form-check-input check-input_them" v-model="agree" type="checkbox" value="">
                       <span class="checkmark"></span>
@@ -108,7 +108,7 @@
               <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
                 <div class="mb-4">
                   <button @click.prevent="onSubmit" type="submit" :disabled="!agree" class="btn_primary">
-                    Зарегистрировать
+                    {{$t('buttons.register')}}
                   </button>
                 </div>
               </div>

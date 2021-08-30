@@ -2,12 +2,12 @@
   <div>
     <div class="d-flex justify-content-between mb-4">
       <div class="user">
-        <p class="h1">Личный кабинет</p>
+        <p class="h1">{{$t('personal_area')}}</p>
         <span class="user-name">{{ user.full }}</span>
-        <span @click="$emit('logOut')" class="logOut">Выйти</span>
+        <span @click="$emit('logOut')" class="logOut">{{$t('buttons.exit')}}</span>
       </div>
       <div class="form-group horizontal">
-        <label for="name1" class="form-label">Показать:</label>
+        <label for="name1" class="form-label">{{$t('show')}}</label>
         <select v-model="selected" class="form-control" name="" id="name1">
           <option value="all">Все</option>
           <option value="false">Не просроченные</option>

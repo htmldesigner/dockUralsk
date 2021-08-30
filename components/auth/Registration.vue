@@ -58,10 +58,10 @@
                 <div class="form-group mb-2">
                   <div class="form-check form-check_them">
                     <ValidationProvider :rules="{ required: { allowFalse: false } }" v-slot="{ errors }">
-                      <label class="form-check-label check-label_them">Согласен
+                      <label class="form-check-label check-label_them">{{$t('agree_part_one')}}
                         <NuxtLink target="_blank"
                                   :to="localePath('/user_agreement')"
-                                  class="content_items_subtitle">с условием пользовательского соглашения
+                                  class="content_items_subtitle">{{$t('agree_part_two')}}
                         </NuxtLink>
                         <input class="form-check-input check-input_them" v-model="agree" type="checkbox" value="">
                         <span class="checkmark"></span>
