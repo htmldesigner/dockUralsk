@@ -41,7 +41,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-xl-4 col-lg-12">
-        <button @click="resetPassword" class="btn_primary btn_block">Сохранить</button>
+        <button @click="resetPassword" class="btn_primary btn_block">{{$t('buttons.save')}}</button>
       </div>
     </div>
   </div>

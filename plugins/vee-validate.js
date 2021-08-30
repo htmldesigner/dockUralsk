@@ -1,9 +1,27 @@
-import {extend, validate} from "vee-validate";
+import VueI18n from 'vue-i18n';
+import {extend, validate, localize} from "vee-validate";
 import {required, image, email, min, max, numeric, alpha} from "vee-validate/dist/rules";
+
+import kz from '../locales/kz.json'
+import ru from '../locales/ru.json'
+
+
+
+const i18n = new VueI18n({
+  locale: localStorage.getItem('current_lang') || 'ru',
+  messages: {
+    ru: {
+      validations: ru
+    },
+    kz:{
+      validations:kz
+    }
+  }
+});
 
 extend("required", {
   ...required,
-  message: "Обязательное поле"
+  message: (_, values) => i18n.t('validations.messages.required', values)
 });
 
 extend("image", {

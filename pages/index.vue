@@ -18,7 +18,7 @@
 
                 <ul v-else>
                   <li>
-                    <NuxtLink :to="localePath('/cabinet')">{{ $t('buttons.cabinet') }}</NuxtLink>
+                    <NuxtLink :to="localePath('/cabinet')">{{ IIN_BIN_Checker }}</NuxtLink>
                   </li>
                   <li><a href="#" @click.prevent="logOut">{{ $t('buttons.exit') }}</a></li>
                 </ul>
@@ -86,6 +86,13 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.state.auth.loggedIn
+    },
+    IIN_BIN_Checker() {
+      if (this.$store.state.auth.user.bin) {
+        return this.$store.state.auth.user.bin
+      } else {
+        return this.$store.state.auth.user.iin
+      }
     }
   },
   data() {

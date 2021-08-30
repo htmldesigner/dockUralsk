@@ -4,14 +4,14 @@
       <div class="user">
         <p class="h1">{{$t('personal_area')}}</p>
         <span class="user-name">{{ user.full }}</span>
-        <span @click="$emit('logOut')" class="logOut">{{$t('buttons.exit')}}</span>
+<!--        <span @click="$emit('logOut')" class="logOut">{{$t('buttons.exit')}}</span>-->
       </div>
       <div class="form-group horizontal">
         <label for="name1" class="form-label">{{$t('show')}}</label>
         <select v-model="selected" class="form-control" name="" id="name1">
-          <option value="all">Все</option>
-          <option value="false">Не просроченные</option>
-          <option value="true">Просроченные</option>
+          <option value="all">{{$t('selector.all')}}</option>
+          <option value="false">{{$t('selector.not_overdue')}}</option>
+          <option value="true">{{$t('selector.overdue')}}</option>
         </select>
       </div>
 
@@ -21,7 +21,7 @@
 
     <div class="row justify-content-end">
       <div class="form-group mb-3 col-3">
-        <input placeholder="Поиск по результатам..." type="text" class="form-control" @input="searchFunction">
+        <input :placeholder="$t('search_placeholder')" type="text" class="form-control" @input="searchFunction">
       </div>
     </div>
 

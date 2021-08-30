@@ -1,4 +1,7 @@
 {
+  "messages": {
+    "required": "Міндетті өріс"
+  },
   "requisites": "Деректемелер",
   "filter": "Сүзгі",
   "all_category": "Барлық санаттар",
@@ -18,7 +21,14 @@
   "personal_area": "Жеке бөлме",
   "show": "Көрсету:",
   "appeals": "Апелляциялар",
+  "search_placeholder": "Нәтижелер бойынша іздеу...",
+  "selector": {
+    "all": "Барлығы",
+    "not_overdue": "Кешіктірілмеген",
+    "overdue": "Мерзімі өткен"
+  },
   "buttons": {
+    "save": "Сақтау",
     "sign_by_EDS": "ЭЦҚ арқылы кіріңіз",
     "sign_and_login": "Қол қою және кіру",
     "drop_down": "Файлды осында тастаңыз",

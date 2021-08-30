@@ -1,4 +1,7 @@
 {
+  "messages": {
+    "required": "Обязательное поле"
+  },
   "requisites": "Реквизиты",
   "filter": "Фильтр",
   "all_category": "Все категории",
@@ -18,7 +21,14 @@
   "personal_area": "Личный кабинет",
   "show": "Показать:",
   "appeals": "Обращения",
+  "search_placeholder": "Поиск по результатам...",
+  "selector": {
+    "all": "Все",
+    "not_overdue": "Не просроченные",
+    "overdue": "Просроченные"
+  },
   "buttons": {
+    "save": "Сохранить",
     "sign_by_EDS": "Войти по ЭЦП",
     "sign_and_login": "Подписать и войти",
     "drop_down": "Перетащите файл сюда",
