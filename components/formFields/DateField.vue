@@ -7,16 +7,29 @@
       <span v-if="element.tooltip" class="hint" :title="element.tooltip"></span>
     </label>
     <ValidationProvider :rules="{'required': !element.disabled}" v-slot="{ errors }">
-      <input
-        :id="element.name"
-        :type="element.type"
-        :disabled="element.disabled"
-        :class="{'is-invalid': errors[0]}"
-        class="form-control"
-        :name="element.name"
-        v-model="dataValue"
-        @focus="clearData"
-      >
+      <client-only>
+        <date-picker
+          :id="element.name"
+          :disabled="element.disabled"
+          :class="{'is-invalid': errors[0]}"
+          :name="element.name"
+          placeholder="Год-Месяц-День"
+          format="YYYY-MM-DD"
+          value-type="YYYY-MM-DD"
+          type="date"
+          class="datePickerInput"
+          v-model="dataValue"/>
+      </client-only>
+<!--            <input-->
+<!--              :id="element.name"-->
+<!--              :type="element.type"-->
+<!--              :disabled="element.disabled"-->
+<!--              :class="{'is-invalid': errors[0]}"-->
+<!--              class="form-control"-->
+<!--              :name="element.name"-->
+<!--              v-model="dataValue"-->
+<!--              @focus="clearData"-->
+<!--            >-->
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
       </div>
@@ -49,19 +62,21 @@ export default {
         if (this.temp.value) {
           return moment(this.temp.value).format('YYYY-MM-DD')
         } else {
-          return ''
+          return null
         }
       },
       set(val) {
-        this.temp.value = moment(val, 'YYYY-MM-DD')
+        // this.temp.value = moment(val, 'YYYY-MM-DD')
+        this.temp.value = val
       }
     }
   },
   props: ['row', 'index', 'groupName'],
   data() {
     return {
+      date_today: null,
       temp: {
-        value: ''
+        value: null
       }
     }
   },
@@ -74,5 +89,8 @@ export default {
 </script>
 
 <style scoped>
+.mx-datepicker{
+  width: 100%;
+}
 
 </style>
