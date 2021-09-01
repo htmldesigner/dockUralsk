@@ -78,7 +78,6 @@
 
                 </div>
 
-
                 <div class="divider" :class="o +'_'+idx">
                   <div class="arrow-toggler" @click="toggler(o +'_'+idx)"></div>
                 </div>
@@ -166,7 +165,7 @@ export default {
       handler: function () {
         this.sendKey()
       }
-    },
+    }
     // checkValue: {
     //   handler: function (payload) {
     //     return this.$store.commit('user/DISABLED_FIELD', payload)
@@ -321,6 +320,9 @@ export default {
         this.$store.commit('user/SET_KEY', null)
       }
     }
+  },
+  async mounted() {
+    this.$refs.form.validate()
   }
 }
 </script>

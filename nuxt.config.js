@@ -16,7 +16,7 @@ export default {
       {name: 'format-detection', content: 'telephone=no'}
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon16x16.png'}
     ]
   },
 
@@ -89,7 +89,7 @@ export default {
 
   i18n: {
     locales: ['kz', 'ru'],
-    defaultLocale: 'ru',
+    defaultLocale: 'kz',
     vueI18n: {
       fallbackLocale: 'ru',
       messages: {kz, ru}

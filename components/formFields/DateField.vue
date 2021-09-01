@@ -17,19 +17,10 @@
           format="YYYY-MM-DD"
           value-type="YYYY-MM-DD"
           type="date"
+          :lang="lang"
           class="datePickerInput"
           v-model="dataValue"/>
       </client-only>
-<!--            <input-->
-<!--              :id="element.name"-->
-<!--              :type="element.type"-->
-<!--              :disabled="element.disabled"-->
-<!--              :class="{'is-invalid': errors[0]}"-->
-<!--              class="form-control"-->
-<!--              :name="element.name"-->
-<!--              v-model="dataValue"-->
-<!--              @focus="clearData"-->
-<!--            >-->
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
       </div>
@@ -38,10 +29,11 @@
 </template>
 
 <script>
-
 import moment from "moment";
-
 import {ValidationProvider, ValidationObserver} from "vee-validate";
+
+import ru from 'vue2-datepicker/locale/ru'
+import kz from 'vue2-datepicker/locale/kk'
 
 export default {
   components: {ValidationProvider, ValidationObserver},
@@ -74,7 +66,7 @@ export default {
   props: ['row', 'index', 'groupName'],
   data() {
     return {
-      date_today: null,
+      lang: kz,
       temp: {
         value: null
       }
@@ -84,12 +76,15 @@ export default {
     clearData() {
       this.temp.value = ''
     }
+  },
+  async mounted() {
+    this.lang = await localStorage.getItem('current_lang')
   }
 }
 </script>
 
 <style scoped>
-.mx-datepicker{
+.mx-datepicker {
   width: 100%;
 }
 

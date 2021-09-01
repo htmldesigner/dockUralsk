@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     selectLanguage(event){
-      console.log(event.currentTarget.dataset['lang'])
       if (event.currentTarget.dataset['lang'] !== this.selected_lang) {
         this.closeSelector()
         let idx = this.languages.indexOf(event.currentTarget.dataset['lang'])
@@ -54,6 +53,7 @@ export default {
         this.domElementSelector.childNodes.forEach(el => {
           if (!el.classList.contains('active')) {
             el.style.display = 'none'
+
           }
         })
       }, 100)
@@ -61,11 +61,11 @@ export default {
 
   },
  async mounted() {
+
     this.domElementSelector = await document.querySelector('.selector')
     this.selected_lang = await localStorage.getItem('current_lang') ? localStorage.getItem('current_lang') : this.languages[0]
 
    this.$i18n.setLocale(this.selected_lang)
-
 
     if (this.domElementSelector) {
       this.domElementSelector.firstChild.classList?.add('active')
