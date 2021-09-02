@@ -14,12 +14,12 @@
           :class="{'is-invalid': errors[0]}"
           :name="element.name"
           :placeholder="$t('Y_M_D')"
-          format="YYYY-MM-DD"
+          format="DD-MM-YYYY"
           value-type="YYYY-MM-DD"
           type="date"
           :lang="lang"
           class="datePickerInput"
-          :disabled-date="disabledBeforeTodayAndAfterAWeek"
+          :disabled-date="disabledBeforeToday"
           v-model="dataValue"/>
       </client-only>
       <div v-if="errors[0]" class="invalid-feedback">

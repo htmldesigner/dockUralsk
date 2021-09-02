@@ -3,14 +3,19 @@
 
     <div class="container">
       <div class="row d-flex justify-content-md-between">
-
         <div class="col-lg-3 col-md-4 col-7">
-          <div class="logo">
-            <NuxtLink
+            <NuxtLink style="cursor: pointer" custom v-slot="{ navigate }"
               :to="localePath('/')">
-              <img class="img-responsive" src="~assets/img/logo_1.svg" alt="Alt">
+              <div @click="navigate" role="link">
+                <Logo
+                  :text_index_size="'18px'"
+                  :text_description_size="'12px'"
+                  :logo_img_margin="'10px'"
+                  :logo_height="'37px'"
+                  :small="true"
+                />
+              </div>
             </NuxtLink>
-          </div>
         </div>
 
         <div class="col-md-5 col-sm-12 d-lg-block d-none">
@@ -55,10 +60,10 @@ import Login from "./auth/login/Login";
 import Registration from "./auth/Registration";
 import LanguageSwitcher from "./LanguageSwitcher";
 import DynamicSearch from "@/components/DynamicSearch";
-
+import Logo from "./Logo";
 export default {
   name: "Header",
-  components: {LanguageSwitcher, DynamicSearch, Login, Registration},
+  components: {Logo, LanguageSwitcher, DynamicSearch, Login, Registration},
   computed: {
     isLoggedIn() {
       return this.$store.state.auth.loggedIn

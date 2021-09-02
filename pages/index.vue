@@ -41,8 +41,16 @@
         <div class="search_section">
 
           <div class="search_section_logo">
-            <NuxtLink :to="localePath('/')">
-              <img class="img-responsive" src="~/assets/img/logo.svg" alt="Alt">
+            <NuxtLink style="cursor: pointer" custom v-slot="{ navigate }"
+                      :to="localePath('/')">
+              <div @click="navigate" role="link">
+                <Logo
+                  :text_index_size="'23px'"
+                  :text_description_size="'18px'"
+                  :logo_img_margin="'10px'"
+                  :logo_height="'51px'"
+                />
+              </div>
             </NuxtLink>
           </div>
 
@@ -75,10 +83,11 @@
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import Login from "@/components/auth/login/Login";
 import Registration from "@/components/auth/Registration";
+import Logo from "../components/Logo";
 
 export default {
   name: "index",
-  components: {LanguageSwitcher, Login, Registration},
+  components: {Logo, LanguageSwitcher, Login, Registration},
   async asyncData({$axios, i18n}) {
     const response = await $axios.$get('/api/recipients?lang=' + i18n.localeProperties.code)
     return {response}
