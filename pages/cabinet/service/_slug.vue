@@ -320,9 +320,6 @@ export default {
         this.$store.commit('user/SET_KEY', null)
       }
     }
-  },
-  async mounted() {
-    this.$refs.form.validate()
   }
 }
 </script>

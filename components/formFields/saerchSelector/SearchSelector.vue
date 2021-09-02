@@ -8,9 +8,11 @@
       <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
     </label>
 
+    <ValidationProvider :rules="{'required': !row.disabled}" ref="provider" v-slot="{ errors }">
+
     <div class="searchSelector form-control"
-         :class="{'disabled': row.disabled}"
-         @click.prevent="showDropDownList = !showDropDownList">
+         :class="{'disabled': row.disabled, 'is-invalid': errors[0]}"
+         @click.prevent="showDropDown">
 
       <span>{{ found }}</span>
 
@@ -42,7 +44,7 @@
       />
     </keep-alive>
 
-    <ValidationProvider :rules="{'required': !row.disabled}" ref="provider" v-slot="{ errors }">
+
       <input type="hidden"
              :name="row.name"
              :disabled="row.disabled"
@@ -71,10 +73,15 @@ export default {
     return {
       showDropDownList: false,
       found: '',
-      targetId: ''
+      targetId: '',
+      validateDesignation: false
     }
   },
   methods: {
+    showDropDown() {
+      this.showDropDownList = !this.showDropDownList
+      this.validateField()
+    },
     addSelected(payload) {
       this.found = payload.found
       this.targetId = payload.targetId
@@ -85,6 +92,18 @@ export default {
       this.found = ''
       this.targetId = ''
       this.showDropDownList = false
+    },
+    validateField() {
+      let checkField = this.$refs.provider.validate()
+      checkField.then(result => {
+        if(result.valid){
+          return this.validateDesignation = false
+        }else {
+          return this.validateDesignation = true
+        }
+      }).catch(e => {
+        throw e
+      })
     }
   },
   mounted() {
