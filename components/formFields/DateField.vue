@@ -19,6 +19,7 @@
           type="date"
           :lang="lang"
           class="datePickerInput"
+          :disabled-date="disabledBeforeTodayAndAfterAWeek"
           v-model="dataValue"/>
       </client-only>
       <div v-if="errors[0]" class="invalid-feedback">
@@ -73,6 +74,12 @@ export default {
     }
   },
   methods: {
+    disabledBeforeToday(date) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return date > today;
+    },
+
     clearData() {
       this.temp.value = ''
     }

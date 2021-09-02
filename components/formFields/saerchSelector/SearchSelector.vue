@@ -1,6 +1,6 @@
 <template>
   <div class="searchSelectorWrap">
-
+{{index}}
     <label
       :for="row.name"
       class="form-label">{{ row.title }}
@@ -67,7 +67,7 @@ import DropDownList from "./DropDownList";
 export default {
   name: "SearchSelector",
   components: {DropDownList, ValidationProvider, ValidationObserver,},
-  props: ['row'],
+  props: ['row', 'index'],
 
   data() {
     return {
