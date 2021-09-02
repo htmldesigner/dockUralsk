@@ -13,7 +13,7 @@
           :disabled="element.disabled"
           :class="{'is-invalid': errors[0]}"
           :name="element.name"
-          placeholder="Год-Месяц-День"
+          :placeholder="$t('Y_M_D')"
           format="YYYY-MM-DD"
           value-type="YYYY-MM-DD"
           type="date"
