@@ -75,13 +75,15 @@ export default {
 
       this.markerLayer.addTo(map)
 
-      map.on('click', (e) => {
+      map.on('click', async (e) => {
 
         this.markerLayer.clearLayers()
-        this.markerLayer.addLayer(new L.Marker(e.latlng, {draggable: false}))
 
         let geocodeService = ELG.geocodeService()
-        geocodeService.reverse().latlng(e.latlng)
+
+        let marker = null
+
+        await geocodeService.reverse().latlng(e.latlng)
           .run(function (error, result) {
             if (error) {
               console.log(error)
@@ -89,6 +91,19 @@ export default {
             }
             self.geoData = result
           })
+
+        setTimeout(() => {
+          marker = new L.Marker(e.latlng, {draggable: false})
+
+          marker.bindPopup(`${this.geoData?.address.Region}, ${this.geoData?.address.City}, ${this.geoData?.address.Address}`).openTooltip()
+
+          marker.on("add", function (event) {
+            event.target.openPopup();
+          });
+
+          this.markerLayer.addLayer(marker)
+        }, 400)
+
 
       })
     },

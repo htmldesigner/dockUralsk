@@ -310,14 +310,18 @@ export default {
             method: 'POST',
             data: this.formElem,
             headers: {"Content-Type": "multipart/form-data"},
-          });
-          this.$router.push('/cabinet')
+          })
 
           this.$store.commit('helper/CLEAR_GEO_DATE')
+          this.$store.commit('user/SET_KEY', null)
+
+          this.$router.push('/cabinet')
+
         }
       } catch (e) {
         alert('Ошибка отпправки запроса')
         this.$store.commit('user/SET_KEY', null)
+        this.$store.commit('helper/CLEAR_GEO_DATE')
       }
     }
   }
