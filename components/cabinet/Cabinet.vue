@@ -2,16 +2,16 @@
   <div>
     <div class="d-flex justify-content-between mb-4">
       <div class="user">
-        <p class="h1">{{$t('personal_area')}}</p>
+        <p class="h1">{{ $t('personal_area') }}</p>
         <span class="user-name">{{ user.full }}</span>
-<!--        <span @click="$emit('logOut')" class="logOut">{{$t('buttons.exit')}}</span>-->
+        <!--        <span @click="$emit('logOut')" class="logOut">{{$t('buttons.exit')}}</span>-->
       </div>
       <div class="form-group horizontal">
-        <label for="name1" class="form-label">{{$t('show')}}</label>
+        <label for="name1" class="form-label">{{ $t('show') }}</label>
         <select v-model="selected" class="form-control" name="" id="name1">
-          <option value="all">{{$t('selector.all')}}</option>
-          <option value="false">{{$t('selector.not_overdue')}}</option>
-          <option value="true">{{$t('selector.overdue')}}</option>
+          <option value="all">{{ $t('selector.all') }}</option>
+          <option value="false">{{ $t('selector.not_overdue') }}</option>
+          <option value="true">{{ $t('selector.overdue') }}</option>
         </select>
       </div>
 
@@ -141,7 +141,7 @@
 
 <script>
 import SortPopUp from "../SortPopUp";
-
+import moment from "moment";
 export default {
   components: {SortPopUp},
   name: "Cabinet",
@@ -214,12 +214,18 @@ export default {
     openStatus(id) {
       this.$router.push('cabinet/status/' + id)
     },
+
     runFilter(val, param) {
       if (!val) {
         return this.reloadFilter()
       }
-      this.filters(param)
+      if (param === 'begin_date') {
+        this.sortByDate(param)
+      } else {
+        this.filters(param)
+      }
     },
+
     filters(arg) {
       this.sortedList = [...this.$store.getters['user/getRequestList']]
       this.sortedList.sort((a, b) => {
@@ -227,6 +233,15 @@ export default {
       })
       this.requestList = this.sortedList
     },
+
+    sortByDate(arg) {
+      this.sortedList = [...this.$store.getters['user/getRequestList']]
+      this.sortedList.sort((a, b) => {
+        return moment(b[arg], 'DD.MM.YY, h:mm') - moment(a[arg], 'DD.MM.YY, h:mm')
+      })
+      this.requestList = this.sortedList
+    },
+
     reloadFilter() {
       this.requestList = [...this.$store.getters['user/getRequestList']]
     }

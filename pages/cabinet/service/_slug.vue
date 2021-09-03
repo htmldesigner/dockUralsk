@@ -321,7 +321,7 @@ export default {
       } catch (e) {
         alert('Ошибка отпправки запроса')
         this.$store.commit('user/SET_KEY', null)
-        this.$store.commit('helper/CLEAR_GEO_DATE')
+        // this.$store.commit('helper/CLEAR_GEO_DATE')
       }
     }
   }
