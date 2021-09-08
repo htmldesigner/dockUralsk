@@ -72,17 +72,12 @@ export default {
         "google2": google2,
       }, {}, {}).addTo(map)
 
-
       this.markerLayer.addTo(map)
 
       map.on('click', async (e) => {
-
         this.markerLayer.clearLayers()
-
         let geocodeService = ELG.geocodeService()
-
         let marker = null
-
         await geocodeService.reverse().latlng(e.latlng)
           .run(function (error, result) {
             if (error) {
@@ -90,21 +85,13 @@ export default {
               return;
             }
             self.geoData = result
+            marker = new L.Marker(e.latlng, {draggable: false})
+            marker.bindPopup(`${result?.address.Region}, ${result?.address.City}, ${result?.address.Address}`).openTooltip()
+            marker.on("add", function (event) {
+              event.target.openPopup();
+            });
+            self.markerLayer.addLayer(marker)
           })
-
-        setTimeout(() => {
-          marker = new L.Marker(e.latlng, {draggable: false})
-
-          marker.bindPopup(`${this.geoData?.address.Region}, ${this.geoData?.address.City}, ${this.geoData?.address.Address}`).openTooltip()
-
-          marker.on("add", function (event) {
-            event.target.openPopup();
-          });
-
-          this.markerLayer.addLayer(marker)
-        }, 400)
-
-
       })
     },
 
