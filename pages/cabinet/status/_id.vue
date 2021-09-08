@@ -31,7 +31,7 @@
 
               <div class="request-result">
                 <div class="request-result_container" v-for="el in cases.form">
-                  <p class="request-result_title">{{ el.title }}</p>
+                  <p class="request-result_title" v-html="el.title"></p>
                   <p class="request-result_value">{{ el.value }}</p>
 
                   <div v-if="el.values">
