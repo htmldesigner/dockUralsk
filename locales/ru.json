@@ -24,6 +24,7 @@
   "search_placeholder": "Поиск по результатам...",
   "Y_M_D": "День-Месяц-Год",
   "logo_description": "Электронные услуги ЗКО",
+  "instruction": "Инструкция пользователя",
   "selector": {
     "all": "Все",
     "not_overdue": "Не просроченные",

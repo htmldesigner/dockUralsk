@@ -50,7 +50,7 @@
 
           <a v-if="cases.document_link" target="_blank" :href="cases.document_link" class="btn_primary btn_block">Скачать
             PDF</a>
-          <a v-if="cases.reject_comment" @click.prevent.stop="showModal" href="#" class="btn_primary btn_block danger">Причина
+          <a v-if="cases.reject_comment && !cases.document_link" @click.prevent.stop="showModal" href="#" class="btn_primary btn_block danger">Причина
             отказа</a>
 
           <div class="status-block">

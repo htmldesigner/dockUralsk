@@ -67,6 +67,7 @@
               </div>
 
               <div class="service_container">
+
                 <div class="opening_card">
                   <div class="opening_card_header d-flex justify-content-between align-items-center"
                        @click="open = !open">
@@ -79,6 +80,17 @@
                     <div v-html="response.confidant_documents"></div>
                   </div>
                 </div>
+
+                <div v-if="response.instruction">
+                  <a class="simple_link"
+                     style="text-decoration: underline"
+                     :href="response.instruction.path"
+                     download TARGET="_blank"
+                  >
+                    {{ $t('instruction') }}
+                  </a>
+                </div>
+
               </div>
 
             </div>
