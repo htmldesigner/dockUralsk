@@ -92,13 +92,13 @@ export default {
     }
   },
 
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    baseURL: 'http://zkoegov.web-design.kz'
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'http://zkoegov.web-design.kz'
   },
-  proxy: {'/api': 'http://zkoegov.web-design.kz'},
+
+  proxy: {'/api': process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'http://zkoegov.web-design.kz'},
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
