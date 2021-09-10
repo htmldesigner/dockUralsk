@@ -20,7 +20,7 @@
         :required="row.validations.includes('required') && !row.disabled"
         @change="onChange"
         ref="file"
-        accept=".pdf,.jpg,.jpeg,.png,.doc,.xls"
+        accept=".pdf,.jpg,.jpeg,.png,.doc,.xls,.xlsx,.docx"
       />
 
       <div class="file-input__label" v-if="fileList.length" v-cloak>
