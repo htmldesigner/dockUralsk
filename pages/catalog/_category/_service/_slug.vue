@@ -72,29 +72,23 @@
 
                   <div class="opening_card_header d-flex justify-content-between align-items-center"
                        @click="open = !open">
-                    <div v-html="response.service_documents"></div>
-                    <div class="toggler" :class="{'open': !open}">
-                      <img src="~assets/img/arrow.svg" alt="Alt">
-                    </div>
-                  </div>
-
-                  <div class="opening_card_body" :class="{'hide': open}">
-
-                    <div v-if="response.confidant_documents_title">
-                      <p class="h3">{{ response.confidant_documents_title }}</p>
-                      <div v-html="response.confidant_documents"></div>
-                    </div>
-
-                    <div v-if="response.other_documents_title">
-                      <p class="h3">{{ response.other_documents_title }}</p>
-                      <div v-html="response.other_documents"></div>
-                    </div>
-
                     <div v-if="response.service_documents_title">
                       <p class="h3">{{ response.service_documents_title }}</p>
                       <div v-html="response.service_documents"></div>
                     </div>
-
+                    <div class="toggler" :class="{'open': !open}">
+                      <img src="~assets/img/arrow.svg" alt="Alt">
+                    </div>
+                  </div>
+                  <div class="opening_card_body" :class="{'hide': open}">
+                    <div v-if="response.confidant_documents_title">
+                      <p class="h3">{{ response.confidant_documents_title }}</p>
+                      <div v-html="response.confidant_documents"></div>
+                    </div>
+                    <div v-if="response.other_documents_title">
+                      <p class="h3">{{ response.other_documents_title }}</p>
+                      <div v-html="response.other_documents"></div>
+                    </div>
                   </div>
                 </div>
 
