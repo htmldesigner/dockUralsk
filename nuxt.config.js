@@ -36,7 +36,7 @@ export default {
     {src: "~/plugins/vee-validate.js", mode: 'client', ssr: false},
     {src: "~/plugins/v-mask.js", mode: 'client', ssr: false},
     {src: "~/plugins/esriGeocoder.js", mode: 'client', ssr: false},
-    { src: '~/plugins/vue-datepicker', ssr: false },
+    {src: '~/plugins/vue-datepicker', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,7 +58,13 @@ export default {
     '@nuxtjs/pwa',
     'nuxt-i18n',
     '@nuxtjs/auth-next',
+    '@nuxtjs/robots'
   ],
+
+  robots: {
+    UserAgent: '*',
+    Disallow: '/'
+  },
 
   auth: {
     redirect: false,
