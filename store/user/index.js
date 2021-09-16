@@ -103,9 +103,9 @@ export const mutations = {
 export const actions = {
 
   // Для фильтра
-  async loadServiceList({commit}) {
+  async loadServiceList({commit}, params) {
     try {
-      const response = await this.$axios.$get('/api/recipients?lang=' + localStorage.getItem('current_lang'))
+      const response = await this.$axios.$get('/api/recipients?lang=' + params)
       commit('ADD_SERVICE', response)
     } catch (error) {
       throw error

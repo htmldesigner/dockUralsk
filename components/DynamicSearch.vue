@@ -28,7 +28,8 @@
       <div class="header_search_line"></div>
       <ul>
         <li v-for="element of elements" :key="element.id" @click="optionsIsOpen().style.display = 'none'; keyword = ''">
-          <NuxtLink :to="element.link" v-html="element.name"></NuxtLink>
+<!--          <NuxtLink :to="`/${$i18n.localeProperties.code}` + '/catalog/' + element.link" v-html="element.name"></NuxtLink>-->
+          <a href="#" @click.prevent="goTo(element.link)" v-html="element.name"></a>
         </li>
       </ul>
     </div>
@@ -36,6 +37,8 @@
 </template>
 
 <script>
+
+import catalogLayout from "../layouts/catalogLayout";
 
 export default {
   name: "DynamicSearch",
@@ -50,7 +53,7 @@ export default {
         }).map(t => ({
           id: t.id,
           name: this.color(t.name),
-          link: this.stringSpliter(t.path)
+          link: t.path
         }))
       } else {
         return false
@@ -63,26 +66,21 @@ export default {
     }
   },
   methods: {
-    stringSpliter(arg) {
-      let temp = arg.split('/')
-      return temp[temp.length - 1]
+    goTo(url) {
+      let path = ''
+      if(this.$i18n.localeProperties.code === 'ru'){
+        path = `/${this.$i18n.localeProperties.code}` + '/catalog/' + url
+      }else {
+        path = '/catalog/' + url
+      }
+     return this.$router.push(path)
     },
     color(str) {
       let re = new RegExp(this.keyword, 'gi')
       return str.replace(re, "<b>" + this.keyword + "</b>")
     },
-    // pressKey() {
-    //   if (this.optionsIsOpen()) {
-    //     this.optionsIsOpen().style.display = 'block'
-    //   }
-    //   // if (this.keyword.length) {
-    //   //   console.log(this.keyword, 'Запрос на сервер')
-    //   // }
-    // },
     loadServiceForFilter() {
-      if (!this.variants.length) {
-        this.$store.dispatch('user/loadServiceList')
-      }
+     this.$store.dispatch('user/loadServiceList', this.$i18n.localeProperties.code)
     },
     optionsIsOpen() {
       let isOpen = document.querySelector('.optionsIsOpen')
