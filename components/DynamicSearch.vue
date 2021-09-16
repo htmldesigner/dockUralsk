@@ -7,7 +7,7 @@
         class="header_search_input_theme"
         placeholder="Найти услугу"
         :class="{includes: elements.length}"
-        @input="pressKey"
+        @click="loadServiceForFilter"
       >
       <button class="search_icon" v-if="keyword.length < 4">
         <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@
     <div class="header_search_options" :class="{optionsIsOpen: elements}" v-if="elements.length">
       <div class="header_search_line"></div>
       <ul>
-        <li v-for="element of elements" :key="element.id">
+        <li v-for="element of elements" :key="element.id" @click="optionsIsOpen().style.display = 'none'; keyword = ''">
           <NuxtLink :to="element.link" v-html="element.name"></NuxtLink>
         </li>
       </ul>
@@ -40,6 +40,9 @@
 export default {
   name: "DynamicSearch",
   computed: {
+    variants() {
+      return this.$store.getters["user/getServiceList"]
+    },
     elements() {
       if (this.keyword.length > 3 && this.variants?.length) {
         return this.variants.filter(el => {
@@ -47,7 +50,7 @@ export default {
         }).map(t => ({
           id: t.id,
           name: this.color(t.name),
-          link: t.link
+          link: this.stringSpliter(t.path)
         }))
       } else {
         return false
@@ -57,51 +60,28 @@ export default {
   data() {
     return {
       keyword: '',
-      variants: [
-        {
-          id: 1,
-          name: 'Выдача1 технических условий на присоединение к электрическим сетям для физических лиц',
-          link: '/catalog/tksh/tekhnikalyk-sharttar/zheke-tulgalar-ushin-elektr-zhelilerine-kosyluga-tekhnikalyk-sharttar-beru'
-        },
-        {
-          id: 2,
-          name: 'Согласование1 технических условий, выданных потребителем субпотребителю для физических лиц при подключении к сетям жилого дома',
-          link: '/catalog/tksh/tekhnikalyk-sharttar/zheke-tulgalar-ushin-elektr-zhelilerine-kosyluga-tekhnikalyk-sharttar-beru'
-        },
-        {
-          id: 3,
-          name: 'Выдача2 технических условий на присоединение к электрическим сетям для физических лиц',
-          link: '/catalog/tksh/tekhnikalyk-sharttar/zheke-tulgalar-ushin-elektr-zhelilerine-kosyluga-tekhnikalyk-sharttar-beru'
-        },
-        {
-          id: 4,
-          name: 'Согласование2 технических условий, выданных потребителем субпотребителю для физических лиц при подключении к сетям жилого дома',
-          link: '/catalog/tksh/tekhnikalyk-sharttar/zheke-tulgalar-ushin-elektr-zhelilerine-kosyluga-tekhnikalyk-sharttar-beru'
-        },
-        {
-          id: 5,
-          name: 'Выдача3 технических условий на присоединение к электрическим сетям для физических лиц',
-          link: '/catalog/tksh/tekhnikalyk-sharttar/zheke-tulgalar-ushin-elektr-zhelilerine-kosyluga-tekhnikalyk-sharttar-beru'
-        },
-        {
-          id: 6,
-          name: 'Согласование3 технических условий, выданных потребителем субпотребителю для физических лиц при подключении к сетям жилого дома',
-          link: '/catalog/tksh/tekhnikalyk-sharttar/zheke-tulgalar-ushin-elektr-zhelilerine-kosyluga-tekhnikalyk-sharttar-beru'
-        },
-      ],
     }
   },
   methods: {
+    stringSpliter(arg) {
+      let temp = arg.split('/')
+      return temp[temp.length - 1]
+    },
     color(str) {
       let re = new RegExp(this.keyword, 'gi')
       return str.replace(re, "<b>" + this.keyword + "</b>")
     },
-    pressKey() {
-      if (this.optionsIsOpen()) {
-        this.optionsIsOpen().style.display = 'block'
-      }
-      if (this.keyword.length) {
-        console.log(this.keyword, 'Запрос на сервер')
+    // pressKey() {
+    //   if (this.optionsIsOpen()) {
+    //     this.optionsIsOpen().style.display = 'block'
+    //   }
+    //   // if (this.keyword.length) {
+    //   //   console.log(this.keyword, 'Запрос на сервер')
+    //   // }
+    // },
+    loadServiceForFilter() {
+      if (!this.variants.length) {
+        this.$store.dispatch('user/loadServiceList')
       }
     },
     optionsIsOpen() {
@@ -118,7 +98,7 @@ export default {
       if (!event.target.closest('.optionsIsOpen') && !event.target.closest('.header_search')) {
         if (this.optionsIsOpen()) {
           this.optionsIsOpen().style.display = 'none'
-          this.variants = null
+          // this.variants = null
         }
       }
     })
@@ -136,6 +116,7 @@ export default {
     display: flex
     align-items: center
     position: relative
+
     button
       position: absolute
       right: 13px
@@ -145,11 +126,14 @@ export default {
       outline: none
       background-color: transparent
       cursor: auto
+
       svg
         fill: #AAAEB0
         transition: .25s
+
       &.remove_search_icon
         cursor: pointer
+
         &:hover
           svg
             fill: darken(#AAAEB0, 10%)
@@ -164,10 +148,12 @@ export default {
       max-height: 40px
       width: 100%
       transition: .25s ease-out
+
       &.includes
         box-shadow: 0 2px 6px rgb(32 33 36 / 18%)
         border-bottom-left-radius: 0
         border-bottom-right-radius: 0
+
       &:focus
         background: #fff
         outline: 0
@@ -188,6 +174,7 @@ export default {
   border-radius: 0 0 6px 6px
   box-shadow: 0 4px 6px rgb(32 33 36 / 18%)
   margin-top: -1px
+  z-index: 100
 
   ul
     padding: 0

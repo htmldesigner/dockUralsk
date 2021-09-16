@@ -3,7 +3,7 @@ export const state = () => ({
   serviceRequest: null, // Форма услуги
   serviceRequestList: null, // Списак заказанных услуг
   serviceStatus: null, // Статус услуги
-
+  serviceList: []
 })
 
 export const mutations = {
@@ -86,10 +86,33 @@ export const mutations = {
         }
       }
     }
+  },
+
+  ADD_SERVICE(state, payload) {
+    state.serviceList = []
+    if (payload.length) {
+      payload.forEach(el => {
+        if (el.list_services) {
+          state.serviceList.push(...el.list_services)
+        }
+      })
+    }
   }
 }
-// Запрос полей формы для страницы подачи заявления
+
 export const actions = {
+
+  // Для фильтра
+  async loadServiceList({commit}) {
+    try {
+      const response = await this.$axios.$get('/api/recipients?lang=' + localStorage.getItem('current_lang'))
+      commit('ADD_SERVICE', response)
+    } catch (error) {
+      throw error
+    }
+  },
+
+  // Запрос полей формы для страницы подачи заявления
   async loadServiceRequest({commit}, params) {
     try {
       const response = await this.$axios.$get('api/services/' + encodeURIComponent(params.slug) + '/getForm' + '?lang=' + params.locale)
@@ -125,5 +148,6 @@ export const getters = {
   getServiceRequest: (state) => state.serviceRequest,
   getRequestList: (state) => state.serviceRequestList,
   getServiceCases: (state) => state.serviceStatus?.case || null,
-  getServiceSteps: (state) => state.serviceStatus?.steps || null
+  getServiceSteps: (state) => state.serviceStatus?.steps || null,
+  getServiceList: (state) => state.serviceList
 }
