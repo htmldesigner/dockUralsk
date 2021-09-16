@@ -88,7 +88,8 @@ import Logo from "../components/Logo";
 export default {
   name: "index",
   components: {Logo, LanguageSwitcher, Login, Registration},
-  async asyncData({$axios, i18n}) {
+  async asyncData({$axios, i18n, $auth}) {
+    $auth.strategy.token.reset()
     const response = await $axios.$get('/api/recipients?lang=' + i18n.localeProperties.code)
     return {response}
   },

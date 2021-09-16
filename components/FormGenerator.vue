@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-group mb-4" v-if="row.type === 'select2'">
-        <SearchSelector :row="row"/>
+      <SearchSelector :row="row"/>
     </div>
 
     <div class="form-group mb-4" v-if="row.type === 'multifiles'">
@@ -51,7 +51,7 @@
               :checked="row.value"
               @change="$emit('checkBoxEvent', {status: !!row.value, value: row.name})"
             >
-            <span class="checkmark"></span>
+            <span class="checkmark" :class="{'disabled': row.disabled}"></span>
           </label>
         </div>
       </div>

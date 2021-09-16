@@ -84,6 +84,10 @@ export default {
           login: {url: '/api/signin', method: 'post'},
           logout: {url: '/api/logout', method: 'post'},
           user: {url: '/api/user', method: 'get', propertyName: ''}
+        },
+        redirect: {
+          login: '/',
+          logout: '/',
         }
       }
     }
@@ -111,7 +115,6 @@ export default {
       lang: 'en'
     }
   },
-
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
