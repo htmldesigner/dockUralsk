@@ -92,10 +92,10 @@
               <div class="col-xl-5 col-lg-12">
                 <div class="form-group mb-4">
                   <div class="form-check form-check_them">
-                    <label class="form-check-label check-label_them">{{$t('agree_part_one')}}
+                    <label class="form-check-label check-label_them">{{ $t('agree_part_one') }}
                       <NuxtLink target="_blank"
                                 :to="localePath('/user_agreement')"
-                                class="content_items_subtitle">{{$t('agree_part_two')}}
+                                class="content_items_subtitle">{{ $t('agree_part_two') }}
                       </NuxtLink>
                       <input class="form-check-input check-input_them" v-model="agree" type="checkbox" value="">
                       <span class="checkmark"></span>
@@ -107,7 +107,7 @@
               <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
                 <div class="mb-4">
                   <button @click.prevent="onSubmit" type="submit" :disabled="!agree" class="btn_primary">
-                    {{$t('buttons.register')}}
+                    {{ $t('buttons.register') }}
                   </button>
                 </div>
               </div>
@@ -131,9 +131,8 @@
 import MapPopup from "~/components/MapPopup";
 import FormGenerator from "~/components/FormGenerator";
 import sha256 from 'crypto-js/sha256';
-import {ValidationProvider, ValidationObserver} from "vee-validate";
+import {ValidationObserver, ValidationProvider} from "vee-validate";
 import Supplement from "../../../components/Supplement";
-import SearchSelector from "../../../components/formFields/saerchSelector/SearchSelector";
 
 export default {
   loading: true,
@@ -143,7 +142,6 @@ export default {
     ValidationProvider,
     ValidationObserver,
     Supplement,
-    SearchSelector,
   },
   name: "index",
   layout: 'cabinet/serviceRequestLayout',
@@ -166,11 +164,6 @@ export default {
         this.sendKey()
       }
     }
-    // checkValue: {
-    //   handler: function (payload) {
-    //     return this.$store.commit('user/DISABLED_FIELD', payload)
-    //   }
-    // }
   },
 
   async fetch({store, params, app}) {
@@ -299,29 +292,27 @@ export default {
     async sendKey() {
       try {
         if (this.xmlKey) {
-
           this.formElem.append('latlng', JSON.stringify(this.getGeoDate));
-
           this.formElem.append('service_id', this.serviceRequest.service_id)
-
           this.formElem.append('xml', this.xmlKey);
-
           await this.$axios('/api/case/create', {
             method: 'POST',
             data: this.formElem,
             headers: {"Content-Type": "multipart/form-data"},
           })
-
           this.$store.commit('helper/CLEAR_GEO_DATE')
           this.$store.commit('user/SET_KEY', null)
-
           this.$router.push('/cabinet')
-
         }
       } catch (e) {
         alert('Ошибка отпправки запроса')
         this.$store.commit('user/SET_KEY', null)
-        // this.$store.commit('helper/CLEAR_GEO_DATE')
+        if (!this.$auth.strategy.token.status().valid()) {
+          alert('Истек токен безопасности')
+          this.$auth.logout()
+          this.$router.push('/')
+          this.$store.commit('helper/CLEAR_GEO_DATE')
+        }
       }
     }
   }

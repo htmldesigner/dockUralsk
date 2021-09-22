@@ -1,5 +1,6 @@
 export default function ({app, store, $auth, route, redirect}) {
-  if (!$auth.strategy.token.status().valid()) {
+  if (store.state.auth.loggedIn && !$auth.strategy.token.status().valid()) {
+    alert('Истек токен безопасности')
     store.commit('user/SET_KEY', null)
     $auth.logout()
     return redirect('/')

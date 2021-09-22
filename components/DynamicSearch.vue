@@ -38,8 +38,6 @@
 
 <script>
 
-import catalogLayout from "../layouts/catalogLayout";
-
 export default {
   name: "DynamicSearch",
   computed: {

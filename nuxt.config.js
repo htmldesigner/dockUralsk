@@ -105,14 +105,22 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    baseURL: process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'http://zkoegov.web-design.kz'
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'https://zkoegov.web-design.kz'
   },
 
-  proxy: {'/api': process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'http://zkoegov.web-design.kz'},
+  proxy: {'/api': process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'https://zkoegov.web-design.kz'},
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'en',
+      name: "doc.uralsk.kz",
+      short_name: "doc.uralsk.kz",
+      theme_color: "#fff",
+      background_color: "#fff",
+      display: "standalone",
+      icon: {
+        fileName: 'icon.png',
+      },
     }
   },
 
