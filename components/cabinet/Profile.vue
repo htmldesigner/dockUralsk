@@ -9,10 +9,6 @@
     </div>
     <slot></slot>
 
-    <ChangePasswordForm class="mt-5"/>
-
-    <hr style="margin-top: 36px; margin-bottom: 36px">
-
     <section>
 
       <ValidationObserver ref="profileForm" v-slot="{ invalid }">
@@ -49,6 +45,11 @@
         </form>
       </ValidationObserver>
     </section>
+
+    <hr style="margin-top: 36px; margin-bottom: 36px">
+
+    <ChangePasswordForm class="mt-5"/>
+
 
   </div>
 </template>

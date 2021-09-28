@@ -89,7 +89,7 @@ export default {
   name: "index",
   components: {Logo, LanguageSwitcher, Login, Registration},
   async asyncData({$axios, i18n, $auth, store}) {
-    $auth.strategy.token.reset()
+    // $auth.strategy.token.reset()
     const response = await $axios.$get('/api/recipients?lang=' + i18n.localeProperties.code)
     store.commit('user/ADD_SERVICE', response)
     return {response}

@@ -4,21 +4,21 @@
     <ValidationObserver ref="form" v-slot="{ valid }">
       <div class="row">
 
-        <div class="col-xl-4 col-lg-12">
-          <div class="form-group mb-4">
-            <label for="currentPassword" class="form-label">Текущий пароль<span
-              class="required">*</span></label>
-            <input
-              id="currentPassword"
-              type="text"
-              class="form-control"
-              v-model="currentPassword"
-              name="login">
-            <div class="invalid-feedback">
-              Login is invalid
-            </div>
-          </div>
-        </div>
+<!--        <div class="col-xl-4 col-lg-12">-->
+<!--          <div class="form-group mb-4">-->
+<!--            <label for="currentPassword" class="form-label">Текущий пароль<span-->
+<!--              class="required">*</span></label>-->
+<!--            <input-->
+<!--              id="currentPassword"-->
+<!--              type="text"-->
+<!--              class="form-control"-->
+<!--              v-model="currentPassword"-->
+<!--              name="login">-->
+<!--            <div class="invalid-feedback">-->
+<!--              Login is invalid-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="col-xl-4 col-lg-12">
           <div class="form-group mb-4">
@@ -57,15 +57,20 @@
             </ValidationProvider>
           </div>
         </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <div class="col-xl-4 col-lg-12">
-          <button type="button" :disabled="!valid" @click.prevent="resetPassword" class="btn_primary btn_block">
+
+
+        <div class="col-xl-4 col-lg-12" style="padding-top: 31px">
+          <button  type="button" :disabled="!valid" @click.prevent="resetPassword" class="btn_primary btn_block">
             {{ $t('buttons.save') }}
           </button>
         </div>
+
       </div>
+
+
+
+
 
     </ValidationObserver>
   </div>
@@ -86,12 +91,17 @@ export default {
   },
   methods: {
     async resetPassword() {
-      const data = {
-        currentPassword: this.currentPassword,
-        newPassword: this.newPassword,
-        confirmPassword: this.confirmPassword
+      try {
+        const data = {
+          currentPassword: this.currentPassword,
+          newPassword: this.newPassword,
+          confirmPassword: this.confirmPassword
+        }
+        this.$store.dispatch('cabinet/changePassword', data)
+        alert("Пароль изменен")
+      }catch (e) {
+        alert("Ошибка отпраки")
       }
-      this.$store.dispatch('cabinet/changePassword', data)
     }
   },
 }
