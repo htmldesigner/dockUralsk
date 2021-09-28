@@ -21,7 +21,7 @@
 
                 <div class="form-group mb-3">
                   <label for="password" class="form-label">{{ $t('create_password') }}</label>
-                  <ValidationProvider name="confirm" rules="required|digits_between:8,25" v-slot="{ errors }">
+                  <ValidationProvider name="confirm" rules="required|digits_between:8,35" v-slot="{ errors }">
                     <input
                       id="password"
                       type="password"

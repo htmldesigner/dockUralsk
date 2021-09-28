@@ -7,7 +7,6 @@ export const mutations = {
     state.userProfile = payload
   },
 
-
   DISABLED_FIELD(state, payload) {
     if (payload) {
       changeCheckValue(state.userProfile)
@@ -31,8 +30,6 @@ export const mutations = {
       }
     }
   },
-
-
 }
 
 export const actions = {
@@ -42,6 +39,14 @@ export const actions = {
       commit('ADD_USER_PROFILE', response)
     } catch (error) {
       throw error
+    }
+  },
+
+  async changePassword({commit}, payload){
+    try {
+      this.$axios.$post('/api/user/password', payload)
+    }catch (e) {
+      console.log(e)
     }
   }
 }

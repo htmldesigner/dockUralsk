@@ -19,11 +19,9 @@
         <form ref="form" enctype="multipart/form-data">
 
           <div v-for="(profile, index) of userProfile.sections">
-
             <div class="section-title mb-3" v-if="profile.title">
               <p :class="profile.title.tag">{{ profile.title.text }}</p>
             </div>
-
             <div class="row" v-for="(rows, index) in profile.rows">
               <div :class="fields.cssClasses" v-for="(fields) in rows.fields">
                 <FormGenerator
@@ -39,7 +37,8 @@
             <div class="row">
               <div class="col-xl-12 d-flex justify-content-center">
                 <div class="col-xl-4">
-                  <button @click.prevent="onSubmit" type="submit" class="btn_block btn_primary">
+                  <button @click.prevent="onSubmit" :disabled="disabledButton" type="submit"
+                          class="btn_block btn_primary">
                     Сохранить
                   </button>
                 </div>
@@ -78,6 +77,7 @@ export default {
   data() {
     return {
       formElem: null,
+      disabledButton: false
     }
   },
   methods: {
@@ -97,16 +97,21 @@ export default {
       )
     },
 
-   async sendForm() {
+    async sendForm() {
       this.formElem = new FormData(this.$refs.form)
+      this.disabledButton = true
       try {
-      await this.$axios('/api/profile/save', {
+       await this.$axios('/api/profile/save', {
           method: 'POST',
           data: this.formElem,
           headers: {"Content-Type": "multipart/form-data"},
         })
+        this.disabledButton = false
+        alert('Данные обновлены')
       } catch (e) {
         alert('Ошибка отправки формы')
+      } finally {
+        this.disabledButton = false
       }
     }
 

@@ -3,7 +3,7 @@ import kz from './locales/kz.json'
 
 export default {
   server: {
-    port: 8501 // default: 3000
+    port: 8502 // prod: 8501
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -105,10 +105,10 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    baseURL: process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'https://zkoegov.web-design.kz'
+    baseURL: process.env.NODE_ENV = 'https://zkoegov.web-design.kz/system'
   },
 
-  proxy: {'/api': process.env.NODE_ENV === 'production' ? 'https://doc.uralsk.kz/system' : 'https://zkoegov.web-design.kz'},
+  proxy: {'/api': process.env.NODE_ENV = 'https://zkoegov.web-design.kz/system'},
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {

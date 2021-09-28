@@ -106,7 +106,7 @@
 
               <div class="col-xl-7 col-lg-12 d-xl-inline-block d-flex justify-content-center">
                 <div class="mb-4">
-                  <button @click.prevent="onSubmit" type="submit" :disabled="!agree" class="btn_primary">
+                  <button @click.prevent="onSubmit" type="submit" :disabled="!agree || disabledButton" class="btn_primary">
                     {{ $t('buttons.register') }}
                   </button>
                 </div>
@@ -176,7 +176,8 @@ export default {
       showMap: false,
       agree: false,
       formElem: null,
-      checkValue: null
+      checkValue: null,
+      disabledButton: false
     }
   },
 
@@ -292,6 +293,7 @@ export default {
     async sendKey() {
       try {
         if (this.xmlKey) {
+          this.disabledButton = true
           this.formElem.append('latlng', JSON.stringify(this.getGeoDate));
           this.formElem.append('service_id', this.serviceRequest.service_id)
           this.formElem.append('xml', this.xmlKey);
@@ -304,6 +306,7 @@ export default {
           this.$store.commit('user/SET_KEY', null)
           this.$router.push('/cabinet')
         }
+        this.disabledButton = false
       } catch (e) {
         alert('Ошибка отпправки запроса')
         this.$store.commit('user/SET_KEY', null)
@@ -313,6 +316,8 @@ export default {
           this.$router.push('/')
           this.$store.commit('helper/CLEAR_GEO_DATE')
         }
+      } finally {
+        this.disabledButton = false
       }
     }
   }
