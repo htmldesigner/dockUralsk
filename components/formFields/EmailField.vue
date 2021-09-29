@@ -1,21 +1,21 @@
 <template>
-  <div v-if="row">
+  <div v-if="field">
     <label
-      :for="row.name"
-      class="form-label">{{ row.title }}
-      <span v-if="row.validations.includes('required')" class="required">*</span>
-      <span v-if="row.tooltip" class="hint" :title="row.tooltip"></span>
+      :for="field.name"
+      class="form-label">{{ field.title }}
+      <span v-if="field.validations.includes('required')" class="required">*</span>
+      <span v-if="field.tooltip" class="hint" :title="field.tooltip"></span>
     </label>
     <ValidationProvider rules="email" v-slot="{ errors }">
     <input
-      :id="row.name"
-      :required="row.validations.includes('required')"
-      :type="row.type"
+      :id="field.name"
+      :required="field.validations.includes('required')"
+      :type="field.type"
       :class="{'is-invalid': errors[0]}"
-      :disabled="row.disabled"
+      :disabled="field.disabled"
       class="form-control"
-      v-model="value"
-      :name="row.name"
+      v-model="field.value"
+      :name="field.name"
     >
       <div v-if="errors[0]" class="invalid-feedback">
         {{ errors[0] }}
@@ -30,10 +30,20 @@ export default {
   components: {ValidationProvider, ValidationObserver},
   name: "EmailField",
   props: ['row', 'index', 'groupName'],
-  data() {
-    return {
-      value: ''
+  computed: {
+    rules() {
+      if (!this.field.disabled) {
+        return this.field.validations.join('|')
+      } else {
+        return ''
+      }
+    },
+    field() {
+      return Object.assign({}, this.row)
     }
+  },
+  data() {
+    return {}
   }
 }
 </script>

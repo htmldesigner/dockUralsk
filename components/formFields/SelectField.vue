@@ -31,6 +31,7 @@ export default {
   props: ['row', 'index', 'groupName'],
   computed: {
     select() {
+      this.selected = this.row.value
       return Object.assign({}, this.row)
     }
   },
