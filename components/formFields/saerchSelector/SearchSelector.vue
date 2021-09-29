@@ -68,9 +68,9 @@ export default {
   props: ['row', 'index'],
   computed: {
     field() {
-      let {id, text} = this.row.options.find(el => el.id === parseInt(this.row.value))
-      this.found = text
-      this.targetId = id
+      let candidate = this.row.options.find(el => el.id === parseInt(this.row.value))
+      this.found = candidate?.text
+      this.targetId = candidate?.id
       return Object.assign({}, this.row)
     }
   },
