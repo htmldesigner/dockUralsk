@@ -105,7 +105,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    baseURL: process.env.NODE_ENV = 'https://zkoegov.web-design.kz/system'
+    // baseURL: process.env.NODE_ENV = 'https://zkoegov.web-design.kz/system'
+    prefix: '/'
   },
 
   proxy: {'/api': process.env.NODE_ENV = 'https://zkoegov.web-design.kz/system'},

@@ -61,6 +61,10 @@
       <GeoButton :row="row" @loadMap="$emit('loadMap')"/>
     </div>
 
+    <div class="form-group mb-4" v-if="row.type === 'KATO'">
+      <KATO />
+    </div>
+
     <div class="form-group mb-4" style="margin-top: 30px;" v-if="row.type === 'subtract'">
       <button type="button" class="btn_outline_small" @click.prevent="$emit('removeItem', {index, groupName})">
         <svg width="15" height="6" viewBox="0 0 13 4" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,6 +93,7 @@ import TextAreaField from "@/components/formFields/TextAreaField";
 import GeoButton from "./formFields/GeoButton";
 import SearchSelector from "./formFields/saerchSelector/SearchSelector";
 import HR from "./formFields/HR";
+import KATO from "./formFields/KATO/KATO";
 
 
 export default {
@@ -102,7 +107,8 @@ export default {
     MultiFilesField,
     TextAreaField,
     GeoButton,
-    SearchSelector
+    SearchSelector,
+    KATO
   },
   name: "FormGenerator",
   props: ['row', 'index', 'groupName'],

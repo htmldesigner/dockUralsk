@@ -82,9 +82,7 @@ export default {
     }
   },
   methods: {
-
     remove(id, i) {
-      console.log(id)
       this.fileList.splice(i, 1)
       this.onValidate(id)
     },
