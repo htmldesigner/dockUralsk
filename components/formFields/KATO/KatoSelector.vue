@@ -1,6 +1,8 @@
 <template>
   <div class="col-md-4 mb-4">
+    <label for="kato_selector" class="form-label">label</label>
     <select
+      id="kato_selector"
       class="form-control"
       v-model="selected"
       @change="emitKato()"

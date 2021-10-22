@@ -28,7 +28,6 @@
       <div class="header_search_line"></div>
       <ul>
         <li v-for="element of elements" :key="element.id" @click="optionsIsOpen().style.display = 'none'; keyword = ''">
-<!--          <NuxtLink :to="`/${$i18n.localeProperties.code}` + '/catalog/' + element.link" v-html="element.name"></NuxtLink>-->
           <a href="#" @click.prevent="goTo(element.link)" v-html="element.name"></a>
         </li>
       </ul>

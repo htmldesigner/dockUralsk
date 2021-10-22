@@ -45,7 +45,7 @@ export const actions = {
   async getKatoStreets({commit}, payload) {
     try {
       if (payload.street) {
-        const response = await this.$axios.$get('http://localhost:8015/GetKatoStreets/' + payload.kato + '/' + payload.street)
+        const response = await this.$axios.$get('http://localhost:8015/GetKatoStreets/' + payload.kato + '/' + payload.street.trim())
         commit('SET_KATO_STREETS', response)
       }
     } catch (error) {
