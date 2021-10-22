@@ -2,15 +2,22 @@
   <div class="col-md-4">
     <div class="kato_dinamic_search">
       <label v-if="label" for="kato_street" class="form-label">{{ label }}</label>
-      <input
-        @input="emitValue($event)"
-        id="kato_street"
-        class="form-control kato_field"
-        type="text"
-        v-model="candidate"
-        @click="showOptions = true"
-        autocomplete="nope"
-      >
+
+      <ValidationProvider rules="required" v-slot="{ errors }">
+        <input
+          @input="emitValue($event)"
+          id="kato_street"
+          class="form-control kato_field"
+          type="text"
+          :class="{'is-invalid': errors[0]}"
+          v-model="candidate"
+          @click="showOptions = true"
+          autocomplete="nope"
+        >
+        <div v-if="errors[0]" class="invalid-feedback">
+          {{ errors[0] }}
+        </div>
+      </ValidationProvider>
 
       <div class="kato_dinamic_options" v-if="list.length && showOptions">
         <ul>
@@ -18,6 +25,7 @@
             <span v-if="item['name_' + $i18n.localeProperties.code]"
                   @click.prevent.stop="setStreet(item)">{{ item["name_" + $i18n.localeProperties.code] }}</span>
             <span v-if="item.housename" @click.prevent.stop="setHouse(item)">{{ item.housename }}</span>
+            <span v-if="item.flatcode" @click.prevent.stop="setFlat(item)">{{ item.flatname }}</span>
           </li>
         </ul>
       </div>
@@ -27,8 +35,11 @@
 </template>
 
 <script>
+import {ValidationObserver, ValidationProvider} from "vee-validate";
+
 export default {
   name: "KatoInput",
+  components: {ValidationProvider, ValidationObserver},
   props: {
     label: {
       type: String
@@ -44,9 +55,8 @@ export default {
     }
   },
   methods: {
-    clear(){
-      console.log('clear')
-      this.candidate  = ''
+    clear() {
+      this.candidate = ''
     },
     emitValue(event) {
       this.$emit('candidate', event.target.value)
@@ -61,10 +71,17 @@ export default {
 
     setHouse(value) {
       this.candidate = value.housename
-      this.$emit('target', value)
+      if (value.hasFlats) {
+        this.$emit('target', value)
+      }
       this.$store.commit('kato/SET_KATO_STREETS', [])
       this.showOptions = false
     },
+
+    setFlat(value) {
+      this.candidate = value.flatname
+      this.showOptions = false
+    }
 
   },
   mounted() {
