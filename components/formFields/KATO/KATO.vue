@@ -2,7 +2,6 @@
   <div v-if="katoChild.length">
 
     <div class="row">
-
       <KatoSelector
         v-for="(options, index) in katoChild"
         :options="options"
@@ -12,11 +11,11 @@
       />
 
       <KatoInput ref="refInput"
-        :label="'Улица'"
-        v-if="selectedKato.selected && selectedKato.selected.hasstreet"
-        @candidate="getStreet"
-        :list="katoStreets"
-        @target="getHouses"
+                 :label="'Улица'"
+                 v-if="selectedKato.selected && selectedKato.selected.hasstreet"
+                 @candidate="getStreet"
+                 :list="katoStreets"
+                 @target="getHouses"
       />
 
       <KatoInput
@@ -30,6 +29,7 @@
         :label="'Квартира'"
         v-if="katoFlat.length"
         :list="katoFlat"
+        @target="setFlatCode"
       />
 
     </div>
@@ -55,22 +55,21 @@ export default {
     katoHouses() {
       return this.$store.getters['kato/getStreetHouses']
     },
-    katoFlat(){
+    katoFlat() {
       return this.$store.getters['kato/getHouseFlats']
     }
   },
   data() {
     return {
-      street: '',
       selectedKato: '',
-      selectedStreet: ''
+      selectedStreet: '',
     }
   },
   methods: {
     async getKato(param) {
       this.selectedKato = param
       if (param.selected.haschild) {
-        if (param.index < this.katoChild.length) { // при смене предидущих значений очищать все значения до текущего
+        if (param.index < this.katoChild.length) { // при смене предыдущих значений очистить все значения до текущего
           await this.$store.dispatch('kato/splitKato', param.index)
           await this.$store.commit('kato/SET_STREET_HOUSES', [])
           await this.$store.commit('kato/SET_KATO_STREETS', [])
@@ -90,6 +89,7 @@ export default {
         await this.$store.commit('kato/SET_HOUSE_FLATS', [])
         this.$refs.refInput?.clear()
       }
+      this.$store.dispatch('kato/setKatoCode', param.selected.kato)
     },
 
     getStreet(street) {
@@ -110,16 +110,18 @@ export default {
         this.$store.commit('kato/SET_HOUSE_FLATS', [])
         this.$store.dispatch('kato/getStreetHouses', value.code)
         this.selectedStreet = value
+        this.$store.dispatch('kato/setKatoCode', value.code)
       }
     },
     getFlat(value) {
-     if (value.housecode){
-       this.$store.dispatch('kato/getHouseFlats', value.housecode)
-     }
+      if (value.housecode) {
+        this.$store.dispatch('kato/getHouseFlats', value.housecode)
+        this.$store.dispatch('kato/setKatoCode', value.housecode)
+      }
+    },
+    setFlatCode(value) {
+      this.$store.dispatch('kato/setKatoCode', value.flatcode)
     }
-  },
-  mounted() {
-    this.$store.dispatch('kato/getKatoChild')
   }
 }
 </script>

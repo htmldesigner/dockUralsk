@@ -2,7 +2,8 @@ export const state = () => ({
   KATO_CHILD: [],
   KATO_STREETS: [],
   STREET_HOUSES: [],
-  HOUSE_FLATS: []
+  HOUSE_FLATS: [],
+  KATO_CODE: ''
 })
 
 export const mutations = {
@@ -20,10 +21,23 @@ export const mutations = {
   },
   SPLIT_KATO(state, indexInArray) {
     state.KATO_CHILD.splice(indexInArray)
+  },
+  SET_KATO_CODE(state, code){
+    console.log(code, 'mutations')
+    state.KATO_CODE = +code
   }
 }
 
 export const actions = {
+
+  async setKatoCode({commit}, payload){
+    try {
+      console.log(payload, 'action')
+      commit('SET_KATO_CODE', payload)
+    }catch (e) {
+      throw e
+    }
+  },
 
   async splitKato({commit}, indexInArray) {
     try {
@@ -78,6 +92,7 @@ export const getters = {
   getKatoStreets: state => state.KATO_STREETS,
   getStreetHouses: state => state.STREET_HOUSES,
   getHouseFlats: state => state.HOUSE_FLATS,
+  getKatoCode: state => state.KATO_CODE
 }
 
 

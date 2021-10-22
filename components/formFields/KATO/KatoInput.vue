@@ -73,6 +73,8 @@ export default {
       this.candidate = value.housename
       if (value.hasFlats) {
         this.$emit('target', value)
+      }else {
+        this.$store.commit('kato/SET_HOUSE_FLATS', [])
       }
       this.$store.commit('kato/SET_KATO_STREETS', [])
       this.showOptions = false
@@ -80,6 +82,7 @@ export default {
 
     setFlat(value) {
       this.candidate = value.flatname
+      this.$emit('target', value)
       this.showOptions = false
     }
 

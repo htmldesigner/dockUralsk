@@ -5,9 +5,7 @@
         <p class="h1">{{ serviceRequest.title }}</p>
       </div>
     </div>
-
     <div class="service_container">
-
       <ValidationObserver ref="form" v-slot="{ invalid }">
         <form ref="serviceForm" enctype="multipart/form-data">
           <section v-for="(request, o) of serviceRequest">
@@ -113,7 +111,6 @@
               </div>
             </div>
           </section>
-
         </form>
       </ValidationObserver>
     </div>
@@ -152,6 +149,10 @@ export default {
 
     getGeoDate() {
       return this.$store.getters['helper/getGeoDate']
+    },
+
+    katoCode(){
+      return this.$store.getters['kato/getKatoCode']
     },
 
     xmlKey() {
@@ -296,6 +297,7 @@ export default {
           this.disabledButton = true
           this.formElem.append('latlng', JSON.stringify(this.getGeoDate));
           this.formElem.append('service_id', this.serviceRequest.service_id)
+          this.formElem.append('kato_key', this.katoCode)
           this.formElem.append('xml', this.xmlKey);
           await this.$axios('/api/case/create', {
             method: 'POST',
@@ -320,6 +322,9 @@ export default {
         this.disabledButton = false
       }
     }
+  },
+  mounted() {
+    this.$store.dispatch('kato/getKatoChild')
   }
 }
 </script>
